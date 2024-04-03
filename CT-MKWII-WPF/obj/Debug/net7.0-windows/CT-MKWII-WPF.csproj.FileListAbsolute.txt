@@ -6,7 +6,6 @@ G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\bin\Debug\net7.0-windows\CT-MKWII-WPF.p
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\MainWindow.g.cs
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\App.g.cs
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\CT-MKWII-WPF_MarkupCompile.cache
-G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\CT-MKWII-WPF_MarkupCompile.lref
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\MainWindow.baml
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\CT-MKWII-WPF.g.resources
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\CT-MKWII-WPF.GeneratedMSBuildEditorConfig.editorconfig

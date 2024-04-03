@@ -1,34 +1,14 @@
 ﻿<Window x:Class="CT_MKWII_WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CT_MKWII_WPF"
-        mc:Ignorable="d"
         Title="MKW Mod Manager" Height="450" Width="800">
-        
-        <DockPanel>
-                <ComboBox x:Name="modSelectionComboBox" DockPanel.Dock="Top" Margin="10" SelectionChanged="ModSelectionComboBox_SelectionChanged">
-                        <ComboBoxItem Content="Select Mod" IsEnabled="False" IsSelected="True"/>
-                        <ComboBoxItem Content="CTGP (Coming Soon...)" IsEnabled="False"/>
-                        <ComboBoxItem Content="Retro Rewind"/>
+        <Grid>
+                <ComboBox x:Name="MenuDropdown" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="120" Height="30">
+                        <ComboBoxItem Content="Option 1" />
+                        <ComboBoxItem Content="Option 2" />
+                        <ComboBoxItem Content="Option 3" />
                 </ComboBox>
-                <TabControl x:Name="mainTabControl" Visibility="Collapsed">
-                        <TabItem Header="Main">
-                                <Grid>
-                                        <Button x:Name="versionCheckButton" Content="Check Version" VerticalAlignment="Top" Margin="10" Click="VersionCheckButton_Click"/>
-                                        <Button x:Name="actionButton" Content="Install" VerticalAlignment="Bottom" Margin="10" Click="ActionButton_Click"/>
-                                </Grid>
-                        </TabItem>
-                        <TabItem Header="Advanced Settings">
-                                <!-- Advanced settings UI here -->
-                        </TabItem>
-                </TabControl>
-        </DockPanel>
-       
-        
-    
+                <Button Content="Continue" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="120" Click="Continue_Click"/>
+        </Grid>
 
-    
-    
 </Window>

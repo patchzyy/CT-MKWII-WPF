@@ -14,50 +14,33 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace CT_MKWII_WPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-
-        private const string RetroRewindPath = @"%APPDATA%\Dolphin Emulator\Load\Riivolution\RetroRewind6\version.txt";
-        
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void ModSelectionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Continue_Click(object sender, RoutedEventArgs e)
         {
-            if (modSelectionComboBox.SelectedIndex > 1) // Retro Rewind is selected
+            switch (MenuDropdown.SelectedIndex)
             {
-                mainTabControl.Visibility = Visibility.Visible;
+                case 0:
+                    MessageBox.Show("Welcome to Screen 1");
+                    break;
+                case 1:
+                    MessageBox.Show("Welcome to Screen 2");
+                    break;
+                case 2:
+                    MessageBox.Show("Welcome to Screen 3");
+                    break;
+                default:
+                    MessageBox.Show("Please select an option");
+                    break;
             }
-        }
-
-        private void VersionCheckButton_Click(object sender, RoutedEventArgs e)
-        {
-            string versionFilePath = Environment.ExpandEnvironmentVariables(RetroRewindPath);
-            if (File.Exists(versionFilePath))
-            {
-                string version = File.ReadAllText(versionFilePath).Trim();
-                versionCheckButton.Content = $"Current Version: {version}";
-                actionButton.Content = version == "6.0.2" ? "Play" : "Update";
-            }
-            else
-            {
-                versionCheckButton.Content = "Not Installed";
-                actionButton.Content = "Install";
-            }
-        }
-
-        private void ActionButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Placeholder for install/update/play logic
-            MessageBox.Show($"{actionButton.Content} functionality not implemented yet.");
         }
     }
-
 }
