@@ -15,7 +15,8 @@
             <TextBlock x:Name="RRStatus" Text="Status: Unknown" Margin="5"/>
             <Button Content="Check Retro Rewind Update" Click="CheckRRUpdate" Margin="5"/>
             <TextBlock x:Name="RRUpdateStatus" Text="Status: Unknown" Margin="5"/>
-            <Button Content="Update Retro Rewind" Click="UpdateRRClick" Margin="5"/>
+            <Button x:Name="ActionButton" Click="ActionButton_Click" Margin="5"/>
+
         </StackPanel>
     </Grid>
 

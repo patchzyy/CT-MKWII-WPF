@@ -11,22 +11,13 @@ public partial class RetroRewind : UserControl
     public RetroRewind()
     {
         InitializeComponent();
-        //pop up window when the page loads to confirm it works
-        if (!IsDolphinInstalled())
-        {
-            return;
-        }
-        if (!IsRetroRewindInstalled())
-        {
-            return;
-        }
-        if (!IsRRUpToDate(CurrentRRVersion()))
-        {
-            MessageBox.Show("Retro Rewind is not up to date. Please click install or Cancel to exit the program.");
-        }
-        
-        
+        CheckDolphinInstallation(null, null);
+        CheckRRInstallation(null, null);
+        CheckRRUpdate(null, null);
+        UpdateActionButton();
     }
+    
+
 
     public static bool IsDolphinInstalled()
     {
@@ -36,7 +27,6 @@ public partial class RetroRewind : UserControl
             MessageBox.Show("Dolphin Emulator is not installed. Please click install or Cancel to exit the program.");
             return false;
         }
-        MessageBox.Show("Dolphin Emulator is installed.");
         return true;
     }
 
@@ -77,7 +67,6 @@ public partial class RetroRewind : UserControl
             return false;
         }
 
-        MessageBox.Show("Retro Rewind is up to date.");
         return true;
     }
     
@@ -91,6 +80,7 @@ public partial class RetroRewind : UserControl
         {
             DolphinStatus.Text = "Dolphin Emulator is not installed. Please install.";
         }
+        UpdateActionButton();
     }
 
     private void CheckRRInstallation(object sender, RoutedEventArgs e)
@@ -103,6 +93,7 @@ public partial class RetroRewind : UserControl
         {
             RRStatus.Text = "Retro Rewind is not installed. Please install.";
         }
+        UpdateActionButton();
     }
 
     private void CheckRRUpdate(object sender, RoutedEventArgs e)
@@ -116,6 +107,7 @@ public partial class RetroRewind : UserControl
         {
             RRUpdateStatus.Text = $"Retro Rewind is not up to date. Current version: {version}.";
         }
+        UpdateActionButton();
     }
 
     private void UpdateRRClick(object sender, RoutedEventArgs e)
@@ -130,10 +122,62 @@ public partial class RetroRewind : UserControl
         {
             RRUpdateStatus.Text = "Failed to update Retro Rewind. Please try again.";
         }
+        UpdateActionButton();
     }
 
     private bool UpdateRR()
     {
+        UpdateActionButton();
         return false;
     }
+    
+    private void UpdateActionButton()
+    {
+        if (!IsDolphinInstalled())
+        {
+            ActionButton.Content = "Install Dolphin";
+        }
+        else if (!IsRetroRewindInstalled())
+        {
+            ActionButton.Content = "Install Retro Rewind";
+        }
+        else if (!IsRRUpToDate(CurrentRRVersion()))
+        {
+            ActionButton.Content = "Update Retro Rewind";
+        }
+        else
+        {
+            ActionButton.Content = "Play Retro Rewind";
+        }
+    }
+
+    private void ActionButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (!IsDolphinInstalled())
+        {
+            // Implement installation logic for Dolphin.
+        }
+        else if (!IsRetroRewindInstalled())
+        {
+            // Implement installation logic for Retro Rewind.
+        }
+        else if (!IsRRUpToDate(CurrentRRVersion()))
+        {
+            // Implement update logic for Retro Rewind.
+            if (UpdateRR())
+            {
+                RRUpdateStatus.Text = "Retro Rewind has been updated successfully.";
+                UpdateActionButton();
+            }
+            else
+            {
+                RRUpdateStatus.Text = "Failed to update Retro Rewind. Please try again.";
+            }
+        }
+        else
+        {
+            // Implement logic to play Retro Rewind.
+        }
+    }
+
 }
