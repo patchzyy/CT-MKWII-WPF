@@ -43,5 +43,10 @@ namespace CT_MKWII_WPF
                     break;
             }
         }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            ContentArea.Content = new Settings();
+        }
     }
 }

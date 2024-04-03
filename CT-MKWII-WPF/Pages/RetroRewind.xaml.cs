@@ -62,7 +62,7 @@ public partial class RetroRewind : UserControl
         }
 
         //if current version is lower then 6.0.0 then it is not up to date
-        if (currentVersion.CompareTo("6.0.0") < 0)
+        if (currentVersion != "3.0.1")
         {
             return false;
         }

@@ -8,8 +8,8 @@
                         <ComboBoxItem Content="CTGP (wii / wiiu only)" IsEnabled="False"/>
                         <ComboBoxItem Content="Placeholder" IsEnabled="False"/>
                 </ComboBox>
-                <Button Content="Continue" HorizontalAlignment="Right" Margin="10,50,10,0" VerticalAlignment="Top" Width="120" Click="Continue_Click"/>
-                
+                <Button Content="Go!" HorizontalAlignment="Right" Margin="10,50,10,0" VerticalAlignment="Top" Width="120" Click="Continue_Click"/>
+                <Button Content="Settings" HorizontalAlignment="Left" Margin="10,50,10,0" VerticalAlignment="Top" Width="120" Click="Settings_Click"/>
                 <ComboBox x:Name="ConsoleSelection" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="120" Height="30" SelectedIndex="0">
                         <ComboBoxItem Content="Dolphin" />
                         <ComboBoxItem Content="Wii" IsEnabled="False"/>
