@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="CT_MKWII_WPF.Pages.RetroRewind"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CT_MKWII_WPF.Pages"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Retro Rewind Setup" FontSize="24" HorizontalAlignment="Center" Margin="10"/>
+            <Button Content="Check Dolphin Installation" Click="CheckDolphinInstallation" Margin="5"/>
+            <TextBlock x:Name="DolphinStatus" Text="Status: Unknown" Margin="5"/>
+            <Button Content="Check Retro Rewind Installation" Click="CheckRRInstallation" Margin="5"/>
+            <TextBlock x:Name="RRStatus" Text="Status: Unknown" Margin="5"/>
+            <Button Content="Check Retro Rewind Update" Click="CheckRRUpdate" Margin="5"/>
+            <TextBlock x:Name="RRUpdateStatus" Text="Status: Unknown" Margin="5"/>
+            <Button Content="Update Retro Rewind" Click="UpdateRRClick" Margin="5"/>
+        </StackPanel>
+    </Grid>
+
+
+</UserControl>

@@ -17,3 +17,10 @@ G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\refint\CT-MKWI
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\CT-MKWII-WPF.pdb
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\CT-MKWII-WPF.genruntimeconfig.cache
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\ref\CT-MKWII-WPF.dll
+G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\CT-MKWII-WPF_MarkupCompile.lref
+G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\CTGP.g.cs
+G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\PlaceholderMod.g.cs
+G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\RetroRewind.g.cs
+G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\CTGP.baml
+G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\PlaceholderMod.baml
+G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\RetroRewind.baml

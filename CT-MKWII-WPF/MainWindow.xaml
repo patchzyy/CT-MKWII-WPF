@@ -3,12 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MKW Mod Manager" Height="450" Width="800">
         <Grid>
-                <ComboBox x:Name="MenuDropdown" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="120" Height="30">
-                        <ComboBoxItem Content="Option 1" />
-                        <ComboBoxItem Content="Option 2" />
-                        <ComboBoxItem Content="Option 3" />
+                <ComboBox x:Name="ModSelection" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top" Width="120" Height="30" SelectedIndex="0">
+                        <ComboBoxItem Content="Retro Rewind"/>
+                        <ComboBoxItem Content="CTGP (wii / wiiu only)" IsEnabled="False"/>
+                        <ComboBoxItem Content="Placeholder" IsEnabled="False"/>
                 </ComboBox>
-                <Button Content="Continue" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="120" Click="Continue_Click"/>
+                <Button Content="Continue" HorizontalAlignment="Right" Margin="10,50,10,0" VerticalAlignment="Top" Width="120" Click="Continue_Click"/>
+                
+                <ComboBox x:Name="ConsoleSelection" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="120" Height="30" SelectedIndex="0">
+                        <ComboBoxItem Content="Dolphin" />
+                        <ComboBoxItem Content="Wii" IsEnabled="False"/>
+                        <ComboBoxItem Content="Wii-u" IsEnabled="False"/>
+                </ComboBox>
+                
+                <ContentControl x:Name="ContentArea" Margin="10,100,10,10"/>
         </Grid>
+
 
 </Window>

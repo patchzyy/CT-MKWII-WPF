@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CT_MKWII_WPF.Pages;
 
 
 namespace CT_MKWII_WPF
@@ -26,16 +27,16 @@ namespace CT_MKWII_WPF
 
         private void Continue_Click(object sender, RoutedEventArgs e)
         {
-            switch (MenuDropdown.SelectedIndex)
+            switch (ConsoleSelection.SelectedIndex)
             {
                 case 0:
-                    MessageBox.Show("Welcome to Screen 1");
+                    ContentArea.Content = new RetroRewind();
                     break;
                 case 1:
-                    MessageBox.Show("Welcome to Screen 2");
+                    ContentArea.Content = new CTGP();
                     break;
                 case 2:
-                    MessageBox.Show("Welcome to Screen 3");
+                    ContentArea.Content = new PlaceholderMod();
                     break;
                 default:
                     MessageBox.Show("Please select an option");
