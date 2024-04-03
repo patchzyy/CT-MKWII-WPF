@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -176,8 +177,60 @@ public partial class RetroRewind : UserControl
         }
         else
         {
-            // Implement logic to play Retro Rewind.
+            PlayRetroRewind();
         }
+    }
+
+    public void PlayRetroRewind()
+    {
+        string dolphinLocation = GetDolphinLocation();
+        string gamePath = GetGamePath();
+        
+        //check if the paths are correct
+        if (!File.Exists(dolphinLocation) || !File.Exists(gamePath))
+        {
+            MessageBox.Show("Please ensure both paths are correct and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+        
+        //start the dolphin emulator with the game
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = dolphinLocation,
+                Arguments = $"-e \"{gamePath}\"",
+                UseShellExecute = false
+            });
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            MessageBox.Show("Failed to start Dolphin Emulator. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            throw;
+        }
+    }
+
+    public string GetDolphinLocation()
+    {
+        //check the config.txt file for the dolphin location, top line is location
+        if (File.Exists("config.txt"))
+        {
+            string[] settings = File.ReadAllLines("config.txt");
+            return settings[0];
+        }
+        return "";
+    }
+    
+    public string GetGamePath()
+    {
+        //check the config.txt file for the game location, second line is location
+        if (File.Exists("config.txt"))
+        {
+            string[] settings = File.ReadAllLines("config.txt");
+            return settings[1];
+        }
+        return "";
     }
 
 }

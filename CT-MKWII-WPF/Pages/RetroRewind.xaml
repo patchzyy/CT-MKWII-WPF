@@ -7,18 +7,40 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="Retro Rewind Setup" FontSize="24" HorizontalAlignment="Center" Margin="10"/>
-            <Button Content="Check Dolphin Installation" Click="CheckDolphinInstallation" Margin="5"/>
-            <TextBlock x:Name="DolphinStatus" Text="Status: Unknown" Margin="5"/>
-            <Button Content="Check Retro Rewind Installation" Click="CheckRRInstallation" Margin="5"/>
-            <TextBlock x:Name="RRStatus" Text="Status: Unknown" Margin="5"/>
-            <Button Content="Check Retro Rewind Update" Click="CheckRRUpdate" Margin="5"/>
-            <TextBlock x:Name="RRUpdateStatus" Text="Status: Unknown" Margin="5"/>
-            <Button x:Name="ActionButton" Click="ActionButton_Click" Margin="5"/>
+        <!-- Add a Grid to contain both the background image and the content -->
+        <Grid>
+            <!-- Background image -->
+            <Image Source="YourBackgroundImage.jpg" Stretch="UniformToFill"/>
 
-        </StackPanel>
+            <!-- Overlay to make the text readable -->
+            <Grid Background="#80000000"> <!-- Use a semi-transparent color as the overlay -->
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Retro Rewind Setup" FontSize="24" HorizontalAlignment="Center" Margin="10" Foreground="White">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <Button Content="Check Dolphin Installation" Click="CheckDolphinInstallation" Margin="5"/>
+                    <TextBlock x:Name="DolphinStatus" Text="Status: Unknown" Margin="5" Foreground="White">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <Button Content="Check Retro Rewind Installation" Click="CheckRRInstallation" Margin="5"/>
+                    <TextBlock x:Name="RRStatus" Text="Status: Unknown" Margin="5" Foreground="White">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <Button Content="Check Retro Rewind Update" Click="CheckRRUpdate" Margin="5"/>
+                    <TextBlock x:Name="RRUpdateStatus" Text="Status: Unknown" Margin="5" Foreground="White">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <Button x:Name="ActionButton" Click="ActionButton_Click" Margin="5"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Grid>
-
-
 </UserControl>

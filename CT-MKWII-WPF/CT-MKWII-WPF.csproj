@@ -8,4 +8,11 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Remove="Retro_Rewind_Cover.png" />
+      <Resource Include="Retro_Rewind_Cover.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+    </ItemGroup>
+
 </Project>
