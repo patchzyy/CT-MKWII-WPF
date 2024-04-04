@@ -27,7 +27,7 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        <TextBlock Text="Version: 1.0.0" FontSize="12" HorizontalAlignment="Left" Margin="221,4,0,280" Foreground="White">
+        <TextBlock Text="Version: 1.0.0" FontSize="12" HorizontalAlignment="Right" Margin="221,4,0,280" Foreground="White">
             <TextBlock.Effect>
                 <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
             </TextBlock.Effect>

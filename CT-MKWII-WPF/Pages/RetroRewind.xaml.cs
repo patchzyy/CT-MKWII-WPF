@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -69,10 +71,38 @@ public partial class RetroRewind : UserControl
     
     
 
-    private bool UpdateRR()
+    private async Task<bool> UpdateRR()
     {
-        UpdateActionButton();
-        return false;
+        //pop up a message box to confirm the update
+        MessageBoxResult result = MessageBox.Show("Are you sure you want to update Retro Rewind?", "Update Retro Rewind", MessageBoxButton.YesNo);
+        if (result == MessageBoxResult.No)
+        {
+            return false;
+        }
+        const string latestVersionUrl = "https://raw.githubusercontent.com/patchzyy/CT-MKWII-WPF/main/Latest.txt";
+
+        try
+        {
+            using (var httpClient = new HttpClient())
+            {
+                // Fetch the latest version string from GitHub
+                string latestVersion = await httpClient.GetStringAsync(latestVersionUrl);
+                latestVersion = latestVersion.Trim(); // Trim any whitespace
+
+                // Version comparison (consider using Version class for more complex comparisons)
+                    MessageBox.Show($"Updating to latest version {latestVersion}");
+                    // Here you could trigger the actual update logic
+                    UpdateActionButton();
+                    return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Failed to check for updates: {ex.Message}");
+            // Depending on your application's needs, you might want to return true or false here
+            return false;
+        }
+        
     }
     
     private void UpdateActionButton()
@@ -115,7 +145,7 @@ public partial class RetroRewind : UserControl
         else if (!IsRRUpToDate(CurrentRRVersion()))
         {
             // Implement update logic for Retro Rewind.
-            if (UpdateRR())
+            if (UpdateRR() != null)
             {
                 UpdateActionButton();
             }

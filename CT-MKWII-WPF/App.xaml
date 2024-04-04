@@ -4,10 +4,8 @@
              xmlns:local="clr-namespace:CT_MKWII_WPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!-- Style for ComboBox (Dropdown Menu) -->
 
-
-
+        
         <!-- Global Style for Buttons -->
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="White"/>

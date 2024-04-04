@@ -48,5 +48,10 @@ namespace CT_MKWII_WPF
         {
             ContentArea.Content = new Settings();
         }
+
+        private void ConsoleSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
