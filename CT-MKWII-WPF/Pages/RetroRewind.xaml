@@ -9,38 +9,43 @@
     <Grid>
         <!-- Add a Grid to contain both the background image and the content -->
         <Grid>
-            <!-- Background image -->
-            <Image Source="YourBackgroundImage.jpg" Stretch="UniformToFill"/>
 
             <!-- Overlay to make the text readable -->
-            <Grid Background="#80000000"> <!-- Use a semi-transparent color as the overlay -->
+            <Grid Background="#80000000">
+                <!-- Use a semi-transparent color as the overlay -->
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="Retro Rewind Setup" FontSize="24" HorizontalAlignment="Center" Margin="10" Foreground="White">
+                    <TextBlock Text="Retro Rewind" FontSize="24" HorizontalAlignment="Center" Margin="10" Foreground="White">
                         <TextBlock.Effect>
                             <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
                         </TextBlock.Effect>
                     </TextBlock>
-                    <Button Content="Check Dolphin Installation" Click="CheckDolphinInstallation" Margin="5"/>
-                    <TextBlock x:Name="DolphinStatus" Text="Status: Unknown" Margin="5" Foreground="White">
-                        <TextBlock.Effect>
-                            <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
-                    <Button Content="Check Retro Rewind Installation" Click="CheckRRInstallation" Margin="5"/>
-                    <TextBlock x:Name="RRStatus" Text="Status: Unknown" Margin="5" Foreground="White">
-                        <TextBlock.Effect>
-                            <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
-                    <Button Content="Check Retro Rewind Update" Click="CheckRRUpdate" Margin="5"/>
-                    <TextBlock x:Name="RRUpdateStatus" Text="Status: Unknown" Margin="5" Foreground="White">
-                        <TextBlock.Effect>
-                            <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
+                    <!-- small text on the top left to display the version and status of everything -->
+
+
+
                     <Button x:Name="ActionButton" Click="ActionButton_Click" Margin="5"/>
                 </StackPanel>
             </Grid>
         </Grid>
+        <TextBlock Text="Version: 1.0.0" FontSize="12" HorizontalAlignment="Left" Margin="221,4,0,280" Foreground="White">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <!-- dynamic text saying weather its up to date or not -->
+        <TextBlock x:Name="StatusText" FontSize="12" HorizontalAlignment="Left" Margin="0,5,0,271" Foreground="White" RenderTransformOrigin="0.402,0.576" Width="159">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+            <TextBlock.Effect>
+                <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
+            </TextBlock.Effect>
+        </TextBlock>
+
     </Grid>
 </UserControl>

@@ -4,6 +4,27 @@
              xmlns:local="clr-namespace:CT_MKWII_WPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- Style for ComboBox (Dropdown Menu) -->
+
+
+
+        <!-- Global Style for Buttons -->
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#FF007ACC"/>
+            <Setter Property="BorderBrush" Value="#FF007ACC"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="10,2"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF005FA3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
+    
+    
 </Application>

@@ -26,3 +26,4 @@ G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\Placehol
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\RetroRewind.baml
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\Settings.baml
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\Settings.g.cs
+G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\App.baml

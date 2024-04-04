@@ -12,14 +12,10 @@ public partial class RetroRewind : UserControl
     public RetroRewind()
     {
         InitializeComponent();
-        CheckDolphinInstallation(null, null);
-        CheckRRInstallation(null, null);
-        CheckRRUpdate(null, null);
         UpdateActionButton();
     }
+
     
-
-
     public static bool IsDolphinInstalled()
     {
         //check the appdata/roaming/Dolphin Emulator folder for the dolphin emulator
@@ -71,60 +67,7 @@ public partial class RetroRewind : UserControl
         return true;
     }
     
-    private void CheckDolphinInstallation(object sender, RoutedEventArgs e)
-    {
-        if (IsDolphinInstalled())
-        {
-            DolphinStatus.Text = "Dolphin Emulator is installed.";
-        }
-        else
-        {
-            DolphinStatus.Text = "Dolphin Emulator is not installed. Please install.";
-        }
-        UpdateActionButton();
-    }
-
-    private void CheckRRInstallation(object sender, RoutedEventArgs e)
-    {
-        if (IsRetroRewindInstalled())
-        {
-            RRStatus.Text = "Retro Rewind is installed.";
-        }
-        else
-        {
-            RRStatus.Text = "Retro Rewind is not installed. Please install.";
-        }
-        UpdateActionButton();
-    }
-
-    private void CheckRRUpdate(object sender, RoutedEventArgs e)
-    {
-        string version = CurrentRRVersion();
-        if (IsRRUpToDate(version))
-        {
-            RRUpdateStatus.Text = "Retro Rewind is up to date.";
-        }
-        else
-        {
-            RRUpdateStatus.Text = $"Retro Rewind is not up to date. Current version: {version}.";
-        }
-        UpdateActionButton();
-    }
-
-    private void UpdateRRClick(object sender, RoutedEventArgs e)
-    {
-        // This function should trigger the update process for Retro Rewind.
-        // Implement the UpdateRR method to actually perform the update.
-        if (UpdateRR())
-        {
-            RRUpdateStatus.Text = "Retro Rewind has been updated successfully.";
-        }
-        else
-        {
-            RRUpdateStatus.Text = "Failed to update Retro Rewind. Please try again.";
-        }
-        UpdateActionButton();
-    }
+    
 
     private bool UpdateRR()
     {
@@ -150,6 +93,13 @@ public partial class RetroRewind : UserControl
         {
             ActionButton.Content = "Play Retro Rewind";
         }
+        
+        //also update the status text at the top left
+        StatusText.Text = "Dolphin: " + (IsDolphinInstalled() ? "Installed" : "Not Installed") + "\n" +
+                          "Retro Rewind: " + (IsRetroRewindInstalled() ? "Installed" : "Not Installed") + "\n" +
+                          "Retro Rewind Version: " + CurrentRRVersion() + "\n" +
+                          "Retro Rewind Up to Date: " + (IsRRUpToDate(CurrentRRVersion()) ? "Yes" : "No");
+        
     }
 
     private void ActionButton_Click(object sender, RoutedEventArgs e)
@@ -167,12 +117,7 @@ public partial class RetroRewind : UserControl
             // Implement update logic for Retro Rewind.
             if (UpdateRR())
             {
-                RRUpdateStatus.Text = "Retro Rewind has been updated successfully.";
                 UpdateActionButton();
-            }
-            else
-            {
-                RRUpdateStatus.Text = "Failed to update Retro Rewind. Please try again.";
             }
         }
         else
@@ -185,6 +130,9 @@ public partial class RetroRewind : UserControl
     {
         string dolphinLocation = GetDolphinLocation();
         string gamePath = GetGamePath();
+        //launch json is in exe folder
+        GenerateLaunchJSON();
+        string LaunchJSON = Path.Combine(Environment.CurrentDirectory, "RR.json");
         
         //check if the paths are correct
         if (!File.Exists(dolphinLocation) || !File.Exists(gamePath))
@@ -199,7 +147,7 @@ public partial class RetroRewind : UserControl
             Process.Start(new ProcessStartInfo
             {
                 FileName = dolphinLocation,
-                Arguments = $"-e \"{gamePath}\"",
+                Arguments = $"-e \"{LaunchJSON}\"" ,
                 UseShellExecute = false
             });
         }
@@ -232,5 +180,58 @@ public partial class RetroRewind : UserControl
         }
         return "";
     }
+
+    public void GenerateLaunchJSON()
+    {
+        
+        //keep in mind a few things, the json formatting of this file is so weird
+        //paths should look like this "C:\/Users\/patchzy\/AppData\/Roaming\/Dolphin Emulator\/Load\/Riivolution\/"
+        //so keep that in mind when replacing the paths, so the slashes should be escaped
+        string OriginalJSON = """
+{
+                  "base-file": "LINK TO ISO OR WBFS",
+                  "display-name": "RR",
+                  "riivolution": {
+                    "patches": [
+                      {
+                        "options": [
+                          {
+                            "choice": 1,
+                            "option-name": "Pack",
+                            "section-name": "Retro Rewind"
+                          },
+                          {
+                            "choice": 0,
+                            "option-name": "My Stuff",
+                            "section-name": "Retro Rewind"
+                          }
+                        ],
+                        "root": "LINK TO APPDATA RIIVOLUTION FOLDER",
+                        "xml": "LINK TO RETRO REWIND XML FILE"
+                      }
+                    ]
+                  },
+                  "type": "dolphin-game-mod-descriptor",
+                  "version": 1
+                }
+                
+""";
+        
+        //replace the base-file with the game path
+        string CorrectedGamePath = GetGamePath().Replace(@"\", @"\/");
+        OriginalJSON = OriginalJSON.Replace("LINK TO ISO OR WBFS", CorrectedGamePath);
+        
+        //replace the link to appdata riivolution folder with the correct path
+        string CorrectedRRPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Dolphin Emulator\Load\Riivolution\";
+        CorrectedRRPath = CorrectedRRPath.Replace(@"\", @"\/");
+        OriginalJSON = OriginalJSON.Replace("LINK TO APPDATA RIIVOLUTION FOLDER", CorrectedRRPath);
+        
+        string CorrectedXMLPath = CorrectedRRPath + @"\/riivolution\/RetroRewind6.xml";
+        OriginalJSON = OriginalJSON.Replace("LINK TO RETRO REWIND XML FILE", CorrectedXMLPath);
+        
+        //write the json to the exe folder
+        File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "RR.json"), OriginalJSON);
+    }
+    
 
 }
