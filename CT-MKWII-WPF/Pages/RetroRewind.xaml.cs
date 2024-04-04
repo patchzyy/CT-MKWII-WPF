@@ -11,11 +11,12 @@ public partial class RetroRewind : UserControl
         UpdateActionButton();
     }
 
-    private void UpdateActionButton()
+    private async void UpdateActionButton()
     {
         var dolphinInstalled = DolphinInstaller.IsDolphinInstalled();
         var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
-        var retroRewindUpToDate = RetroRewindInstaller.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
+        var retroRewindUpToDate = await RetroRewindInstaller.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
+        string latestRRVersion = await RetroRewindInstaller.GetLatestVersionString();
 
         if (!dolphinInstalled)
         {
@@ -37,14 +38,15 @@ public partial class RetroRewind : UserControl
         StatusText.Text = $"Dolphin: {(dolphinInstalled ? "Installed" : "Not Installed")}\n" +
                           $"Retro Rewind: {(retroRewindInstalled ? "Installed" : "Not Installed")}\n" +
                           $"Retro Rewind Version: {RetroRewindInstaller.CurrentRRVersion()}\n" +
-                          $"Retro Rewind Up to Date: {(retroRewindUpToDate ? "Yes" : "No")}";
+                          $"Retro Rewind Up to Date: {(retroRewindUpToDate ? "Yes\n" : "No\n")}" +
+                          $"Latest RR Version: {latestRRVersion}";
     }
 
     private async void ActionButton_Click(object sender, RoutedEventArgs e)
     {
         var dolphinInstalled = DolphinInstaller.IsDolphinInstalled();
         var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
-        var retroRewindUpToDate = RetroRewindInstaller.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
+        var retroRewindUpToDate = await RetroRewindInstaller.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
 
         if (!dolphinInstalled)
         {

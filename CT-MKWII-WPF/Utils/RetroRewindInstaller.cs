@@ -17,22 +17,35 @@ public static class RetroRewindInstaller
         var versionFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator", "Load", "Riivolution", "RetroRewind6", "version.txt");
         if (!File.Exists(versionFilePath))
         {
-            MessageBox.Show("Retro Rewind is not installed. Please click install or Cancel to exit the program.");
             return "Not Installed";
         }
         return File.ReadAllText(versionFilePath);
     }
 
-    public static bool IsRRUpToDate(string currentVersion)
+    public async static Task<bool> IsRRUpToDate(string currentVersion)
     {
-        if (currentVersion == "Not Installed")
-        {
-            MessageBox.Show("Retro Rewind is not installed. Please click install or Cancel to exit the program.");
-            return false;
-        }
+        //make sure to ignore any spaces
+        currentVersion = currentVersion.Trim();
+        string latestVersion = await GetLatestVersionString();
+        latestVersion = latestVersion.Trim();
+        
+        return currentVersion == latestVersion;
+    }
 
-        // If the current version is lower than 3.0.1, it is not up-to-date
-        return currentVersion == "3.0.1";
+    public static async Task<string> GetLatestVersionString()
+    {
+        const string latestVersionUrl = "https://raw.githubusercontent.com/patchzyy/CT-MKWII-WPF/main/Latest.txt";
+        try
+        {
+            using var httpClient = new HttpClient();
+            return await httpClient.GetStringAsync(latestVersionUrl);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Failed to check for updates: {ex.Message}");
+            return "Failed to check for updates";
+        }
+        
     }
 
     public static async Task<bool> UpdateRR()
@@ -69,4 +82,6 @@ public static class RetroRewindInstaller
         // Implement installation logic for Retro Rewind.
         MessageBox.Show("Retro Rewind installation logic not implemented yet.");
     }
+    
+    
 }
