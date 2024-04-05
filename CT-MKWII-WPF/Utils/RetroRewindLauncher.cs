@@ -2,13 +2,14 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using CT_MKWII_WPF.Utils;
 
 public static class RetroRewindLauncher
 {
     public static void PlayRetroRewind()
     {
-        string dolphinLocation = GetDolphinLocation();
-        string gamePath = GetGamePath();
+        string dolphinLocation = LauncherUtils.GetDolphinLocation();
+        string gamePath = LauncherUtils.GetGamePath();
         GenerateLaunchJSON();
         string launchJson = Path.Combine(Environment.CurrentDirectory, "RR.json");
 
@@ -36,27 +37,7 @@ public static class RetroRewindLauncher
         }
     }
 
-    private static string GetDolphinLocation()
-    {
-        if (File.Exists("config.txt"))
-        {
-            string[] settings = File.ReadAllLines("config.txt");
-            return settings[0];
-        }
 
-        return string.Empty;
-    }
-
-    private static string GetGamePath()
-    {
-        if (File.Exists("config.txt"))
-        {
-            string[] settings = File.ReadAllLines("config.txt");
-            return settings[1];
-        }
-
-        return string.Empty;
-    }
 
     private static void GenerateLaunchJSON()
     {
@@ -90,7 +71,7 @@ public static class RetroRewindLauncher
                               """;
 
         // Replace the base-file with the game path
-        string correctedGamePath = GetGamePath().Replace(@"\", @"\/");
+        string correctedGamePath = LauncherUtils.GetGamePath().Replace(@"\", @"\/");
         originalJSON = originalJSON.Replace("LINK TO ISO OR WBFS", correctedGamePath);
 
         // Replace the link to appdata riivolution folder with the correct path

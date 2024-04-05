@@ -27,3 +27,5 @@ G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\RetroRew
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\Settings.baml
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\Settings.g.cs
 G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\App.baml
+G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\Riivolution.g.cs
+G:\autoupdater\CT-MKWII-WPF\CT-MKWII-WPF\obj\Debug\net7.0-windows\Pages\Riivolution.baml

@@ -44,6 +44,7 @@
                         </ComboBox.Effect>
                         <ComboBoxItem Content="Retro Rewind"/>
                         <ComboBoxItem Content="CTGP (wii / wiiu only)" IsEnabled="False"/>
+                        <ComboBoxItem Content="Riivolution"/>
                         <ComboBoxItem Content="Placeholder" IsEnabled="False"/>
                     </ComboBox>
                     <ComboBox x:Name="ConsoleSelection" Grid.Column="0" HorizontalAlignment="Left" Width="120" Height="30" SelectedIndex="0" BorderBrush="#FF226CE4" Background="#FF0078D7">

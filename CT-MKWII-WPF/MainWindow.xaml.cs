@@ -27,7 +27,7 @@ namespace CT_MKWII_WPF
 
         private void Continue_Click(object sender, RoutedEventArgs e)
         {
-            switch (ConsoleSelection.SelectedIndex)
+            switch (ModSelection.SelectedIndex)
             {
                 case 0:
                     ContentArea.Content = new RetroRewind();
@@ -36,6 +36,9 @@ namespace CT_MKWII_WPF
                     ContentArea.Content = new CTGP();
                     break;
                 case 2:
+                    ContentArea.Content = new Riivolution();
+                    break;
+                case 3:
                     ContentArea.Content = new PlaceholderMod();
                     break;
                 default:
