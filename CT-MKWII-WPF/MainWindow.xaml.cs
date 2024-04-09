@@ -24,9 +24,20 @@ namespace CT_MKWII_WPF
         {
             InitializeComponent();
         }
+        public void ChangeContent(UserControl control)
+        {
+            ContentArea.Content = control;
+        }
+        
 
         private void Continue_Click(object sender, RoutedEventArgs e)
         {
+            //before accepting a click, check if config.txt is setup
+            if (!File.Exists("./config.txt"))
+            {
+                MessageBox.Show("Please set the paths in settings.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             switch (ModSelection.SelectedIndex)
             {
                 case 0:
@@ -49,12 +60,14 @@ namespace CT_MKWII_WPF
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            ContentArea.Content = new Settings();
+            ContentArea.Content = new SettingsPage();
         }
 
         private void ConsoleSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
+        
+        
     }
 }

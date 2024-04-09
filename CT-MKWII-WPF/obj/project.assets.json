@@ -1,11 +1,60 @@
 {
   "version": 3,
   "targets": {
-    "net7.0-windows7.0": {}
+    "net7.0-windows7.0": {
+      "Microsoft.WindowsAPICodePack.Core/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/Microsoft.WindowsAPICodePack.dll": {}
+        },
+        "runtime": {
+          "lib/Microsoft.WindowsAPICodePack.dll": {}
+        }
+      },
+      "Microsoft.WindowsAPICodePack.Shell/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.WindowsAPICodePack.Core": "1.1.0"
+        },
+        "compile": {
+          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {}
+        },
+        "runtime": {
+          "lib/Microsoft.WindowsAPICodePack.Shell.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Microsoft.WindowsAPICodePack.Core/1.1.0": {
+      "sha512": "szH5i6kUEuukCJN2vxPKRKvrTrtb759ScSWvlzN0lA9LNfZZQiauqqE5UrMZUdt5GzlJFSHfHkdcIe4qEC7Z1A==",
+      "type": "package",
+      "path": "microsoft.windowsapicodepack.core/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/Microsoft.WindowsAPICodePack.dll",
+        "microsoft.windowsapicodepack.core.1.1.0.nupkg.sha512",
+        "microsoft.windowsapicodepack.core.nuspec"
+      ]
+    },
+    "Microsoft.WindowsAPICodePack.Shell/1.1.0": {
+      "sha512": "mf++Hez9kbikfIuwz4uCdQRwJDpd38rCD/F5CWU78tzyZtpEsUR6oWOX8ea59XvQ3hLitm2zZe3fXEgTD5Qyxg==",
+      "type": "package",
+      "path": "microsoft.windowsapicodepack.shell/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/Microsoft.WindowsAPICodePack.Shell.dll",
+        "microsoft.windowsapicodepack.shell.1.1.0.nupkg.sha512",
+        "microsoft.windowsapicodepack.shell.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net7.0-windows7.0": []
+    "net7.0-windows7.0": [
+      "Microsoft.WindowsAPICodePack.Shell >= 1.1.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\patchzy\\.nuget\\packages\\": {},
@@ -51,6 +100,12 @@
     "frameworks": {
       "net7.0-windows7.0": {
         "targetAlias": "net7.0-windows",
+        "dependencies": {
+          "Microsoft.WindowsAPICodePack.Shell": {
+            "target": "Package",
+            "version": "[1.1.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
@@ -73,5 +128,27 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.WindowsAPICodePack.Core 1.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.WindowsAPICodePack.Core",
+      "targetGraphs": [
+        "net7.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.WindowsAPICodePack.Shell 1.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.WindowsAPICodePack.Shell",
+      "targetGraphs": [
+        "net7.0-windows7.0"
+      ]
+    }
+  ]
 }

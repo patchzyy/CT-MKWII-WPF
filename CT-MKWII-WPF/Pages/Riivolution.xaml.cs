@@ -15,29 +15,23 @@ public Riivolution()
     private async void UpdateActionButton()
     {
         var dolphinInstalled = DolphinInstaller.IsDolphinInstalled();
-        var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
-        var retroRewindUpToDate = await RetroRewindInstaller.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
-        string latestRRVersion = await RetroRewindInstaller.GetLatestVersionString();
+        var RiivolutionInstalled = RiivolutionInstaller.IsRiivolutionInstalled();
 
         if (!dolphinInstalled)
         {
             ActionButton.Content = "Install Dolphin";
         }
-        else if (!retroRewindInstalled)
+        else if (!RiivolutionInstalled)
         {
-            ActionButton.Content = "Install Retro Rewind";
-        }
-        else if (!retroRewindUpToDate)
-        {
-            ActionButton.Content = "Update Retro Rewind";
+            ActionButton.Content = "Install Riivolution";
         }
         else
         {
-            ActionButton.Content = "Play Retro Rewind";
+            ActionButton.Content = "Play Riivolution";
         }
 
         StatusText.Text = $"Dolphin: {(dolphinInstalled ? "Installed" : "Not Installed")}\n" +
-                          $"RiiVolution: {(retroRewindInstalled ? "Installed" : "Not Installed")}\n";
+                          $"RiiVolution: {(RiivolutionInstalled ? "Installed" : "Not Installed")}\n";
     }
 
     private async void ActionButton_Click(object sender, RoutedEventArgs e)
@@ -55,7 +49,7 @@ public Riivolution()
         }
         else
         {
-            MessageBox.Show("Riivolution is already installed");
+            MessageBox.Show("Starting Riivolution...");
         }
     }
 }

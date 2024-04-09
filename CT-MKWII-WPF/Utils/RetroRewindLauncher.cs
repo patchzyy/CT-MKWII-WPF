@@ -42,33 +42,33 @@ public static class RetroRewindLauncher
     private static void GenerateLaunchJSON()
     {
         string originalJSON = """
-                              {
-                                                "base-file": "LINK TO ISO OR WBFS",
-                                                "display-name": "RR",
-                                                "riivolution": {
-                                                  "patches": [
-                                                    {
-                                                      "options": [
-                                                        {
-                                                          "choice": 1,
-                                                          "option-name": "Pack",
-                                                          "section-name": "Retro Rewind"
-                                                        },
-                                                        {
-                                                          "choice": 0,
-                                                          "option-name": "My Stuff",
-                                                          "section-name": "Retro Rewind"
-                                                        }
-                                                      ],
-                                                      "root": "LINK TO APPDATA RIIVOLUTION FOLDER",
-                                                      "xml": "LINK TO RETRO REWIND XML FILE"
-                                                    }
-                                                  ]
-                                                },
-                                                "type": "dolphin-game-mod-descriptor",
-                                                "version": 1
-                                              }
-                              """;
+{
+"base-file": "LINK TO ISO OR WBFS",
+"display-name": "RR",
+"riivolution": {
+  "patches": [
+    {
+      "options": [
+        {
+          "choice": 1,
+          "option-name": "Pack",
+          "section-name": "Retro Rewind"
+        },
+        {
+          "choice": 0,
+          "option-name": "My Stuff",
+          "section-name": "Retro Rewind"
+        }
+      ],
+      "root": "LINK TO APPDATA RIIVOLUTION FOLDER",
+      "xml": "LINK TO RETRO REWIND XML FILE"
+    }
+  ]
+},
+"type": "dolphin-game-mod-descriptor",
+"version": 1
+}
+""";
 
         // Replace the base-file with the game path
         string correctedGamePath = LauncherUtils.GetGamePath().Replace(@"\", @"\/");
@@ -78,9 +78,9 @@ public static class RetroRewindLauncher
         string correctedRRPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "Dolphin Emulator", "Load", "Riivolution");
         correctedRRPath = correctedRRPath.Replace(@"\", @"\/");
-        originalJSON = originalJSON.Replace("LINK TO APPDATA RIIVOLUTION FOLDER", correctedRRPath);
+        originalJSON = originalJSON.Replace("LINK TO APPDATA RIIVOLUTION FOLDER", correctedRRPath + @"\/");
 
-        string correctedXMLPath = Path.Combine(correctedRRPath, "riivolution", "RetroRewind6.xml");
+        string correctedXMLPath = correctedRRPath + @"\/riivolution\/RetroRewind6.xml";
         originalJSON = originalJSON.Replace("LINK TO RETRO REWIND XML FILE", correctedXMLPath);
 
         // Write the json to the exe folder

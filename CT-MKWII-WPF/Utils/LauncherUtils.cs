@@ -22,7 +22,7 @@ public class LauncherUtils
             string[] settings = File.ReadAllLines("config.txt");
             return settings[1];
         }
-
+ 
         return string.Empty;
     }
 }
