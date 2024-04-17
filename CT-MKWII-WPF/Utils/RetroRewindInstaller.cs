@@ -5,25 +5,56 @@ using System.IO.Compression;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
+using CT_MKWII_WPF.Pages;
 using CT_MKWII_WPF.Utils;
 
 public static class RetroRewindInstaller
 {
     public static bool IsRetroRewindInstalled()
     {
-        // var retroRewindFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator", "Load", "Riivolution", "RetroRewind6");
         var loadPath = SettingsUtils.GetLoadPathLocation();
         var retroRewindFolder = Path.Combine(loadPath, "Riivolution", "RetroRewind6");
-        return Directory.Exists(retroRewindFolder);
+        
+        var retroRewindRRFolder = Path.Combine(loadPath, "Riivolution-RR", "RetroRewind6");
+
+        if (Directory.Exists(retroRewindFolder))
+        {
+            return true;
+        }
+
+        if (Directory.Exists(retroRewindRRFolder))
+        {
+            return true;
+        }
+
+        return false;
+    }
+    
+    public static void InstallRRToSD()
+    {
+        MessageBox.Show("Installing Retro Rewind to SD/USB...");
+        MessageBox.Show("Implement me!");
+    }
+    
+    public static void InstallRRToUSB()
+    {
+        MessageBox.Show("Installing Retro Rewind to USB...");
+        MessageBox.Show("Implement me!");
     }
 
     public static string CurrentRRVersion()
     {
-        // var versionFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator", "Load", "Riivolution", "RetroRewind6", "version.txt");
         var loadPath = SettingsUtils.GetLoadPathLocation();
         var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
-        if (!File.Exists(versionFilePath)) return "Not Installed";
-        
+        if (!File.Exists(versionFilePath))
+        {
+            //try the RR folder
+            versionFilePath = Path.Combine(loadPath, "Riivolution-RR", "RetroRewind6", "version.txt");
+            if (!File.Exists(versionFilePath))
+            {
+                return "Not Installed";
+            }
+        }
         return File.ReadAllText(versionFilePath);
     }
 
@@ -66,6 +97,7 @@ public static class RetroRewindInstaller
         InstallRetroRewind();
         return true;
     }
+    
 
     if (await IsRRUpToDate(currentVersion))
     {
@@ -75,21 +107,39 @@ public static class RetroRewindInstaller
 
     var allVersions = await GetAllVersionData();
     var updatesToApply = GetUpdatesToApply(currentVersion, allVersions);
+    
+    var progressWindow = new ProgressWindow();
+    progressWindow.Show();
+    
+    int totalUpdates = updatesToApply.Count;
+    int currentUpdateIndex = 1;
+    
+
 
     foreach (var update in updatesToApply)
     {
-        MessageBox.Show($"Updating to version {update.Version}: {update.Description}");
-        // MessageBox.Show($"Debug Info:\nVersion: {update.Version}\nURL: {update.Url}\nPath: {update.Path}\nDescription: {update.Description}");
+        // MessageBox.Show($"Updating to version {update.Version}: {update.Description}");
+        int progressPercentage = (currentUpdateIndex * 100) / totalUpdates;
+        string status = $"Updating to version {update.Version}: {update.Description}";
+        Application.Current.Dispatcher.Invoke(() => 
+        {
+            progressWindow.UpdateProgress(progressPercentage, status);
+        });
+        
         bool success = await DownloadAndApplyUpdate(update);
         if (!success)
         {
+            progressWindow.Close();
             MessageBox.Show("Failed to apply an update. Aborting.");
             return false;
         }
+        currentUpdateIndex++;
         UpdateVersionFile(update.Version);
         
     }
+    progressWindow.Close();
     MessageBox.Show("Update completed successfully.");
+    
     return true;
 }
     
@@ -183,11 +233,107 @@ private static async Task<bool> DownloadAndApplyUpdate((string Version, string U
 
 
 
-    public static void InstallRetroRewind()
+    public static async Task InstallRetroRewind()
+{
+    const string RetroRewindURL = "http://75.128.250.209:8000/RetroRewind/zip/RetroRewind.zip";
+    // Check if Retro Rewind is already installed
+    if (IsRetroRewindInstalled())
     {
-        // Implement installation logic for Retro Rewind.
-        MessageBox.Show("Retro Rewind installation logic not implemented yet.");
+        MessageBox.Show("Retro Rewind is already installed.");
+        return;
     }
     
+    var loadPath = SettingsUtils.GetLoadPathLocation();
+    var tempZipPath = Path.Combine(loadPath, "Temp", "RetroRewind.zip");
+    Directory.CreateDirectory(Path.GetDirectoryName(tempZipPath)); // Ensure the Temp directory exists
     
+    try
+    {
+        using var httpClient = new HttpClient();
+        
+        var progressWindow = new ProgressWindow();
+        progressWindow.Show();
+        
+        // Start the download
+        var response = await httpClient.GetAsync(RetroRewindURL, HttpCompletionOption.ResponseHeadersRead);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            MessageBox.Show("Failed to download Retro Rewind.");
+            return;
+        }
+        
+        long? totalDownloadSize = response.Content.Headers.ContentLength;
+        var totalBytesDownloaded = 0L;
+        
+        using (var downloadStream = await response.Content.ReadAsStreamAsync())
+        {
+            using (var fileStream = new FileStream(tempZipPath, FileMode.Create, FileAccess.Write))
+            {
+                var buffer = new byte[81920]; // 80KB buffer
+                int bytesRead;
+                while ((bytesRead = await downloadStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                {
+                    fileStream.Write(buffer, 0, bytesRead);
+                    totalBytesDownloaded += bytesRead;
+                    
+                    int progressPercentage = totalDownloadSize.HasValue
+                        ? (int)((totalBytesDownloaded * 100) / totalDownloadSize.Value)
+                        : 0;
+                    
+                    Application.Current.Dispatcher.Invoke(() => 
+                    {
+                        progressWindow.UpdateProgress(progressPercentage, "Downloading Retro Rewind... This may take a while.");
+                    });
+                }
+            }
+        }
+        
+        // Extract the zip to the Riivolution folder
+        var extractionPath = Path.Combine(loadPath, "Riivolution");
+        ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
+        
+        // Clean up the downloaded zip file
+        File.Delete(tempZipPath);
+        
+        Application.Current.Dispatcher.Invoke(() => 
+        {
+            progressWindow.Close();
+        });
+        
+        MessageBox.Show("Retro Rewind has been installed successfully.\nIf the button still says install please click 'go!' again.");
+        //update the button
+        
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show($"An error occurred during the installation: {ex.Message}");
+    }
+}
+
+
+
+    public static async Task<bool> IsServerEnabled()
+    {
+        const string serverUrl = "http://75.128.250.209:8000";
+        using (var httpClient = new HttpClient())
+        {
+            try
+            {
+                // Setting a reasonable timeout duration
+                httpClient.Timeout = TimeSpan.FromSeconds(5);
+            
+                // Making a GET request to the server URL
+                var response = await httpClient.GetAsync(serverUrl);
+            
+                // If the server responds with a success status code, it is reachable
+                return response.IsSuccessStatusCode;
+            }
+            catch
+            {
+                // If an exception occurs (e.g., timeout), the server is not reachable
+                return false;
+            }
+        }
+    }
 }

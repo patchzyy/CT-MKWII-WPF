@@ -7,13 +7,15 @@
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         <!-- Make the background dimmer -->
-        <Rectangle Grid.RowSpan="4" Fill="#FF000000" Opacity="0.3"/>
+        <Rectangle Grid.RowSpan="10" Fill="#FF000000" Opacity="0.3"/>
 
         <TextBlock Text="Dolphin Emulator Path:" Grid.Row="0" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,10,0,0"/>
         <TextBox x:Name="DolphinPathTextBox" Grid.Row="0" Margin="0,24,90,38"/>
@@ -31,7 +33,8 @@
         <Button Content="Help" Grid.Row="2" HorizontalAlignment="Left"  Width="75" Click="AppDataPath_Help_Click" Margin="0,40,90,0"/>
 
         
-        <Button Content="Save Settings" Grid.Row="3" HorizontalAlignment="Right" Width="100" Click="SaveButton_Click" Margin="0,10,0,0"/>
+        <Button Content="Save Settings" Grid.Row="5" HorizontalAlignment="Right" Width="100" Click="SaveButton_Click" Margin="0,10,0,0"/>
+        <Button Content="Go back!" Grid.Row="5" HorizontalAlignment="Left" Width="100" Click="GoBackButton_Click" Margin="0,10,0,0"/>
         
         
         

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CT_MKWII_WPF.Pages.Riivolution"
+﻿<UserControl x:Class="CT_MKWII_WPF.Pages.RetroRewindDolphin"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -14,7 +14,7 @@
             <Grid Background="#80000000">
                 <!-- Use a semi-transparent color as the overlay -->
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="Riivolution" FontSize="24" HorizontalAlignment="Center" Margin="10" Foreground="White">
+                    <TextBlock Text="Retro Rewind" FontSize="24" HorizontalAlignment="Center" Margin="10" Foreground="White">
                         <TextBlock.Effect>
                             <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
                         </TextBlock.Effect>
@@ -27,7 +27,7 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        <TextBlock Text="Version: 1.0.0" FontSize="12" HorizontalAlignment="Right" Margin="221,4,0,280" Foreground="White">
+        <TextBlock Text="Mod made by ZPL" FontSize="12" HorizontalAlignment="Right" Margin="200,4,0,280" Foreground="White">
             <TextBlock.Effect>
                 <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
             </TextBlock.Effect>
@@ -46,6 +46,21 @@
                 <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
             </TextBlock.Effect>
         </TextBlock>
+        <!-- text with current status if game is updating or downloading or something all the way at the bottom under the button -->
+        <TextBlock x:Name="CurrentStatus" FontSize="12" HorizontalAlignment="Center" Margin="0,196,0,86" Foreground="White" RenderTransformOrigin="0.402,0.576" Width="122">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="0.1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+            <TextBlock.Effect>
+                <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
+            </TextBlock.Effect>
+        </TextBlock>
+
 
     </Grid>
 </UserControl>

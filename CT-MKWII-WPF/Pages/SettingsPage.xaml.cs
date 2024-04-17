@@ -52,7 +52,7 @@ public partial class SettingsPage : UserControl
     {
         OpenFileDialog openFileDialog = new OpenFileDialog
         {
-            Filter = "Game files (*.iso;*.wbfs)|*.iso;*.wbfs|All files (*.*)|*.*",
+            Filter = "Game files (*.iso;*.wbfs;*.rvz)|*.iso;*.wbfs;*.rvz|All files (*.*)|*.*",
             Title = "Select Mario Kart Wii Game File"
         };
 
@@ -125,12 +125,20 @@ public partial class SettingsPage : UserControl
     private void MKWII_Path_Help_Click(object sender, RoutedEventArgs e)
     {
         MessageBox.Show(
-            "This would be the location of your mario kart wii .iso or .wbfs file.\nI can't provide any sources of how to obtain one, but the internet is your best friend :)", "Mario Kart Wii Path Help", MessageBoxButton.OK, MessageBoxImage.Information);
+            "This would be the location of your mario kart wii .iso .rvz or .wbfs file.\nI can't provide any sources of how to obtain one", "Mario Kart Wii Path Help", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
     private void AppDataPath_Help_Click(object sender, RoutedEventArgs e)
     {
         MessageBox.Show(
             "This path should be found automatically, but if it doesnt follow these instructions\n\n1. Open your Dolphin emulator\n2. The Load Path can be found under Options \u2192 Configuration \u2192 Paths\n3. Look at the bottom, There should be one called 'Load Path' \n4. Copy the Load Path and paste it here\n\nThis is required", "Dolphin Load Path Help", MessageBoxButton.OK, MessageBoxImage.Information);
+    }
+
+    private void GoBackButton_Click(object sender, RoutedEventArgs e)
+    {
+        // call the method in the main window
+        var mainWindow = (MainWindow)Application.Current.MainWindow;
+        mainWindow.SwitchContent();
+        
     }
 }

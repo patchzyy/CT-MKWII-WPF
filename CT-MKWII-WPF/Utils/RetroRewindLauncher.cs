@@ -8,6 +8,12 @@ public static class RetroRewindLauncher
 {
     public static void PlayRetroRewind()
     {
+        //if its not activated, activate it
+        if (!DirectoryHandler.isRRActive())
+        {
+            DirectoryHandler.BackupRiivolution();
+            DirectoryHandler.RetrieveRR();
+        }
         string dolphinLocation = LauncherUtils.GetDolphinLocation();
         string gamePath = LauncherUtils.GetGamePath();
         GenerateLaunchJSON();

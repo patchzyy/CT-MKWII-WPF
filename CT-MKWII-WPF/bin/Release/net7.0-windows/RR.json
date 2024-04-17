@@ -1,0 +1,26 @@
+{
+"base-file": "G:\/GAMES\/Wii\/mkwii\/wiimmfi-patcher-v7.5\/wiimmfi-images\/RMCP01.wbfs",
+"display-name": "RR",
+"riivolution": {
+  "patches": [
+    {
+      "options": [
+        {
+          "choice": 1,
+          "option-name": "Pack",
+          "section-name": "Retro Rewind"
+        },
+        {
+          "choice": 0,
+          "option-name": "My Stuff",
+          "section-name": "Retro Rewind"
+        }
+      ],
+      "root": "C:\/Users\/patchzy\/AppData\/Roaming\/Dolphin Emulator\/Load\/Riivolution\/",
+      "xml": "C:\/Users\/patchzy\/AppData\/Roaming\/Dolphin Emulator\/Load\/Riivolution\/riivolution\/RetroRewind6.xml"
+    }
+  ]
+},
+"type": "dolphin-game-mod-descriptor",
+"version": 1
+}

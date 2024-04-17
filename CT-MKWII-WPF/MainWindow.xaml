@@ -38,22 +38,25 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <ComboBox x:Name="ModSelection" Grid.Column="1" HorizontalAlignment="Right" Width="120" Height="30" SelectedIndex="0" RenderTransformOrigin="0.894,0.512">
+                    <ComboBox x:Name="ModSelection" Grid.Column="1" SelectionChanged="ModSelection_SelectionChanged" HorizontalAlignment="Right" Width="120" Height="30" SelectedIndex="0" RenderTransformOrigin="0.894,0.512">
                         <ComboBox.Effect>
                             <DropShadowEffect/>
                         </ComboBox.Effect>
+                        <ComboBoxItem Content="Select Mod" IsEnabled="False" IsSelected="True" />
                         <ComboBoxItem Content="Retro Rewind"/>
                         <ComboBoxItem Content="CTGP (wii / wiiu only)" IsEnabled="False"/>
-                        <ComboBoxItem Content="Riivolution"/>
+                        <ComboBoxItem Content="Riivolution" IsEnabled="False"/>
                         <ComboBoxItem Content="Placeholder" IsEnabled="False"/>
                     </ComboBox>
-                    <ComboBox x:Name="ConsoleSelection" Grid.Column="0" HorizontalAlignment="Left" Width="120" Height="30" SelectedIndex="0" BorderBrush="#FF226CE4" Background="#FF0078D7">
+                    <ComboBox x:Name="ConsoleSelection" Grid.Column="0" SelectionChanged="ConsoleSelection_SelectionChanged" HorizontalAlignment="Left" Width="120" Height="30" SelectedIndex="0" BorderBrush="#FF226CE4" Background="#FF0078D7">
                         <ComboBox.Effect>
                             <DropShadowEffect/>
                         </ComboBox.Effect>
+                        <ComboBoxItem Content="Select Platform" IsEnabled="False" IsSelected="True" />
                         <ComboBoxItem Content="Dolphin" />
-                        <ComboBoxItem Content="Wii" IsEnabled="False"/>
+                        <ComboBoxItem Content="Wii"/>
                         <ComboBoxItem Content="Wii-u" IsEnabled="False"/>
+                        
                         <!-- make the color of the box blue -->
                     </ComboBox>
                 </Grid>
@@ -62,16 +65,28 @@
                 <ContentControl x:Name="ContentArea" Grid.Row="1" Margin="0,10,0,0" Grid.ColumnSpan="2" Grid.Column="0" />
 
                 <!-- Buttons at the bottom -->
-                <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="0,504,0,0" Grid.RowSpan="2">
+                <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="0,0,0,0" Grid.RowSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Button Content="Settings" Grid.Column="0" HorizontalAlignment="Left" Width="120" Click="Settings_Click"/>
-                    <Button Content="Go!" Grid.Column="1" HorizontalAlignment="Right" Width="120" Click="Continue_Click"/>
+                    <Button Content="Settings" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="120" Click="Settings_Click"/>
+                    <!-- <Button Content="Go!" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="120" Click="Continue_Click"/> -->
                 </Grid>
+                
             </Grid>
+            <TextBlock Text="Made by lum patch" FontSize="12" Margin="0,20,0,0" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            
+            <TextBlock Text="Discord: Patchzy" FontSize="12" Margin="0,20,0,20" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
+                </TextBlock.Effect>
+            </TextBlock>
         </Grid>
     </Grid>
 </Window>

@@ -4,9 +4,9 @@ using CT_MKWII_WPF.Utils;
 
 namespace CT_MKWII_WPF.Pages;
 
-public partial class Riivolution : UserControl
+public partial class RiivolutionDolphin : UserControl
 {
-public Riivolution()
+public RiivolutionDolphin()
     {
         InitializeComponent();
         UpdateActionButton();
