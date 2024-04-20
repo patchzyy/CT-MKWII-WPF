@@ -20,9 +20,6 @@
                         </TextBlock.Effect>
                     </TextBlock>
                     <!-- small text on the top left to display the version and status of everything -->
-
-
-
                     <Button x:Name="ActionButton" Click="ActionButton_Click" Margin="5"/>
                 </StackPanel>
             </Grid>
@@ -33,7 +30,7 @@
             </TextBlock.Effect>
         </TextBlock>
         <!-- dynamic text saying weather its up to date or not -->
-        <TextBlock x:Name="StatusText" FontSize="12" HorizontalAlignment="Left" Margin="0,5,0,271" Foreground="White" RenderTransformOrigin="0.402,0.576" Width="159">
+        <TextBlock x:Name="StatusText" FontSize="5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,0,10" Foreground="White" RenderTransformOrigin="0.402,0.576">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1"/>
@@ -60,7 +57,18 @@
                 <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
             </TextBlock.Effect>
         </TextBlock>
-
-
+        
+        <ComboBox x:Name="ResolutionDropDown" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" SelectedIndex="0" BorderBrush="#FF226CE4" Background="#FF0078D7">
+            <ComboBox.Effect>
+                <DropShadowEffect/>
+            </ComboBox.Effect>
+            <ComboBoxItem Content="1x (Native 640x528)"/>
+            <ComboBoxItem Content="2x (1280x1056)" />
+            <ComboBoxItem Content="3x (1920x1584)"/>
+            <ComboBoxItem Content="4x (2560x2112)"/>
+            <ComboBoxItem Content="5x (3200x2640) NOT RECOMMENDED"/>
+        </ComboBox>
+        <CheckBox x:Name="VSync" Content="VSync" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0"></CheckBox>
+        <Button x:Name="OptimalSettings" Click="TriggerNANDSetup" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="NAND setup"/>
     </Grid>
 </UserControl>

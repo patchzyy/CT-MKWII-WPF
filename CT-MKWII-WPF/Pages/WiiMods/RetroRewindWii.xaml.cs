@@ -20,4 +20,9 @@ public partial class RetroRewindWii : UserControl
         
 
     }
+
+    private void Change_Resolution(object sender, SelectionChangedEventArgs e)
+    {
+        throw new System.NotImplementedException();
+    }
 }

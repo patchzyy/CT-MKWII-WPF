@@ -8,7 +8,10 @@
     ".NETCoreApp,Version=v7.0": {
       "CT-MKWII-WPF/1.0.0": {
         "dependencies": {
-          "Microsoft.WindowsAPICodePack.Shell": "1.1.0"
+          "Microsoft.WindowsAPICodePack.Shell": "1.1.0",
+          "NLog.Windows.Forms": "5.2.3",
+          "Newtonsoft.Json": "13.0.3",
+          "System.Management": "9.0.0-preview.3.24172.9"
         },
         "runtime": {
           "CT-MKWII-WPF.dll": {}
@@ -30,6 +33,52 @@
           "lib/Microsoft.WindowsAPICodePack.Shell.dll": {
             "assemblyVersion": "1.1.0.0",
             "fileVersion": "1.1.0.0"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.3": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.3.27908"
+          }
+        }
+      },
+      "NLog/5.2.2": {
+        "runtime": {
+          "lib/netstandard2.0/NLog.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.2.2.1914"
+          }
+        }
+      },
+      "NLog.Windows.Forms/5.2.3": {
+        "dependencies": {
+          "NLog": "5.2.2"
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/NLog.Windows.Forms.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.2.3.612"
+          }
+        }
+      },
+      "System.CodeDom/9.0.0-preview.3.24172.9": {
+        "runtime": {
+          "lib/netstandard2.0/System.CodeDom.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.24.17209"
+          }
+        }
+      },
+      "System.Management/9.0.0-preview.3.24172.9": {
+        "dependencies": {
+          "System.CodeDom": "9.0.0-preview.3.24172.9"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Management.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "9.0.24.17209"
           }
         }
       }
@@ -54,6 +103,41 @@
       "sha512": "sha512-mf++Hez9kbikfIuwz4uCdQRwJDpd38rCD/F5CWU78tzyZtpEsUR6oWOX8ea59XvQ3hLitm2zZe3fXEgTD5Qyxg==",
       "path": "microsoft.windowsapicodepack.shell/1.1.0",
       "hashPath": "microsoft.windowsapicodepack.shell.1.1.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "path": "newtonsoft.json/13.0.3",
+      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
+    },
+    "NLog/5.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-r6Q9740g29gTwmTWlsgdIFm0mhNsfNZmbvWKX/Fxmi8X89ZrpUowHM2T2X1lP7RVpND+ef+XnfKL5g6Q1iNGXA==",
+      "path": "nlog/5.2.2",
+      "hashPath": "nlog.5.2.2.nupkg.sha512"
+    },
+    "NLog.Windows.Forms/5.2.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-G6pqDXbC0EwyWGvxlBkNk3qFGBdRAeU711NUaOGTGbzFFNvosN3LjH+vtLlckvEE4P/3ZKUd1CrNgWEBb7MitA==",
+      "path": "nlog.windows.forms/5.2.3",
+      "hashPath": "nlog.windows.forms.5.2.3.nupkg.sha512"
+    },
+    "System.CodeDom/9.0.0-preview.3.24172.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XlDKGNWYIg4bMpgELuAZsbVs9KYwq0SkJVzlom9osW5XtO8sLzalCS0wk90NV6WeUUVlMvXCsyquCuv5HuVs1A==",
+      "path": "system.codedom/9.0.0-preview.3.24172.9",
+      "hashPath": "system.codedom.9.0.0-preview.3.24172.9.nupkg.sha512"
+    },
+    "System.Management/9.0.0-preview.3.24172.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MZXCNMOhaSSkrHJjdwiXY0mjRklGh0U5Yl3IyRruPRhmeq4UzWzXs2wsowmPzQSELeM+STfT9djZXYaXfspZgQ==",
+      "path": "system.management/9.0.0-preview.3.24172.9",
+      "hashPath": "system.management.9.0.0-preview.3.24172.9.nupkg.sha512"
     }
   }
 }

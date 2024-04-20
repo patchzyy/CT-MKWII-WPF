@@ -1,0 +1,9 @@
+# Server Settings
+SPIGOTSERVER_PORT=25575
+
+# URLs
+MINECRAFT_URL=https://launcher.mojang.com/download/Minecraft.deb
+BUILDTOOLS_URL=https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+
+# File Paths
+INSTALL_DIR=apps

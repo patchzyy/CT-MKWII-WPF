@@ -1,3 +1,0 @@
-G:\GAMES\Wii\Dolphin-x64\Dolphin.exe
-G:\GAMES\Wii\mkwii\wiimmfi-patcher-v7.5\wiimmfi-images\RMCP01.wbfs
-C:\Users\patchzy\AppData\Roaming\Dolphin Emulator\Load

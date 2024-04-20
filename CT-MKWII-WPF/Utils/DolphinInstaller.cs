@@ -9,9 +9,8 @@ public static class DolphinInstaller
     public static bool IsDolphinInstalled()
     {
         // var dolphinFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator");
-        var loadPath = SettingsUtils.GetLoadPathLocation();
         //go back 1 folder
-        var dolphinFolder = Path.Combine(loadPath, "..");
+        var dolphinFolder = SettingsUtils.GetUserPathLocation();
         return Directory.Exists(dolphinFolder);
     }
 

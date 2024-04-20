@@ -48,6 +48,18 @@
             "Microsoft.WindowsAPICodePack.Shell": {
               "target": "Package",
               "version": "[1.1.0, )"
+            },
+            "NLog.Windows.Forms": {
+              "target": "Package",
+              "version": "[5.2.3, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.Management": {
+              "target": "Package",
+              "version": "[9.0.0-preview.3.24172.9, )"
             }
           },
           "imports": [

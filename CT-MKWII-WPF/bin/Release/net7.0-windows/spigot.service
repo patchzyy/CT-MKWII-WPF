@@ -1,0 +1,14 @@
+[Unit]
+Description=SpigotMC
+After=network.target
+
+[Service]
+Type=forking
+User=minecraft
+Group=minecraft
+ExecStart=/usr/bin/screen -d -m -S minecraft apps/spigotserver/spigotstart.sh
+ExecStop=/usr/bin/screen -S minecraft -p 0 -X stuff "stop$(printf \\r)"
+WorkingDirectory=/home/minecraft/server
+
+[Install]
+WantedBy=multi-user.target

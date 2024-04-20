@@ -14,14 +14,20 @@ public static class RetroRewindLauncher
             DirectoryHandler.BackupRiivolution();
             DirectoryHandler.RetrieveRR();
         }
-        string dolphinLocation = LauncherUtils.GetDolphinLocation();
-        string gamePath = LauncherUtils.GetGamePath();
+        //show a pop up if nand setup has not been completed
+        if (!SettingsUtils.HasRunNANDTutorial())
+        {
+            MessageBox.Show("It seems you have not setup your NAND yet. \nIf you have not set up your NAND yet you can NOT play online! \nIf you have already set up your NAND please run the NAND setup and click 'I've already set this up'\nThe game will still launch.", "NAND setup", MessageBoxButton.OK,
+                MessageBoxImage.Warning);
+        }
+        string dolphinLocation = SettingsUtils.GetDolphinLocation();
+        string gamePath = SettingsUtils.GetGameLocation();
         GenerateLaunchJSON();
         string launchJson = Path.Combine(Environment.CurrentDirectory, "RR.json");
 
         if (!File.Exists(dolphinLocation) || !File.Exists(gamePath))
         {
-            MessageBox.Show("Please ensure both paths are correct and try again.", "Error", MessageBoxButton.OK,
+            MessageBox.Show("Message patchzy with the following error: " + dolphinLocation + " " + gamePath, "Error", MessageBoxButton.OK, 
                 MessageBoxImage.Error);
             return;
         }
@@ -66,7 +72,7 @@ public static class RetroRewindLauncher
           "section-name": "Retro Rewind"
         }
       ],
-      "root": "LINK TO APPDATA RIIVOLUTION FOLDER",
+      "root": "LINK TO RIIVOLUTION FOLDER",
       "xml": "LINK TO RETRO REWIND XML FILE"
     }
   ]
@@ -77,14 +83,13 @@ public static class RetroRewindLauncher
 """;
 
         // Replace the base-file with the game path
-        string correctedGamePath = LauncherUtils.GetGamePath().Replace(@"\", @"\/");
+        string correctedGamePath = SettingsUtils.GetGameLocation().Replace(@"\", @"\/");
         originalJSON = originalJSON.Replace("LINK TO ISO OR WBFS", correctedGamePath);
 
         // Replace the link to appdata riivolution folder with the correct path
-        string correctedRRPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "Dolphin Emulator", "Load", "Riivolution");
+        string correctedRRPath = Path.Combine(SettingsUtils.GetLoadPathLocation(),"Riivolution");
         correctedRRPath = correctedRRPath.Replace(@"\", @"\/");
-        originalJSON = originalJSON.Replace("LINK TO APPDATA RIIVOLUTION FOLDER", correctedRRPath + @"\/");
+        originalJSON = originalJSON.Replace("LINK TO RIIVOLUTION FOLDER", correctedRRPath + @"\/");
 
         string correctedXMLPath = correctedRRPath + @"\/riivolution\/RetroRewind6.xml";
         originalJSON = originalJSON.Replace("LINK TO RETRO REWIND XML FILE", correctedXMLPath);

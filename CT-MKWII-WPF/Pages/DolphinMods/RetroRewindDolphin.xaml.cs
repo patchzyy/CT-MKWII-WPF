@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using CT_MKWII_WPF.Utils;
+using CT_MKWII_WPF.Utils.DolphinHelpers;
+
 namespace CT_MKWII_WPF.Pages;
 
 public partial class RetroRewindDolphin : UserControl
@@ -9,6 +11,21 @@ public partial class RetroRewindDolphin : UserControl
     {
         InitializeComponent();
         UpdateActionButton();
+        UpdateResolutionDropDown();
+        Loaded += (sender, e) => ResolutionDropDown.SelectionChanged += Change_Resolution;
+    }
+
+    private void UpdateResolutionDropDown()
+    {
+        //read the setting from the GFX file
+        var GFXFile = SettingsUtils.FindGFXFile();
+        if (GFXFile == "")
+        {
+            return;
+        }
+        var resolution = DolphinSettingHelper.ReadINISetting(GFXFile, "Settings", "InternalResolution");
+        ResolutionDropDown.SelectedIndex = int.Parse(resolution) - 1;
+        
     }
 
     private async void UpdateActionButton()
@@ -96,5 +113,25 @@ public partial class RetroRewindDolphin : UserControl
         {
             RetroRewindLauncher.PlayRetroRewind();
         }
+    }
+
+    private void Change_Resolution(object sender, SelectionChangedEventArgs e)
+    {
+        int Resolution = ResolutionDropDown.SelectedIndex + 1;
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution", Resolution.ToString());
+        // MessageBox.Show("Resolution has been changed!");
+        UpdateResolutionDropDown();
+        return;
+    }
+
+    private void SetOptimalDolphinSettings(object sender, RoutedEventArgs e)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void TriggerNANDSetup(object sender, RoutedEventArgs e)
+    {
+        NANDTutorialUtils.RunNANDTutorial();
+        
     }
 }

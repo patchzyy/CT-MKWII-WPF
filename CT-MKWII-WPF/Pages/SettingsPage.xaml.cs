@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32; // For OpenFileDialog
 using System.Diagnostics;
+using CT_MKWII_WPF.Utils;
 using Microsoft.WindowsAPICodePack.Dialogs; // For Process
 
 namespace CT_MKWII_WPF.Pages;
@@ -20,18 +21,20 @@ public partial class SettingsPage : UserControl
     {
         string dolphinPath = DolphinPathTextBox.Text;
         string gamePath = GamePathTextBox.Text;
-        string loadFolder = DolphinLoadPathTextBox.Text;
+        string userFolder = DolphinUserFolderTextBox.Text;
 
-        if (!File.Exists(dolphinPath) || !File.Exists(gamePath))
+        if (!File.Exists(dolphinPath) || !File.Exists(gamePath) || !Directory.Exists(userFolder))
         {
-            MessageBox.Show("Please ensure both paths are correct and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 
         // Save settings to a configuration file or system registry
-        SaveSettings(dolphinPath, gamePath, loadFolder);
+        SettingsUtils.SaveSettings(dolphinPath, gamePath, userFolder);
 
         MessageBox.Show("Settings saved successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        var mainWindow = (MainWindow)Application.Current.MainWindow;
+        mainWindow.SwitchContent();
     }
 
     private void BrowseDolphinButton_Click(object sender, RoutedEventArgs e)
@@ -64,46 +67,44 @@ public partial class SettingsPage : UserControl
 
     private void LoadSettings()
     {
-        // try and find the config file
-        if (!File.Exists("config.txt")) return;
-        string[] settings = File.ReadAllLines("config.txt");
-        if (settings.Length != 3) return;
-        DolphinPathTextBox.Text = settings[0];
-        GamePathTextBox.Text = settings[1];
-        DolphinLoadPathTextBox.Text = settings[2];
-
-    }
-
-    private void SaveSettings(string dolphinPath, string gamePath, string loadPath)
-    {
-        //create a config file if it doesn't exist
-        if (!File.Exists("config.txt"))
-        {
-            File.Create("config.txt").Close();
-        }
-        //write the paths to the config file
-        File.WriteAllText("config.txt", dolphinPath + "\n" + gamePath + "\n" + loadPath);
         
+        if (!File.Exists("./config.json")) return;
+        DolphinPathTextBox.Text = SettingsUtils.GetDolphinLocation();
+        GamePathTextBox.Text = SettingsUtils.GetGameLocation();
+        DolphinUserFolderTextBox.Text = SettingsUtils.GetLoadPathLocation();
+
     }
 
     private void BrowseDolphinAppDataButton_Click(object sender, RoutedEventArgs e)
     {
         //select the appdata dolphin folder
         //try to automatically find it
-        string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator", "Load");
+        string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator");
         if (Directory.Exists(appDataPath))
         {
             //ask user if they want to use this folder
             var result = MessageBox.Show("**If you dont know what all of this means, just click yes :)**\n\nDolphin Emulator folder found in AppData. Would you like to use this folder?", "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                DolphinLoadPathTextBox.Text = appDataPath;
+                DolphinUserFolderTextBox.Text = appDataPath;
+                return;
+            }
+        }
+        //path not found, check documents folder
+        string documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Dolphin Emulator");
+        if (Directory.Exists(documentsPath))
+        {
+            //ask user if they want to use this folder
+            var result = MessageBox.Show("**If you dont know what all of this means, just click yes :)**\n\nDolphin Emulator folder found in Documents. Would you like to use this folder?", "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                DolphinUserFolderTextBox.Text = documentsPath;
                 return;
             }
         }
         else
         {
-            MessageBox.Show("Dolphin Emulator folder not found in AppData. Please try and find the folder manually, click 'help' for more information.", "Dolphin Emulator Folder Not Found", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Dolphin Emulator folder not automatically found. Please try and find the folder manually, click 'help' for more information.", "Dolphin Emulator Folder Not Found", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         //if we end up here, this means either the path wasnt found, or  the user wants to manually select the path
         //make it so we have to select a folder, not an executable
@@ -111,7 +112,7 @@ public partial class SettingsPage : UserControl
         dialog.IsFolderPicker = true;
         if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
         {
-            DolphinLoadPathTextBox.Text = dialog.FileName;
+            DolphinUserFolderTextBox.Text = dialog.FileName;
         }
 
     }
@@ -128,10 +129,10 @@ public partial class SettingsPage : UserControl
             "This would be the location of your mario kart wii .iso .rvz or .wbfs file.\nI can't provide any sources of how to obtain one", "Mario Kart Wii Path Help", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
-    private void AppDataPath_Help_Click(object sender, RoutedEventArgs e)
+    private void DolphinUserFolderHelp_Click(object sender, RoutedEventArgs e)
     {
         MessageBox.Show(
-            "This path should be found automatically, but if it doesnt follow these instructions\n\n1. Open your Dolphin emulator\n2. The Load Path can be found under Options \u2192 Configuration \u2192 Paths\n3. Look at the bottom, There should be one called 'Load Path' \n4. Copy the Load Path and paste it here\n\nThis is required", "Dolphin Load Path Help", MessageBoxButton.OK, MessageBoxImage.Information);
+            "This path should be found automatically once you click browse..., but if it doesnt follow these instructions\n\n1. Open your Dolphin emulator\n2. Click File \u2192 Open User Folder \n\nThis is required", "Dolphin Load Path Help", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
     private void GoBackButton_Click(object sender, RoutedEventArgs e)
@@ -141,4 +142,5 @@ public partial class SettingsPage : UserControl
         mainWindow.SwitchContent();
         
     }
+
 }

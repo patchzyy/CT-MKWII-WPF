@@ -87,9 +87,11 @@ namespace CT_MKWII_WPF
         public void SwitchContent()    
         {
 
-            if (!File.Exists("./config.txt"))
+            if (!File.Exists("./config.json"))
             {
                 MessageBox.Show("Please set the paths in settings.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.ChangeContent(new SettingsPage());
                 return;
             }
 
