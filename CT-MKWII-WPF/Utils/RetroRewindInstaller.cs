@@ -70,7 +70,7 @@ public static class RetroRewindInstaller
 
     public static async Task<string> GetLatestVersionString()
     {
-        const string FullTextURLText = "http://75.128.250.209:8000/RetroRewind/RetroRewindVersion.txt";
+        string FullTextURLText = RRNetwork.Ip + "/RetroRewind/RetroRewindVersion.txt";
         try
         {
             using var httpClient = new HttpClient();
@@ -153,7 +153,7 @@ private static void UpdateVersionFile(string newVersion)
 private static async Task<List<(string Version, string Url, string Path, string Description)>> GetAllVersionData()
 {
     List<(string Version, string Url, string Path, string Description)> versions = new List<(string Version, string Url, string Path, string Description)>();
-    const string versionUrl = "http://75.128.250.209:8000/RetroRewind/RetroRewindVersion.txt";
+    string versionUrl = RRNetwork.Ip + "/RetroRewind/RetroRewindVersion.txt";
 
     using var httpClient = new HttpClient();
     string allVersionsText = await httpClient.GetStringAsync(versionUrl);
@@ -235,7 +235,7 @@ private static async Task<bool> DownloadAndApplyUpdate((string Version, string U
 
     public static async Task InstallRetroRewind()
 {
-    const string RetroRewindURL = "http://75.128.250.209:8000/RetroRewind/zip/RetroRewind.zip";
+    string RetroRewindURL = RRNetwork.Ip + "/RetroRewind/zip/RetroRewind.zip";
     // Check if Retro Rewind is already installed
     if (IsRetroRewindInstalled())
     {
@@ -315,7 +315,7 @@ private static async Task<bool> DownloadAndApplyUpdate((string Version, string U
 
     public static async Task<bool> IsServerEnabled()
     {
-        const string serverUrl = "http://75.128.250.209:8000";
+        string serverUrl = RRNetwork.Ip;
         using (var httpClient = new HttpClient())
         {
             try
