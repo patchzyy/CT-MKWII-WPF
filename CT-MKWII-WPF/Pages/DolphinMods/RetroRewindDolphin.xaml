@@ -68,7 +68,8 @@
             <ComboBoxItem Content="4x (2560x2112)"/>
             <ComboBoxItem Content="5x (3200x2640) NOT RECOMMENDED"/>
         </ComboBox>
-        <CheckBox x:Name="VSync" Content="VSync" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0"></CheckBox>
+        <CheckBox x:Name="VSyncCheckbox" Foreground="White" FontWeight="Bold" Content="VSync" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0"></CheckBox>
+        <CheckBox x:Name="ReccommendedSettingsCheckBox" Foreground="White" FontWeight="Bold" Content="Recommended Settings" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,70,0,0"></CheckBox>
         <Button x:Name="OptimalSettings" Click="TriggerNANDSetup" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="NAND setup"/>
     </Grid>
 </UserControl>

@@ -86,23 +86,26 @@ public class NANDTutorialUtils
 
         }
         
-        MessageBox.Show("Step 1:\n Launch your wii and go to your settings. \nClick OK to continue", "Step 1 NAND Setup", MessageBoxButton.OK, MessageBoxImage.Information);
-        MessageBox.Show("Step 2:\n Go to Internet -> Connection Settings ->  Connection 1/2/3 (whichever your currently using", "Step 2 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 3:\n Click on Change Settings -> Click on the right arrow until you see Auto-Obtain DNS -> Click No -> Click Advanced Settings", "Step 3 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 4:\n Click on Primary DNS", "Step 4 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 5:\n Fill in the following DNS: 18.188.135.9", "Step 5 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 6:\n Do the same for the Secondary DNS: 18.188.135.9", "Step 6 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Click Confirm and save. \n Click OK to Continue and wait for your internet to be tested.\nIf it asks you to update, click NO", "Step 7 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 8:\n Go back to your internet settings and click User Agreements\n It will ask you to use WiiConnect24.\n Click YES and NEXT and DO NOT DO ANYTHING\ndo NOT click ACCEPT or NOT ACCEPT\n Wait untill your wii starts showing crazy colors", "Step 8 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 9:\n You should now see a message saying this software must NOT be sold. \n Wait here untill 'Press 1 to continue' shows up", "Step 9 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 10:\n You should have now reached the HackMii Installer. \n Press A to continue and go to the BootMii Menu, and click 'Install BootMii as IOS' and then 'Yes, continue' and then again 'Yes, Continue'.", "Step 10 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 11:\n Once you have installed BootMii as IOS, go back to the main menu and click 'Exit'.", "Step 11 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 12:\n You should now be in the Homebrew channel. Press the HOME button and click 'Launch BootMii'.", "Step 12 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 13:\n Once you have launched BootMii, Your controller will not work anymore. Use the POWER button to move and your RESET button to select on your WII device", "Step 13 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 14:\n Click the power button 4 times to reach the GEARS. and then press reset to select. then select the SD card with the GREEN arrow\n You should now see your NAND being backed up in real time", "Step 14 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 15:\n After all the blocks turned green you are finished \n if some blocks are black. just wait, it will come back around and try and fix those. it may take a while", "Step 15 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 16:\n Once its finished click the power button, it will bring you back a menu, Just click the power button to reach the back arrow, and click reset to select it to go back, and go back to the homebrew channel", "Step 16 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        MessageBox.Show("Step 17:\n You are all done, you may take out your SD card and put it in your computer.\n Please click continue once you have the file on your computer", "Step 17 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        NANDTutorialWindow tutorialWindow = new NANDTutorialWindow();
+        tutorialWindow.ShowDialog();
+        
+        // MessageBox.Show("Step 1:\n Launch your wii and go to your settings. \nClick OK to continue", "Step 1 NAND Setup", MessageBoxButton.OK, MessageBoxImage.Information);
+        // MessageBox.Show("Step 2:\n Go to Internet -> Connection Settings ->  Connection 1/2/3 (whichever your currently using", "Step 2 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 3:\n Click on Change Settings -> Click on the right arrow until you see Auto-Obtain DNS -> Click No -> Click Advanced Settings", "Step 3 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 4:\n Click on Primary DNS", "Step 4 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 5:\n Fill in the following DNS: 18.188.135.9", "Step 5 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 6:\n Do the same for the Secondary DNS: 18.188.135.9", "Step 6 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Click Confirm and save. \n Click OK to Continue and wait for your internet to be tested.\nIf it asks you to update, click NO", "Step 7 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 8:\n Go back to your internet settings and click User Agreements\n It will ask you to use WiiConnect24.\n Click YES and NEXT and DO NOT DO ANYTHING\ndo NOT click ACCEPT or NOT ACCEPT\n Wait untill your wii starts showing crazy colors", "Step 8 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 9:\n You should now see a message saying this software must NOT be sold. \n Wait here untill 'Press 1 to continue' shows up", "Step 9 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 10:\n You should have now reached the HackMii Installer. \n Press A to continue and go to the BootMii Menu, and click 'Install BootMii as IOS' and then 'Yes, continue' and then again 'Yes, Continue'.", "Step 10 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 11:\n Once you have installed BootMii as IOS, go back to the main menu and click 'Exit'.", "Step 11 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 12:\n You should now be in the Homebrew channel. Press the HOME button and click 'Launch BootMii'.", "Step 12 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 13:\n Once you have launched BootMii, Your controller will not work anymore. Use the POWER button to move and your RESET button to select on your WII device", "Step 13 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 14:\n Click the power button 4 times to reach the GEARS. and then press reset to select. then select the SD card with the GREEN arrow\n You should now see your NAND being backed up in real time", "Step 14 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 15:\n After all the blocks turned green you are finished \n if some blocks are black. just wait, it will come back around and try and fix those. it may take a while", "Step 15 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 16:\n Once its finished click the power button, it will bring you back a menu, Just click the power button to reach the back arrow, and click reset to select it to go back, and go back to the homebrew channel", "Step 16 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        // MessageBox.Show("Step 17:\n You are all done, you may take out your SD card and put it in your computer.\n Please click continue once you have the file on your computer", "Step 17 NAND", MessageBoxButton.YesNo, MessageBoxImage.Information);
     }
 
     public static void FormatDriveToFAT32(string DriveLetter)

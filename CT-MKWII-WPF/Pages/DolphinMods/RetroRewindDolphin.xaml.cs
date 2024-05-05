@@ -13,6 +13,66 @@ public partial class RetroRewindDolphin : UserControl
         UpdateActionButton();
         UpdateResolutionDropDown();
         Loaded += (sender, e) => ResolutionDropDown.SelectionChanged += Change_Resolution;
+        Loaded += (sender, e) => GetCurrentVSyncStatus();
+        Loaded += (sender, e) => UpdateCurrentUberShaderStatus();
+        
+        VSyncCheckbox.Checked += Enable_VSync;
+        VSyncCheckbox.Unchecked += Disable_VSync;
+        ReccommendedSettingsCheckBox.Checked += EnableReccommendedSettings;
+        ReccommendedSettingsCheckBox.Unchecked += DisableReccommendedSettings;
+    }
+    
+    private void EnableReccommendedSettings(object sender, RoutedEventArgs e)
+    {
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "ShaderCompilationMode", "2");
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings","WaitForShadersBeforeStarting", "True" );
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "MSAA", "0x00000002");
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "SSAA", "False");
+    }
+    
+    private void DisableReccommendedSettings(object sender, RoutedEventArgs e)
+    {
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "ShaderCompilationMode", "0");
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings","WaitForShadersBeforeStarting", "False" );
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "MSAA", "0x00000001");
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "SSAA", "False");
+    }
+    
+    private void UpdateCurrentUberShaderStatus()
+    {
+        var GFXFile = SettingsUtils.FindGFXFile();
+        if (GFXFile == "")
+        {
+            ReccommendedSettingsCheckBox.IsChecked = false;
+        }
+        var UberShaders = DolphinSettingHelper.ReadINISetting(GFXFile, "Settings", "ShaderCompilationMode");
+        if (UberShaders == "2")
+        {
+            ReccommendedSettingsCheckBox.IsChecked = true;
+        }
+        else
+        {
+            ReccommendedSettingsCheckBox.IsChecked = false;
+        }
+    }
+    
+    
+    private void GetCurrentVSyncStatus()
+    {
+        var GFXFile = SettingsUtils.FindGFXFile();
+        if (GFXFile == "")
+        {
+            VSyncCheckbox.IsChecked = false;
+        }
+        var VSync = DolphinSettingHelper.ReadINISetting(GFXFile, "Hardware", "VSync");
+        if (VSync == "True")
+        {
+            VSyncCheckbox.IsChecked = true;
+        }
+        else
+        {
+            VSyncCheckbox.IsChecked = false;
+        }
     }
 
     private void UpdateResolutionDropDown()
@@ -121,6 +181,17 @@ public partial class RetroRewindDolphin : UserControl
         DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution", Resolution.ToString());
         // MessageBox.Show("Resolution has been changed!");
         UpdateResolutionDropDown();
+        return;
+    }
+    private void Enable_VSync(object sender, RoutedEventArgs e)
+    {
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Hardware", "VSync", "True");
+        return;
+    }
+    
+    private void Disable_VSync(object sender, RoutedEventArgs e)
+    {
+        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Hardware", "VSync", "False");
         return;
     }
 

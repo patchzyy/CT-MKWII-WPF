@@ -17,7 +17,7 @@ public static class RetroRewindLauncher
         //show a pop up if nand setup has not been completed
         if (!SettingsUtils.HasRunNANDTutorial())
         {
-            MessageBox.Show("It seems you have not setup your NAND yet. \nIf you have not set up your NAND yet you can NOT play online! \nIf you have already set up your NAND please run the NAND setup and click 'I've already set this up'\nThe game will still launch.", "NAND setup", MessageBoxButton.OK,
+            MessageBox.Show("Keep in mind, you need your NAND setup to play online. \nIf you have not set up your NAND yet you can NOT play online! \nIf you have already set up your NAND you may ignore this message", "NAND setup", MessageBoxButton.OK,
                 MessageBoxImage.Warning);
         }
         string dolphinLocation = SettingsUtils.GetDolphinLocation();

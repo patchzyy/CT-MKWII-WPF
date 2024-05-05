@@ -52,7 +52,7 @@
                         </ComboBox.Effect>
                         <ComboBoxItem Content="Select Platform" IsEnabled="False" IsSelected="True" />
                         <ComboBoxItem Content="Dolphin" />
-                        <ComboBoxItem Content="Wii"/>
+                        <ComboBoxItem Content="Wii" IsEnabled="False"/>
                         <ComboBoxItem Content="Wii-u" IsEnabled="False"/>
                         
                         <!-- make the color of the box blue -->
