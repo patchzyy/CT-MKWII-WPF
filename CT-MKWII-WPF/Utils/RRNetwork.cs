@@ -2,5 +2,6 @@
 
 public class RRNetwork
 {
-    public static string Ip = " IP of the server :) "; 
+    //eg http://123.456.789.123:1010
+    public static string Ip = "IP"; 
 }

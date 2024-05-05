@@ -24,7 +24,8 @@ public class DolphinSettingHelper
         }
         if (!sectionFound)
         {
-            MessageBox.Show("Could not find section in INI file, Message Patchzy with the following error: " + Section, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            // MessageBox.Show("Could not find section in INI file, Message Patchzy with the following error: " + Section, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return "";
         }
         //now we know the section exists, we need to find the setting
         for (int i = 0; i < lines.Length; i++)
@@ -36,7 +37,7 @@ public class DolphinSettingHelper
                 return setting[1].Trim();
             }
         }
-        MessageBox.Show("Could not find setting in INI file, Message Patchzy with the following error: " + SettingToRead, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        // MessageBox.Show("Could not find setting in INI file, Message Patchzy with the following error: " + SettingToRead, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         return "";
     }
     public static void ChangeINISettings(string FileLocation, string Section, string SettingToChange, string Value)

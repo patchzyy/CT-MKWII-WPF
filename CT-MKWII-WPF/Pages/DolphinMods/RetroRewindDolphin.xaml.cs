@@ -84,8 +84,15 @@ public partial class RetroRewindDolphin : UserControl
             return;
         }
         var resolution = DolphinSettingHelper.ReadINISetting(GFXFile, "Settings", "InternalResolution");
-        ResolutionDropDown.SelectedIndex = int.Parse(resolution) - 1;
-        
+        //TODO: very dirty fix, please properly fix when there is no resolution or other settings set
+        try
+        {
+            ResolutionDropDown.SelectedIndex = int.Parse(resolution) - 1;
+        }
+        catch
+        {
+            ResolutionDropDown.SelectedIndex = 0;
+        }
     }
 
     private async void UpdateActionButton()
