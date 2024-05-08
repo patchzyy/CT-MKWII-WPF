@@ -12,4 +12,5 @@ Please report any bugs :)
 - move config.json and rr.json (if its created) to %appdata/MWiiManager
 - error detection if config.json contains invalid information
 - No nand error message after first time launch
-- 
+- Disclamer on what Reccomended settings does
+- Possible shortcut on desktop (ask on first time launch)
