@@ -5,7 +5,6 @@
 Please report any bugs :)
 
 ## Todo:
-- Auto-update the program itself (On launch it will ask the user to update)
 - UI rework (add tabs top bar for settings, my-stuff, game, x)
 - My-stuff manager
 - A bug can appear where GFX.ini is trying to be found in the LOAD instead of user folder
@@ -14,3 +13,6 @@ Please report any bugs :)
 - No nand error message after first time launch
 - Disclamer on what Reccomended settings does
 - Possible shortcut on desktop (ask on first time launch)
+
+## Done:
+- Auto-update the program itself (On launch it will ask the user to update)
