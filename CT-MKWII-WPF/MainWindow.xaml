@@ -85,6 +85,11 @@
                     <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
                 </TextBlock.Effect>
             </TextBlock>
+            <!-- <TextBlock Text="Version 1.0" FontSize="12" Margin="0,0,0,2" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom"> -->
+            <!--     <TextBlock.Effect> -->
+            <!--         <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/> -->
+            <!--     </TextBlock.Effect> -->
+            <!-- </TextBlock> -->
         </Grid>
     </Grid>
 </Window>

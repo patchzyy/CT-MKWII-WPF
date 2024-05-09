@@ -3,17 +3,24 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
+using CT_MKWII_WPF.Pages;
 
 namespace CT_MKWII_WPF.Utils.Auto_updator;
 
-public class VersionChecker
+public static class VersionChecker
 {
     private const string VersionFileURL = "https://raw.githubusercontent.com/patchzyy/CT-MKWII-WPF/main/version.txt";
     //this is the internal version of the program. On the github the version number is exposed.
     //I will only update the version.txt & this when there is a next stable release
     private const string CurrentVersion = "0.0.1";
+    
+    public static string GetVersionNumber()
+    {
+        return CurrentVersion;
+    }
 
     public static void CheckForUpdates()
     {
@@ -33,15 +40,19 @@ public class VersionChecker
                         Update();
                     }
                 }
+                else
+                {
+                    MessageBox.Show("CT-MKWII-WPF is up to date.");
+                }
             }
             catch (Exception e)
             {
-                MessageBox.Show("An error occurred while checking for updates. Please try again later.");
+                MessageBox.Show("An error occurred while checking for updates. Please try again later. \n \nError: " + e.Message);
             }
         }
     }
 
-    public static void Update()
+    public static async Task Update()
     {
         //find the file location of the current program
         var currentLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
@@ -59,7 +70,13 @@ public class VersionChecker
             System.IO.Directory.CreateDirectory(tempFolder);
         }
         var updateFile = tempFolder + "/CT-MKWII-WPF.exe";
-        DownloadUpdateFile(downloadurl, updateFile);
+        
+        //create a progress window
+        var progressWindow = new ProgressWindow();
+        progressWindow.Show();
+        
+        //download the update file
+        await DownloadUpdateFile(downloadurl, updateFile, progressWindow);
         
         //rename the current exe file
         string backupExePath = Path.Combine(Path.GetDirectoryName(currentLocation), "CT-MKWII-WPF-old.exe");
@@ -75,12 +92,36 @@ public class VersionChecker
         Environment.Exit(0);
     }
     
-    static void DownloadUpdateFile(string url, string filePath)
+    static async Task DownloadUpdateFile(string url, string filePath, ProgressWindow progressWindow)
     {
         using (HttpClient client = new HttpClient())
         {
-            byte[] fileBytes = client.GetByteArrayAsync(url).Result;
-            File.WriteAllBytes(filePath, fileBytes);
+            using (var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
+            {
+                var totalBytes = response.Content.Headers.ContentLength ?? -1;
+                using (var downloadStream = await response.Content.ReadAsStreamAsync())
+                using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None, bufferSize: 8192, useAsync: true))
+                {
+                    var downloadedBytes = 0;
+                    var bufferSize = 8192;
+                    var buffer = new byte[bufferSize];
+                    int bytesRead;
+
+                    while ((bytesRead = await downloadStream.ReadAsync(buffer, 0, bufferSize)) != 0)
+                    {
+                        await fileStream.WriteAsync(buffer, 0, bytesRead);
+                        downloadedBytes += bytesRead;
+
+                        var progress = totalBytes == -1 ? 0 : (int)((float)downloadedBytes / totalBytes * 100);
+                        var status = $"Downloading... {downloadedBytes}/{totalBytes} bytes";
+
+                        progressWindow.Dispatcher.Invoke(() =>
+                        {
+                            progressWindow.UpdateProgress(progress, status);
+                        });
+                    }
+                }
+            }
         }
     }
 }

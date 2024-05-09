@@ -14,4 +14,5 @@ public partial class ProgressWindow : Window
         ProgressBar.Value = progress;
         StatusLabel.Content = status;
     }
+    
 }
