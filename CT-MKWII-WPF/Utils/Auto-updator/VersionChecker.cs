@@ -40,10 +40,6 @@ public static class VersionChecker
                         Update();
                     }
                 }
-                else
-                {
-                    MessageBox.Show("CT-MKWII-WPF is up to date.");
-                }
             }
             catch (Exception e)
             {
