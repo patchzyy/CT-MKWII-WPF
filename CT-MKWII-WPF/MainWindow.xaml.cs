@@ -24,7 +24,9 @@ namespace CT_MKWII_WPF
         public MainWindow()
         {
             InitializeComponent();
+            ChangeContent(new SettingsPage());
         }
+        
 
         public void ChangeContent(UserControl control)
         {
@@ -72,5 +74,7 @@ namespace CT_MKWII_WPF
         {
             MessageBox.Show("This feature is not yet implemented.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
+        
+        
     }
 }

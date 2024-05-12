@@ -15,6 +15,22 @@ public partial class SettingsPage : UserControl
     {
         InitializeComponent();
         LoadSettings();
+        fillUserPath();
+    }
+
+    private void fillUserPath()
+    {
+        //first we check if the user path is already filled
+        if (DolphinUserFolderTextBox.Text != "")
+        {
+            return;
+        }
+        //if not, we try to find it
+        string folderPath = GetDolphinFolderPath();
+        if (!string.IsNullOrEmpty(folderPath))
+        {
+            DolphinUserFolderTextBox.Text = folderPath;
+        }
     }
     
     private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -73,30 +89,32 @@ public partial class SettingsPage : UserControl
         DolphinUserFolderTextBox.Text = SettingsUtils.GetUserPathLocation();
     }
 
-    private void BrowseDolphinAppDataButton_Click(object sender, RoutedEventArgs e)
+    private string GetDolphinFolderPath()
     {
-        //select the appdata dolphin folder
-        //try to automatically find it
+        // Try to automatically find the Dolphin Emulator folder path
         string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator");
         if (Directory.Exists(appDataPath))
-        {
-            //ask user if they want to use this folder
-            var result = MessageBox.Show("**If you dont know what all of this means, just click yes :)**\n\nDolphin Emulator folder found in AppData. Would you like to use this folder?", "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-            {
-                DolphinUserFolderTextBox.Text = appDataPath;
-                return;
-            }
-        }
-        //path not found, check documents folder
+            return appDataPath;
+
         string documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Dolphin Emulator");
         if (Directory.Exists(documentsPath))
+            return documentsPath;
+
+        // Folder not found automatically
+        return string.Empty;
+    }
+
+    private void BrowseDolphinAppDataButton_Click(object sender, RoutedEventArgs e)
+    {
+        string folderPath = GetDolphinFolderPath();
+
+        if (!string.IsNullOrEmpty(folderPath))
         {
-            //ask user if they want to use this folder
-            var result = MessageBox.Show("**If you dont know what all of this means, just click yes :)**\n\nDolphin Emulator folder found in Documents. Would you like to use this folder?", "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            // Ask user if they want to use the automatically found folder
+            var result = MessageBox.Show("**If you dont know what all of this means, just click yes :)**\n\nDolphin Emulator folder found. Would you like to use this folder?\n\n" + folderPath, "Dolphin Emulator Folder Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                DolphinUserFolderTextBox.Text = documentsPath;
+                DolphinUserFolderTextBox.Text = folderPath;
                 return;
             }
         }
@@ -104,15 +122,15 @@ public partial class SettingsPage : UserControl
         {
             MessageBox.Show("Dolphin Emulator folder not automatically found. Please try and find the folder manually, click 'help' for more information.", "Dolphin Emulator Folder Not Found", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-        //if we end up here, this means either the path wasnt found, or  the user wants to manually select the path
-        //make it so we have to select a folder, not an executable
+
+        // If we end up here, this means either the path wasn't found, or the user wants to manually select the path
+        // Make it so we have to select a folder, not an executable
         CommonOpenFileDialog dialog = new();
         dialog.IsFolderPicker = true;
         if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
         {
             DolphinUserFolderTextBox.Text = dialog.FileName;
         }
-
     }
 
 

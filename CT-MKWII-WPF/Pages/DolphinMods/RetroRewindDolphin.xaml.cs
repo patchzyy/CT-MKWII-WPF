@@ -62,10 +62,11 @@ public partial class RetroRewindDolphin : UserControl
         var GFXFile = SettingsUtils.FindGFXFile();
         if (GFXFile == "")
         {
+            MessageBox.Show("GFX file not found");
             VSyncCheckbox.IsChecked = false;
         }
-        var VSync = DolphinSettingHelper.ReadINISetting(GFXFile, "Hardware", "VSync");
-        if (VSync == "True")
+        var VSync = DolphinSettingHelper.ReadINISetting(GFXFile,  "VSync");
+        if (VSync.Trim() == "True")
         {
             VSyncCheckbox.IsChecked = true;
         }

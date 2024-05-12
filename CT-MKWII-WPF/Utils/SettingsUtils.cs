@@ -28,6 +28,11 @@ namespace CT_MKWII_WPF.Utils
             return File.Exists(_configFilePath);
         }
         
+        public static bool configCorrectAndExists()
+        {
+            return doesConfigExist() && SetupCorrectly();
+        }
+        
         
         public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath)
         {

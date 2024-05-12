@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using CT_MKWII_WPF.Pages;
+using CT_MKWII_WPF.Utils;
 using CT_MKWII_WPF.Utils.Auto_updator;
 
 namespace CT_MKWII_WPF
@@ -15,6 +17,7 @@ namespace CT_MKWII_WPF
         {
             VersionChecker.CheckForUpdates();
         }
+
     }
 
 }

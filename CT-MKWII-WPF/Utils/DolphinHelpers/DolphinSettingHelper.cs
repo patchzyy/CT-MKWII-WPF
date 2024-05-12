@@ -5,7 +5,7 @@ namespace CT_MKWII_WPF.Utils.DolphinHelpers;
 
 public class DolphinSettingHelper
 {
-        public static string ReadINISetting(string FileLocation, string Section, string SettingToRead)
+    public static string ReadINISetting(string FileLocation, string Section, string SettingToRead)
     {
         if (!File.Exists(FileLocation))
         {
@@ -38,6 +38,25 @@ public class DolphinSettingHelper
             }
         }
         // MessageBox.Show("Could not find setting in INI file, Message Patchzy with the following error: " + SettingToRead, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        return "";
+    }
+    
+    public static string ReadINISetting(string FileLocation, string SettingToRead)
+    {
+        if (!File.Exists(FileLocation))
+        {
+            MessageBox.Show("Something went wrong, INI file could not be read, Message Patchzy with the following error: " + FileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        var lines = File.ReadAllLines(FileLocation);
+        foreach (string line in lines)
+        {
+            if (line.StartsWith(SettingToRead))
+            {
+                var setting = line.Split("=");
+                return setting[1].Trim();
+            }
+        }
         return "";
     }
     public static void ChangeINISettings(string FileLocation, string Section, string SettingToChange, string Value)
