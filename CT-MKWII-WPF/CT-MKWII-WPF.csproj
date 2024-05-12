@@ -10,18 +10,9 @@
 
     <ItemGroup>
       <None Remove="Retro_Rewind_Cover.png" />
-      <Resource Include="Retro_Rewind_Cover.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
         <None Remove="Pages\RR.json" />
       <None Remove="background_cover.png" />
-      <Resource Include="background_cover.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
       <None Remove="wii.png" />
-      <Resource Include="wii.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
     </ItemGroup>
 
     <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows;
 using Newtonsoft.Json;
 using CT_MKWII_WPF.Pages;
@@ -7,13 +8,26 @@ namespace CT_MKWII_WPF.Utils
 {
     public static class SettingsUtils
     {
-        private static readonly string _configFilePath = "./config.json";
+        //in appdata CT-MKWII
+        private static readonly string _configFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/CT-MKWII", "config.json");
         private static Config _config;
 
         static SettingsUtils()
         {
             LoadConfigFromFile();
         }
+
+        public static bool SetupCorrectly()
+        {
+            //see if the file has all the required paths
+            return _config != null && Directory.Exists(_config.UserFolderPath) && File.Exists(_config.DolphinLocation) && File.Exists(_config.GameLocation);
+        }
+
+        public static bool doesConfigExist()
+        {
+            return File.Exists(_configFilePath);
+        }
+        
         
         public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath)
         {
@@ -23,7 +37,16 @@ namespace CT_MKWII_WPF.Utils
             _config.UserFolderPath = userFolderPath;
             // Serialize the _config object to JSON and save it to the config file
             var configJson = JsonConvert.SerializeObject(_config, Formatting.Indented);
-            File.WriteAllText(_configFilePath, configJson);
+            Directory.CreateDirectory(Path.GetDirectoryName(_configFilePath));
+            try
+            {
+                File.WriteAllText(_configFilePath, configJson);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("An error occurred while saving settings. Please try again later. \n \nError: " + e.Message);
+                throw;
+            }
         }
         public static void SaveSettings(string dolphinPath, string gamePath, string userFolderPath, bool hasRunNANDTutorial)
         {
@@ -54,7 +77,7 @@ namespace CT_MKWII_WPF.Utils
             return File.Exists(_configFilePath) ? File.ReadAllText(_configFilePath) : string.Empty;
         }
         
-        public static void SetHasRunNANDTutorial(bool hasRunNANDTutorial)
+        public static void setHasSeenNandPopUp(bool hasRunNANDTutorial)
         {
             _config.HasRunNANDTutorial = hasRunNANDTutorial;
             SaveSettings(_config.DolphinLocation, _config.GameLocation, _config.UserFolderPath, hasRunNANDTutorial);

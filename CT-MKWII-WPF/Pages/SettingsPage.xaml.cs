@@ -22,7 +22,6 @@ public partial class SettingsPage : UserControl
         string dolphinPath = DolphinPathTextBox.Text;
         string gamePath = GamePathTextBox.Text;
         string userFolder = DolphinUserFolderTextBox.Text;
-
         if (!File.Exists(dolphinPath) || !File.Exists(gamePath) || !Directory.Exists(userFolder))
         {
             MessageBox.Show("Please ensure all paths are correct and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -67,12 +66,11 @@ public partial class SettingsPage : UserControl
 
     private void LoadSettings()
     {
-        
-        if (!File.Exists("./config.json")) return;
+        if (!SettingsUtils.doesConfigExist()) return;
+        if (!SettingsUtils.SetupCorrectly()) return;
         DolphinPathTextBox.Text = SettingsUtils.GetDolphinLocation();
         GamePathTextBox.Text = SettingsUtils.GetGameLocation();
-        DolphinUserFolderTextBox.Text = SettingsUtils.GetLoadPathLocation();
-
+        DolphinUserFolderTextBox.Text = SettingsUtils.GetUserPathLocation();
     }
 
     private void BrowseDolphinAppDataButton_Click(object sender, RoutedEventArgs e)
@@ -137,10 +135,15 @@ public partial class SettingsPage : UserControl
 
     private void GoBackButton_Click(object sender, RoutedEventArgs e)
     {
-        // call the method in the main window
-        var mainWindow = (MainWindow)Application.Current.MainWindow;
-        mainWindow.SwitchContent();
-        
+        SaveButton_Click(sender, e);
+        if (!SettingsUtils.doesConfigExist())
+        {
+            MessageBox.Show("Please set the paths in settings and save the settings.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+        var RetroRewindDolphinPage = new RetroRewindDolphin();
+        var mw = (MainWindow)Application.Current.MainWindow;
+        mw.ChangeContent(RetroRewindDolphinPage);
     }
 
 }

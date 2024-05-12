@@ -3,11 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MKW Mod Manager" Height="670" Width="400">
 
-    <Window.Resources>
-        <!-- Custom ComboBox Template -->
-
-
-    </Window.Resources>
     <Grid>
         <!-- Background Image -->
         <Image Source="./Retro_Rewind_Cover.png" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -15,83 +10,57 @@
         <!-- Semi-transparent overlay for blur effect -->
         <Grid>
             <Grid.Background>
-                <SolidColorBrush Color="Black" Opacity="0.5"/>
+                <SolidColorBrush Color="Black" Opacity="0.8"/>
             </Grid.Background>
 
             <!-- Main Content -->
             <Grid Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="117*"/>
-                    <ColumnDefinition Width="73*"/>
-                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
-                    <!-- Changed this row to * to allocate remaining space to the content -->
                 </Grid.RowDefinitions>
 
-                <!-- First Row -->
-                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                <!-- Top Bar -->
+                <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <ComboBox x:Name="ModSelection" Grid.Column="1" SelectionChanged="ModSelection_SelectionChanged" HorizontalAlignment="Right" Width="120" Height="30" SelectedIndex="0" RenderTransformOrigin="0.894,0.512">
-                        <ComboBox.Effect>
-                            <DropShadowEffect/>
-                        </ComboBox.Effect>
-                        <ComboBoxItem Content="Select Mod" IsEnabled="False" IsSelected="True" />
-                        <ComboBoxItem Content="Retro Rewind"/>
-                        <ComboBoxItem Content="CTGP (wii / wiiu only)" IsEnabled="False"/>
-                    </ComboBox>
-                    <ComboBox x:Name="ConsoleSelection" Grid.Column="0" SelectionChanged="ConsoleSelection_SelectionChanged" HorizontalAlignment="Left" Width="120" Height="30" SelectedIndex="0" BorderBrush="#FF226CE4" Background="#FF0078D7">
-                        <ComboBox.Effect>
-                            <DropShadowEffect/>
-                        </ComboBox.Effect>
-                        <ComboBoxItem Content="Select Platform" IsEnabled="False" IsSelected="True" />
-                        <ComboBoxItem Content="Dolphin" />
-                        <ComboBoxItem Content="Wii" IsEnabled="False"/>
-                        <ComboBoxItem Content="Wii-u" IsEnabled="False"/>
-                        
-                        <!-- make the color of the box blue -->
-                    </ComboBox>
+                    <Button Content="Settings" Grid.Column="0" Click="Settings_Click" Margin="5" />
+                    <Button Content="My Stuff" Grid.Column="1" Click="MyStuff_Click" Margin="5" />
+                    <Button Content="Game" Grid.Column="2" Click="Game_Click" Margin="5" />
+                    <Button Content="Extras" Grid.Column="3" Click="Extras_Click" Margin="5" />
                 </Grid>
 
                 <!-- Content Area -->
-                <ContentControl x:Name="ContentArea" Grid.Row="1" Margin="0,10,0,0" Grid.ColumnSpan="2" Grid.Column="0" />
+                <ContentControl x:Name="ContentArea" Grid.Row="1" Margin="0,10,0,0" />
 
                 <!-- Buttons at the bottom -->
-                <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="0,0,0,0" Grid.RowSpan="2">
+                <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Button Content="Settings" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="120" Click="Settings_Click"/>
-                    <!-- <Button Content="Go!" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="120" Click="Continue_Click"/> -->
+                    <!-- Add your buttons here if needed -->
                 </Grid>
-                
             </Grid>
-            <TextBlock Text="Made by lum patch" FontSize="12" Margin="0,20,0,0" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+            <TextBlock Text="Made by lum patch" FontSize="12" Margin="0,60,0,0" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
                 </TextBlock.Effect>
             </TextBlock>
-            
+
             <TextBlock Text="Discord: Patchzy" FontSize="12" Margin="0,20,0,20" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
                 </TextBlock.Effect>
             </TextBlock>
-            <!-- <TextBlock Text="Version 1.0" FontSize="12" Margin="0,0,0,2" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom"> -->
-            <!--     <TextBlock.Effect> -->
-            <!--         <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/> -->
-            <!--     </TextBlock.Effect> -->
-            <!-- </TextBlock> -->
         </Grid>
     </Grid>
 </Window>
-
-

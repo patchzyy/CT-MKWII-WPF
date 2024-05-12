@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CT_MKWII_WPF.Pages;
 using CT_MKWII_WPF.Pages.WiiMods;
-
+using CT_MKWII_WPF.Utils;
 
 namespace CT_MKWII_WPF
 {
@@ -25,68 +25,19 @@ namespace CT_MKWII_WPF
         {
             InitializeComponent();
         }
+
         public void ChangeContent(UserControl control)
         {
             ContentArea.Content = control;
         }
-        
-
-        // private void Continue_Click(object sender, RoutedEventArgs e)
-        // {
-        //     //before accepting a click, check if config.txt is setup
-        //     if (!File.Exists("./config.txt"))
-        //     {
-        //         MessageBox.Show("Please set the paths in settings.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        //         return;
-        //     }
-        //     switch (ModSelection.SelectedIndex)
-        //     {
-        //         case 0:
-        //             ContentArea.Content = new RetroRewind();
-        //             break;
-        //         case 1:
-        //             ContentArea.Content = new CTGP();
-        //             break;
-        //         case 2:
-        //             ContentArea.Content = new Riivolution();
-        //             break;
-        //         case 3:
-        //             ContentArea.Content = new PlaceholderMod();
-        //             break;
-        //         default:
-        //             MessageBox.Show("Please select an option");
-        //             break;
-        //     }
-        // }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             ContentArea.Content = new SettingsPage();
         }
 
-        private void ModSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void SwitchContent()
         {
-            if (ModSelection == null || ConsoleSelection == null) return;
-            if (ModSelection.SelectedIndex == 0 || ConsoleSelection.SelectedIndex == 0)
-            {
-                return;
-            }
-            SwitchContent();
-        }
-
-        private void ConsoleSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ModSelection == null || ConsoleSelection == null) return;
-            if (ModSelection.SelectedIndex == 0 || ConsoleSelection.SelectedIndex == 0)
-            {
-                return;
-            }
-            SwitchContent();
-        }
-
-        public void SwitchContent()    
-        {
-
             if (!File.Exists("./config.json"))
             {
                 MessageBox.Show("Please set the paths in settings.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -95,60 +46,31 @@ namespace CT_MKWII_WPF
                 return;
             }
 
-            if (ConsoleSelection.SelectedIndex == 2)
-            {
-                SwitchonWii();
-            }
-            else if (ConsoleSelection.SelectedIndex == 1)
-            {
-                SwitchonDolphin();
-            }
-            
+            // Handle button clicks and switch content accordingly
         }
 
-        private void SwitchonWii()
+        private void MyStuff_Click(object sender, RoutedEventArgs e)
         {
-            int modIndexWii = ModSelection.SelectedIndex;
-
-            switch (modIndexWii)
-            {
-                case 0:
-                    break;
-                case 1:
-                    ContentArea.Content = new RetroRewindWii();
-                    break;
-                default:
-                    break;
-            }
+            var MyStuffManager = new MyStuffManager();
+            ChangeContent(MyStuffManager);
         }
 
-        private void SwitchonDolphin()
+        private void Game_Click(object sender, RoutedEventArgs e)
         {
-            
-            int modIndexDolphin = ModSelection.SelectedIndex;
-            
-            switch (modIndexDolphin)
+            if (!SettingsUtils.doesConfigExist())
             {
-                case 0:
-                    break;
-                case 1:
-                    ContentArea.Content = new RetroRewindDolphin();
-                    break;
-                case 2:
-                    ContentArea.Content = new CTGP();
-                    break;
-                case 3:
-                    ContentArea.Content = new RiivolutionDolphin();
-                    break;
-                case 4:
-                    ContentArea.Content = new PlaceholderMod();
-                    break;
-                default:
-                    MessageBox.Show("Please select a mod");
-                    return;
+                MessageBox.Show("Please set the paths in settings.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                var mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.ChangeContent(new SettingsPage());
+                return;
             }
+            var RetroRewindDolphinPage = new RetroRewindDolphin();
+            ChangeContent(RetroRewindDolphinPage);
         }
-        
-        
+
+        private void Extras_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("This feature is not yet implemented.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }

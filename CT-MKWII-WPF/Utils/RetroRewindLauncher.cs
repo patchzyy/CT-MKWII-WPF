@@ -14,16 +14,17 @@ public static class RetroRewindLauncher
             DirectoryHandler.BackupRiivolution();
             DirectoryHandler.RetrieveRR();
         }
-        //show a pop up if nand setup has not been completed
+        //show a pop up if the user has not launched yet
         if (!SettingsUtils.HasRunNANDTutorial())
         {
             MessageBox.Show("Keep in mind, you need your NAND setup to play online. \nIf you have not set up your NAND yet you can NOT play online! \nIf you have already set up your NAND you may ignore this message", "NAND setup", MessageBoxButton.OK,
                 MessageBoxImage.Warning);
+            SettingsUtils.setHasSeenNandPopUp(true);
         }
         string dolphinLocation = SettingsUtils.GetDolphinLocation();
         string gamePath = SettingsUtils.GetGameLocation();
         GenerateLaunchJSON();
-        string launchJson = Path.Combine(Environment.CurrentDirectory, "RR.json");
+        string launchJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "RR.json");
 
         if (!File.Exists(dolphinLocation) || !File.Exists(gamePath))
         {
@@ -48,8 +49,6 @@ public static class RetroRewindLauncher
                 MessageBoxImage.Error);
         }
     }
-
-
 
     private static void GenerateLaunchJSON()
     {
@@ -95,6 +94,6 @@ public static class RetroRewindLauncher
         originalJSON = originalJSON.Replace("LINK TO RETRO REWIND XML FILE", correctedXMLPath);
 
         // Write the json to the exe folder
-        File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "RR.json"), originalJSON);
+        File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "RR.json"), originalJSON);
     }
 }
