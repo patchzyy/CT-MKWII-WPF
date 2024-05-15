@@ -9,6 +9,7 @@ Please report any bugs :)
 - error detection if config.json contains invalid information
 - Disclamer on what Reccomended settings does
 - Possible shortcut on desktop (ask on first time launch)
+- how to get around that stupid (windows protected your pc) popup
 
 ## Done:
 - Auto-update the program itself (On launch it will ask the user to update)
