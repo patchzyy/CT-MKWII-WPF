@@ -10,6 +10,8 @@ Please report any bugs :)
 - Disclamer on what Reccomended settings does
 - Possible shortcut on desktop (ask on first time launch)
 - how to get around that stupid (windows protected your pc) popup
+- after saving settings where previously were no settings it will give the error (please set the paths in settings)
+- multiple times clicking on update. limit to one
 
 ## Done:
 - Auto-update the program itself (On launch it will ask the user to update)
