@@ -17,17 +17,7 @@ public static class RetroRewindInstaller
         
         var retroRewindRRFolder = Path.Combine(loadPath, "Riivolution-RR", "RetroRewind6");
 
-        if (Directory.Exists(retroRewindFolder))
-        {
-            return true;
-        }
-
-        if (Directory.Exists(retroRewindRRFolder))
-        {
-            return true;
-        }
-
-        return false;
+        return Directory.Exists(retroRewindFolder) || Directory.Exists(retroRewindRRFolder);
     }
     
     public static void InstallRRToSD()
@@ -46,25 +36,18 @@ public static class RetroRewindInstaller
     {
         var loadPath = SettingsUtils.GetLoadPathLocation();
         var versionFilePath = Path.Combine(loadPath, "Riivolution", "RetroRewind6", "version.txt");
-        if (!File.Exists(versionFilePath))
-        {
-            //try the RR folder
-            versionFilePath = Path.Combine(loadPath, "Riivolution-RR", "RetroRewind6", "version.txt");
-            if (!File.Exists(versionFilePath))
-            {
-                return "Not Installed";
-            }
-        }
-        return File.ReadAllText(versionFilePath);
+        if (File.Exists(versionFilePath)) return File.ReadAllText(versionFilePath);
+        //try the RR folder
+        versionFilePath = Path.Combine(loadPath, "Riivolution-RR", "RetroRewind6", "version.txt");
+        return !File.Exists(versionFilePath) ? "Not Installed" : File.ReadAllText(versionFilePath);
     }
 
-    public async static Task<bool> IsRRUpToDate(string currentVersion)
+    public static async Task<bool> IsRRUpToDate(string currentVersion)
     {
         //make sure to ignore any spaces
         currentVersion = currentVersion.Trim();
         string latestVersion = await GetLatestVersionString();
         latestVersion = latestVersion.Trim();
-        
         return currentVersion == latestVersion;
     }
 
@@ -86,25 +69,24 @@ public static class RetroRewindInstaller
             return "Failed to check for updates";
         }
         
-    }
-
+    } 
     public static async Task<bool> UpdateRR()
-{
-    string currentVersion = CurrentRRVersion();
-    if (currentVersion == "Not Installed")
     {
-        MessageBox.Show("Retro Rewind is not installed. Starting installation.");
-        InstallRetroRewind();
-        return true;
-    }
+    string currentVersion = CurrentRRVersion();
     
-
     if (await IsRRUpToDate(currentVersion))
     {
         MessageBox.Show("Retro Rewind is up to date.");
         return true;
     }
-
+    
+    if (currentVersion == "Not Installed")
+    {
+        MessageBox.Show("Retro Rewind is not installed. Starting installation.");
+        await InstallRetroRewind();
+        return true;
+    }
+    
     var allVersions = await GetAllVersionData();
     var updatesToApply = GetUpdatesToApply(currentVersion, allVersions);
     
@@ -233,7 +215,7 @@ private static async Task<bool> DownloadAndApplyUpdate((string Version, string U
 
 
 
-    public static async Task InstallRetroRewind()
+public static async Task InstallRetroRewind()
 {
     string RetroRewindURL = RRNetwork.Ip + "/RetroRewind/zip/RetroRewind.zip";
     // Check if Retro Rewind is already installed

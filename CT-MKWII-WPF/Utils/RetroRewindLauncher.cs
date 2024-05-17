@@ -21,6 +21,30 @@ public static class RetroRewindLauncher
                 MessageBoxImage.Warning);
             SettingsUtils.setHasSeenNandPopUp(true);
         }
+        //first clear the my-stuff folder
+        //now we check for all the mods we want in the modconfig
+        var mods = SettingsUtils.GetMods();
+        if (mods == null || mods.Length == 0)
+        {
+            MessageBox.Show("You have no mods enabled. TEMP ERROR", "Error", MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
+        //reverse the list, because mods that have the lowest priority go first
+        //the reason we do this is, lets say file A from the lowest priority mod is in the highest priority mod, we want to overwrite it
+        Array.Reverse(mods);
+        var mystuffFolder = Path.Combine(SettingsUtils.GetLoadPathLocation(), "Riivolution", "RetroRewind6", "MyStuff");
+        if (Directory.Exists(mystuffFolder))
+        {
+            Directory.Delete(mystuffFolder, true);
+        }
+        foreach (var mod in mods)
+        {
+            if (mod.IsEnabled)
+            {
+                DirectoryHandler.InstallMod(mod);
+            }
+        }
+        
         string dolphinLocation = SettingsUtils.GetDolphinLocation();
         string gamePath = SettingsUtils.GetGameLocation();
         GenerateLaunchJSON();
@@ -32,7 +56,6 @@ public static class RetroRewindLauncher
                 MessageBoxImage.Error);
             return;
         }
-
         try
         {
             Process.Start(new ProcessStartInfo
@@ -66,7 +89,7 @@ public static class RetroRewindLauncher
           "section-name": "Retro Rewind"
         },
         {
-          "choice": 0,
+          "choice": 2,
           "option-name": "My Stuff",
           "section-name": "Retro Rewind"
         }

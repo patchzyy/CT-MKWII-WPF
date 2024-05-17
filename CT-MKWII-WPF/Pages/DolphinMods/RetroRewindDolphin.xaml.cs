@@ -102,7 +102,7 @@ public partial class RetroRewindDolphin : UserControl
         var serverEnabled = await RetroRewindInstaller.IsServerEnabled();
         if (!serverEnabled)
         {
-            MessageBox.Show("We can't connect to the RR servers.\nPlease check back later.\n Launching in offline mode", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("We can't connect to the RR servers. Check your internet connection\nThe servers might be down. Please check back later.\nLaunching in offline mode", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         
         var dolphinInstalled = DolphinInstaller.IsDolphinInstalled();
@@ -160,6 +160,7 @@ public partial class RetroRewindDolphin : UserControl
         var retroRewindUpToDate = await RetroRewindInstaller.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
         var retroRewindActive = DirectoryHandler.isRRActive();
         bool installedButNotActive = retroRewindInstalled && !retroRewindActive;
+        bool isUpdating = false;
 
         if (!dolphinInstalled)
         {
@@ -172,10 +173,17 @@ public partial class RetroRewindDolphin : UserControl
         }
         else if (!retroRewindUpToDate)
         {
+            if (isUpdating)
+            {
+                MessageBox.Show("Already updating Retro Rewind", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            isUpdating = true;
             if (await RetroRewindInstaller.UpdateRR())
             {
                 UpdateActionButton();
             }
+            isUpdating = false;
         }
         else
         {
@@ -187,7 +195,6 @@ public partial class RetroRewindDolphin : UserControl
     {
         int Resolution = ResolutionDropDown.SelectedIndex + 1;
         DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution", Resolution.ToString());
-        // MessageBox.Show("Resolution has been changed!");
         UpdateResolutionDropDown();
         return;
     }

@@ -6,13 +6,51 @@
              xmlns:local="clr-namespace:CT_MKWII_WPF.Pages"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    
+    <UserControl.Resources>
+        <ContextMenu x:Key="ModContextMenu">
+            <MenuItem Header="Rename" Click="RenameMod_Click"/>
+            <MenuItem Header="Delete" Click="DeleteMod_Click"/>
+            <MenuItem Header="Open Folder" Click="OpenFolder_Click"/>
+        </ContextMenu>
+    </UserControl.Resources>
+    
     <Grid>
-        <TextBlock Text="Coming Soon!"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   Foreground="White"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   TextAlignment="Center" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="0" Name="ModsListView" ItemsSource="{Binding Mods}" AllowDrop="True" 
+                  PreviewMouseLeftButtonDown="ModsListView_PreviewMouseLeftButtonDown" 
+                  PreviewMouseMove="ModsListView_PreviewMouseMove"
+                  Drop="ModsListView_Drop"
+                  MouseRightButtonUp="ModsListView_MouseRightButtonUp">
+            <ListView.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Margin" Value="0,0,0,5" />
+                    <Setter Property="Padding" Value="10" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Enabled" Width="50">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="150" />
+                    <GridViewColumn Header="Author" DisplayMemberBinding="{Binding Author}" Width="150" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Import Mod" Margin="5" Padding="10,5" Click="ImportMod_Click"/>
+            <Button Content="Select All" Margin="5" Padding="10,5" Click="SelectAll_Click"/>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -25,19 +25,15 @@ namespace CT_MKWII_WPF
         {
             InitializeComponent();
             ChangeContent(new SettingsPage());
+            // this is hardcoded for now, update this when the default menu changes
+            SettingsButton.Opacity = 0.5;
         }
         
-
         public void ChangeContent(UserControl control)
         {
             ContentArea.Content = control;
         }
-
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            ContentArea.Content = new SettingsPage();
-        }
-
+        
         public void SwitchContent()
         {
             if (!File.Exists("./config.json"))
@@ -50,11 +46,28 @@ namespace CT_MKWII_WPF
 
             // Handle button clicks and switch content accordingly
         }
+        
+        private void resetAllOpacity(Button currentlyClickedButton)
+        {
+            SettingsButton.Opacity = 1;
+            MyStuffButton.Opacity = 1;
+            GameButton.Opacity = 1;
+            ExtrasButton.Opacity = 1;
+            currentlyClickedButton.Opacity = 0.5;
+        }
+        
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeContent(new SettingsPage());
+            resetAllOpacity((Button)sender);
+        }
+        
 
         private void MyStuff_Click(object sender, RoutedEventArgs e)
         {
-            var MyStuffManager = new MyStuffManager();
-            ChangeContent(MyStuffManager);
+            ChangeContent(new MyStuffManager());
+            resetAllOpacity((Button)sender);
         }
 
         private void Game_Click(object sender, RoutedEventArgs e)
@@ -68,11 +81,13 @@ namespace CT_MKWII_WPF
             }
             var RetroRewindDolphinPage = new RetroRewindDolphin();
             ChangeContent(RetroRewindDolphinPage);
+            resetAllOpacity((Button)sender);
         }
 
         private void Extras_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("This feature is not yet implemented.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            resetAllOpacity((Button)sender);
         }
         
         

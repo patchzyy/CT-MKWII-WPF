@@ -137,5 +137,19 @@ namespace CT_MKWII_WPF.Utils
             public string UserFolderPath { get; set; }
             public bool HasRunNANDTutorial { get; set; }
         }
+
+        public static ModData[] GetMods()
+        {
+            //go to the appdata
+            var modConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CT-MKWII", "Mods", "modconfig.json");
+            //[{"IsEnabled":true,"Title":"rocky_wii_v1p1","Author":"Unknown Author"},{"IsEnabled":true,"Title":"sticks_rosa_-_20","Author":"Unknown Author"},{"IsEnabled":true,"Title":"sticks_daisy","Author":"Unknown Author"},{"IsEnabled":true,"Title":"n64_boom_boom_fortress_v1","Author":"Unknown Author"}]
+            if (!File.Exists(modConfigPath))
+            {
+                MessageBox.Show("Mod config file not found", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return new ModData[0];
+            }
+            var json = File.ReadAllText(modConfigPath);
+            return JsonConvert.DeserializeObject<ModData[]>(json);
+        }
     }
 }

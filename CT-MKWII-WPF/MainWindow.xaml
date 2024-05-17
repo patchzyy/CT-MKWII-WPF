@@ -30,10 +30,10 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Button Content="Settings" Grid.Column="0" Click="Settings_Click" Margin="5" />
-                    <Button Content="My Stuff" Grid.Column="1" Click="MyStuff_Click" Margin="5" />
-                    <Button Content="Game" Grid.Column="2" Click="Game_Click" Margin="5" />
-                    <Button Content="Extras" Grid.Column="3" Click="Extras_Click" Margin="5" />
+                    <Button Content="Settings" x:Name="SettingsButton" Grid.Column="0" Click="Settings_Click" Margin="5" />
+                    <Button Content="My Stuff" x:Name="MyStuffButton" Grid.Column="1" Click="MyStuff_Click" Margin="5" />
+                    <Button Content="Game" x:Name="GameButton" Grid.Column="2" Click="Game_Click" Margin="5" />
+                    <Button Content="Extras" x:Name="ExtrasButton" Grid.Column="3" Click="Extras_Click" Margin="5" />
                 </Grid>
 
                 <!-- Content Area -->
@@ -50,11 +50,11 @@
                 </Grid>
             </Grid>
 
-            <TextBlock Text="Made by lum patch" FontSize="12" Margin="0,60,0,0" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <TextBlock.Effect>
-                    <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
-                </TextBlock.Effect>
-            </TextBlock>
+            <!-- <TextBlock Text="Made by lum patch" FontSize="12" Margin="0,60,0,0" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top"> -->
+            <!--     <TextBlock.Effect> -->
+            <!--         <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/> -->
+            <!--     </TextBlock.Effect> -->
+            <!-- </TextBlock> -->
 
             <TextBlock Text="Discord: Patchzy" FontSize="12" Margin="0,20,0,20" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                 <TextBlock.Effect>
