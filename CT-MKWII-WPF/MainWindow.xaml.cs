@@ -25,7 +25,6 @@ namespace CT_MKWII_WPF
         {
             InitializeComponent();
             ChangeContent(new SettingsPage());
-            // this is hardcoded for now, update this when the default menu changes
             SettingsButton.Opacity = 0.5;
         }
         
@@ -66,21 +65,27 @@ namespace CT_MKWII_WPF
 
         private void MyStuff_Click(object sender, RoutedEventArgs e)
         {
+            if (!SettingsUtils.IsConfigFileFinishedSettingUp())
+            {
+                MessageBox.Show("Please set all the paths in settings.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                var mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.ChangeContent(new SettingsPage());
+                return;
+            }
             ChangeContent(new MyStuffManager());
             resetAllOpacity((Button)sender);
         }
 
         private void Game_Click(object sender, RoutedEventArgs e)
         {
-            if (!SettingsUtils.doesConfigExist())
+            if (!SettingsUtils.IsConfigFileFinishedSettingUp())
             {
-                MessageBox.Show("Please set the paths in settings.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please set all the paths in settings.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 var mainWindow = (MainWindow)Application.Current.MainWindow;
                 mainWindow.ChangeContent(new SettingsPage());
                 return;
             }
-            var RetroRewindDolphinPage = new RetroRewindDolphin();
-            ChangeContent(RetroRewindDolphinPage);
+            ChangeContent(new RetroRewindDolphin());
             resetAllOpacity((Button)sender);
         }
 

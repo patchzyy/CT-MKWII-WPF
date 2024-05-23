@@ -154,7 +154,7 @@ public partial class SettingsPage : UserControl
     private void GoBackButton_Click(object sender, RoutedEventArgs e)
     {
         SaveButton_Click(sender, e);
-        if (!SettingsUtils.doesConfigExist())
+        if (!SettingsUtils.IsConfigFileFinishedSettingUp())
         {
             MessageBox.Show("Please set the paths in settings and save the settings.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;

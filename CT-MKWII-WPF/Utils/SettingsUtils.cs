@@ -105,7 +105,6 @@ namespace CT_MKWII_WPF.Utils
         {
             if (_config == null || !Directory.Exists(_config.UserFolderPath) || !File.Exists(_config.DolphinLocation) || !File.Exists(_config.GameLocation))
             {
-                MessageBox.Show("One or more required paths are missing. Please set the paths in settings.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 var mainWindow = (MainWindow)Application.Current.MainWindow;
                 mainWindow.ChangeContent(new SettingsPage());
                 return false;

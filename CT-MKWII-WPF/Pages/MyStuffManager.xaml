@@ -8,14 +8,50 @@
              d:DesignHeight="300" d:DesignWidth="300">
     
     <UserControl.Resources>
-        <ContextMenu x:Key="ModContextMenu">
+        <!-- Dark Theme Resources -->
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#FF1E1E1E"/>
+        <SolidColorBrush x:Key="ForegroundBrush" Color="#FFF0F0F0"/>
+        <SolidColorBrush x:Key="BorderBrush" Color="#FF3E3E3E"/>
+        <SolidColorBrush x:Key="ItemBackgroundBrush" Color="#FF2E2E2E"/>
+        <SolidColorBrush x:Key="ItemMouseOverBrush" Color="#FF3E3E3E"/>
+        <SolidColorBrush x:Key="ItemSelectedBrush" Color="#FF5E5E5E"/>
+        <SolidColorBrush x:Key="ProgressBarBrush" Color="#FF76C7C0"/>
+
+        <!-- GridView Column Header Style -->
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Context Menu -->
+        <ContextMenu x:Key="ModContextMenu" Background="{StaticResource BackgroundBrush}" Foreground="{StaticResource ForegroundBrush}">
             <MenuItem Header="Rename" Click="RenameMod_Click"/>
             <MenuItem Header="Delete" Click="DeleteMod_Click"/>
             <MenuItem Header="Open Folder" Click="OpenFolder_Click"/>
         </ContextMenu>
+        
+        <!-- ListView Item Style -->
+        <Style TargetType="ListViewItem">
+            <Setter Property="Margin" Value="0,0,0,5" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="{StaticResource ItemBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ItemMouseOverBrush}" />
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ItemSelectedBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     
-    <Grid>
+    <Grid Background="{StaticResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -25,20 +61,15 @@
                   PreviewMouseLeftButtonDown="ModsListView_PreviewMouseLeftButtonDown" 
                   PreviewMouseMove="ModsListView_PreviewMouseMove"
                   Drop="ModsListView_Drop"
-                  MouseRightButtonUp="ModsListView_MouseRightButtonUp">
-            <ListView.Resources>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Margin" Value="0,0,0,5" />
-                    <Setter Property="Padding" Value="10" />
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                </Style>
-            </ListView.Resources>
+                  MouseRightButtonUp="ModsListView_MouseRightButtonUp"
+                  Background="{StaticResource BackgroundBrush}"
+                  Foreground="{StaticResource ForegroundBrush}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Enabled" Width="50">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -52,5 +83,15 @@
             <Button Content="Import Mod" Margin="5" Padding="10,5" Click="ImportMod_Click"/>
             <Button Content="Select All" Margin="5" Padding="10,5" Click="SelectAll_Click"/>
         </StackPanel>
+
+        <ProgressBar x:Name="ProgressBar" Visibility="Collapsed" Height="20" VerticalAlignment="Bottom" Margin="10" Foreground="{StaticResource ProgressBarBrush}" />
+        <TextBlock x:Name="StatusTextBlock" Visibility="Collapsed" Height="20" VerticalAlignment="Bottom" Margin="10,0,0,30" Text="Processing..." Foreground="{StaticResource ForegroundBrush}"/>
+        
+        <!-- text saying the mystuff is in beta and to message patchzy for any issues -->
+        <TextBlock Text="BETA... Please message Patchzy for any issues." FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Foreground="{StaticResource ForegroundBrush}">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
+            </TextBlock.Effect>
+        </TextBlock>
     </Grid>
 </UserControl>
