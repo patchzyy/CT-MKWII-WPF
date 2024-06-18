@@ -205,7 +205,20 @@ namespace CT_MKWII_WPF.Pages
                 try
                 {
                     // Extract the zip file to the destination directory
+                    //get name of the zip file
+                    string zipFileName = Path.GetFileNameWithoutExtension(file);
+                    //now we check if there isnt already a folder with the same name as the zip file, if so... cancel
+                    if (Directory.Exists(Path.Combine(destinationDirectory, zipFileName)))
+                    {
+                        MessageBox.Show($"You already have a mod with this name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                     ZipFile.ExtractToDirectory(file, destinationDirectory);
+                }
+                //if file already exists, we catch the exception and show a message
+                catch (IOException)
+                {
+                    MessageBox.Show($"You already have a mod with this name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch (Exception ex)
                 {

@@ -49,7 +49,7 @@ namespace CT_MKWII_WPF
             SettingsButton.Opacity = 1;
             MyStuffButton.Opacity = 1;
             GameButton.Opacity = 1;
-            ExtrasButton.Opacity = 1;
+            // ExtrasButton.Opacity = 1;
             currentlyClickedButton.Opacity = 0.5;
         }
         

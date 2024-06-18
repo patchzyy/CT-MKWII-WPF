@@ -33,7 +33,7 @@ public class NANDTutorialUtils
             MessageBox.Show("You need an SD card to get your NAND, you can still play offline without NAND!", "NAND Setup", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
-        bool wantSDcardFormattingHelp = MessageBox.Show("Do you need help formatting your SD card to the proper File System?", "NAND Setup", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
+        bool wantSDcardFormattingHelp = MessageBox.Show("Do you need help formatting your SD card to the proper File System?\nThis will remove ALL files from your SD card.", "NAND Setup", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
         if (wantSDcardFormattingHelp)
         {
             MessageBox.Show("Please plug in your SD card and click OK once your computer recognizes it", "NAND Setup", MessageBoxButton.OK, MessageBoxImage.Information);

@@ -192,8 +192,7 @@ private static async Task<bool> DownloadAndApplyUpdate((string Version, string U
 
         // Extract the zip file.
         ZipFile.ExtractToDirectory(tempZipPath, extractionPath, true);
-
-        MessageBox.Show($"Successfully applied update: {update.Version}");
+        
     }
     catch (Exception ex)
     {
@@ -202,13 +201,11 @@ private static async Task<bool> DownloadAndApplyUpdate((string Version, string U
     }
     finally
     {
-        // Clean up the temporary zip file.
         if (File.Exists(tempZipPath))
         {
             File.Delete(tempZipPath);
         }
     }
-
     return true;
 }
 
@@ -283,7 +280,7 @@ public static async Task InstallRetroRewind()
             progressWindow.Close();
         });
         
-        MessageBox.Show("Retro Rewind has been installed successfully.\nIf the button still says install please click 'go!' again.");
+        MessageBox.Show("Retro Rewind has been installed successfully.\nIf the button still says install please navigate to a different page and then go back.");
         //update the button
         
     }

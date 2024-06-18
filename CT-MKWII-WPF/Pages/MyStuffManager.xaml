@@ -26,7 +26,7 @@
         </Style>
 
         <!-- Context Menu -->
-        <ContextMenu x:Key="ModContextMenu" Background="{StaticResource BackgroundBrush}" Foreground="{StaticResource ForegroundBrush}">
+        <ContextMenu x:Key="ModContextMenu">
             <MenuItem Header="Rename" Click="RenameMod_Click"/>
             <MenuItem Header="Delete" Click="DeleteMod_Click"/>
             <MenuItem Header="Open Folder" Click="OpenFolder_Click"/>
@@ -66,14 +66,14 @@
                   Foreground="{StaticResource ForegroundBrush}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Enabled" Width="50">
+                    <GridViewColumn Header="Enabled" Width="75">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="150" />
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="200" />
                 </GridView>
             </ListView.View>
         </ListView>

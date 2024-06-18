@@ -1,7 +1,7 @@
 ﻿<Window x:Class="CT_MKWII_WPF.NANDTutorialWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="NAND Tutorial" Height="150" Width="600">
+        Title="NAND Tutorial" Height="175" Width="600">
     <Grid>
         <StackPanel Margin="10">
             <TextBlock TextWrapping="Wrap">Tutorial 1:</TextBlock>

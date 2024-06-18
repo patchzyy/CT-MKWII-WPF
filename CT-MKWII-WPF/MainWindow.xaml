@@ -27,13 +27,12 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Button Content="Settings" x:Name="SettingsButton" Grid.Column="0" Click="Settings_Click" Margin="5" />
                     <Button Content="My Stuff" x:Name="MyStuffButton" Grid.Column="1" Click="MyStuff_Click" Margin="5" />
                     <Button Content="Game" x:Name="GameButton" Grid.Column="2" Click="Game_Click" Margin="5" />
-                    <Button Content="Extras" x:Name="ExtrasButton" Grid.Column="3" Click="Extras_Click" Margin="5" />
+                    <!-- <Button Content="Extras" x:Name="ExtrasButton" Grid.Column="3" Click="Extras_Click" Margin="5" IsEnabled="False" /> -->
                 </Grid>
 
                 <!-- Content Area -->

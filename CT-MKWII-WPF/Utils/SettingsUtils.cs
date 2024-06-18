@@ -144,7 +144,7 @@ namespace CT_MKWII_WPF.Utils
             //[{"IsEnabled":true,"Title":"rocky_wii_v1p1"},{"IsEnabled":true,"Title":"sticks_rosa_-_20"},{"IsEnabled":true,"Title":"sticks_daisy"},{"IsEnabled":true,"Title":"n64_boom_boom_fortress_v1"}]
             if (!File.Exists(modConfigPath))
             {
-                MessageBox.Show("Mod config file not found", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                // MessageBox.Show("Mod config file not found", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return new ModData[0];
             }
             var json = File.ReadAllText(modConfigPath);
