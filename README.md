@@ -6,6 +6,7 @@ Please report any bugs :)
 
 ## Todo:
 - error detection if config.json contains invalid information
+- combined mods should have a clearer name, not just the name of the top mod
 - Disclamer on what Reccomended settings does
 - Possible shortcut on desktop (ask on first time launch)
 - how to get around that stupid (windows protected your pc) popup
