@@ -9,7 +9,6 @@ public class Mod : INotifyPropertyChanged
 {
     private bool _isEnabled;
     private string _title;
-    private string _author;
 
     public bool IsEnabled
     {
@@ -37,18 +36,6 @@ public class Mod : INotifyPropertyChanged
         }
     }
     
-    public string Author
-    {
-        get { return _author; }
-        set
-        {
-            if (_author != value)
-            {
-                _author = value;
-                OnPropertyChanged(nameof(Author));
-            }
-        }
-    }
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -62,5 +49,4 @@ public class ModData
 {
     public bool IsEnabled { get; set; }
     public string Title { get; set; }
-    public string Author { get; set; }
 }

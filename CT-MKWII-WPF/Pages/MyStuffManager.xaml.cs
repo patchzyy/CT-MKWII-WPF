@@ -241,7 +241,6 @@ namespace CT_MKWII_WPF.Pages
                 {
                     IsEnabled = false,
                     Title = modName,
-                    Author = "Unknown"
                 };
                 mod.PropertyChanged += Mod_PropertyChanged;
                 Mods.Add(mod);

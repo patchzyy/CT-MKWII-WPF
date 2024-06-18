@@ -74,7 +74,6 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="150" />
-                    <GridViewColumn Header="Author" DisplayMemberBinding="{Binding Author}" Width="150" />
                 </GridView>
             </ListView.View>
         </ListView>

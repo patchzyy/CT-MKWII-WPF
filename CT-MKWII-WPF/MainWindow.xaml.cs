@@ -32,17 +32,15 @@ namespace CT_MKWII_WPF
         {
             ContentArea.Content = control;
         }
-        
         public void SwitchContent()
         {
-            if (!File.Exists("./config.json"))
+            if (!SettingsUtils.doesConfigExist())
             {
                 MessageBox.Show("Please set the paths in settings.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                 mainWindow.ChangeContent(new SettingsPage());
                 return;
             }
-
             // Handle button clicks and switch content accordingly
         }
         
