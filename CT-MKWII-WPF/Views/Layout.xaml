@@ -34,8 +34,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             
             <Border
                     CornerRadius="{StaticResource CornerRadiusLeft}"
-                    Background="{StaticResource ForegroundColorV2}"
-                    MouseDown="TopBar_MouseDown"></Border>
+                    Background="{StaticResource ForegroundColorV2}"></Border>
             
             <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button Width="30" Height="20" Style="{StaticResource TopButton}" Click="MinimizeButton_Click">

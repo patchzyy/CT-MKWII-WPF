@@ -4,132 +4,14 @@
              xmlns:local="clr-namespace:CT_MKWII_WPF"
              StartupUri="Views/Layout.xaml">
     <Application.Resources>
-        <!-- Global Dark Theme -->
-        <SolidColorBrush x:Key="BackgroundColor">#1E1E1E</SolidColorBrush>
-        <SolidColorBrush x:Key="ForegroundColor">#4b4b4b</SolidColorBrush>
-        <SolidColorBrush x:Key="AccentColor">#3b3b3b</SolidColorBrush>
-        <SolidColorBrush x:Key="WhiteTextColor">#FFFFFF</SolidColorBrush>
         
-
-        <!-- Global Style for Buttons -->
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource AccentColor}"/>
-            <Setter Property="Foreground" Value="{StaticResource WhiteTextColor}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource AccentColor}"/>
-            
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#005FA3"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <!-- Global Style for TextBoxes -->
-        <Style TargetType="TextBox">
-            <Setter Property="Background" Value="#2D2D2D"/>
-            <Setter Property="Foreground" Value="{StaticResource WhiteTextColor}"/>
-            <Setter Property="BorderBrush" Value="#4D4D4D"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="FontSize" Value="12"/>
-        </Style>
-        
-        <Style TargetType="ComboBox">
-        <Setter Property="Background" Value="#2D2D2D"/>
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
-        <Setter Property="BorderBrush" Value="#4D4D4D"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="5"/>
-        <Setter Property="FontSize" Value="12"/>
-        </Style>
-            
-        
-        <!-- Reworked UI -->
-        <Color x:Key="Gray50">#F6F7F9 </Color>
-        <Color x:Key="Gray100">#EDEDF1</Color>
-        <Color x:Key="Gray200">#D7D9E0</Color>
-        <Color x:Key="Gray300">#B4B8C5</Color>
-        <Color x:Key="Gray400">#8B91A5</Color>
-        <Color x:Key="Gray500">#6C7389</Color>
-        <Color x:Key="Gray600">#575D72</Color>
-        <Color x:Key="Gray700">#474B5D</Color>
-        <Color x:Key="Gray800">#3E424E</Color>
-        <Color x:Key="Gray900">#363944</Color>
-        <Color x:Key="Gray950">#24252D</Color>
-        
-        <Color x:Key="Red50">#FFF1F4 </Color>
-        <Color x:Key="Red100">#FFE0E6</Color>
-        <Color x:Key="Red200">#FFC5CF</Color>
-        <Color x:Key="Red300">#FF9DAF</Color>
-        <Color x:Key="Red400">#FF6581</Color>
-        <Color x:Key="Red500">#FE2048</Color>
-        <Color x:Key="Red600">#EC163D</Color>
-        <Color x:Key="Red700">#C70E2F</Color>
-        <Color x:Key="Red800">#A4102B</Color>
-        <Color x:Key="Red900">#881429</Color>
-        <Color x:Key="Red950">#4A0511</Color>
-        
-        <Color x:Key="Yellow50">#FFFEE7 </Color>
-        <Color x:Key="Yellow100">#FFFDC1</Color>
-        <Color x:Key="Yellow200">#FFF686</Color>
-        <Color x:Key="Yellow300">#FFE941</Color>
-        <Color x:Key="Yellow400">#FFD80D</Color>
-        <Color x:Key="Yellow500">#FFC800</Color>
-        <Color x:Key="Yellow600">#D19200</Color>
-        <Color x:Key="Yellow700">#A66802</Color>
-        <Color x:Key="Yellow800">#89510A</Color>
-        <Color x:Key="Yellow900">#74420F</Color>
-        <Color x:Key="Yellow950">#442204</Color>
-        
-        <Color x:Key="Cyan50">#EEFFFA </Color>
-        <Color x:Key="Cyan100">#C7FFF0</Color>
-        <Color x:Key="Cyan200">#8EFFE2</Color>
-        <Color x:Key="Cyan300">#34EAC5</Color>
-        <Color x:Key="Cyan400">#01CBA5</Color>
-        <Color x:Key="Cyan500">#00A488</Color>
-        <Color x:Key="Cyan600">#00A488</Color>
-        <Color x:Key="Cyan700">#03826E</Color>
-        <Color x:Key="Cyan800">#08675A</Color>
-        <Color x:Key="Cyan900">#0C554A</Color>
-        <Color x:Key="Cyan950">#00342F</Color>
-        
-        <SolidColorBrush x:Key="BackgroundColorV2" Color="{StaticResource Gray950}" />
-        <SolidColorBrush x:Key="ForegroundColorV2" Color="{StaticResource Gray900}" />
-        <SolidColorBrush x:Key="SilentText" Color="{StaticResource Gray600}"/>
-        
-        <CornerRadius x:Key="CornerRadius">5</CornerRadius>
-        <CornerRadius x:Key="CornerRadiusLeft">5,0,0,5</CornerRadius>
-        <!-- <Thickness x:Key="Padding">12.3</Thickness> -->
-        
-        <Style x:Key="TopButton" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{StaticResource SilentText}"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            
-            <Style.Triggers>
-                 <Trigger Property="IsMouseOver" Value="True">
-                     <Setter Property="Foreground" Value="White"/>
-                 </Trigger>
-            </Style.Triggers>
-        </Style>
-            
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Views/Styles/Constants.xaml"/>
+                <ResourceDictionary Source="Views/Styles/OldStyle.xaml"/>
+                <ResourceDictionary Source="Views/Styles/ButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
         
     </Application.Resources>
 </Application>
