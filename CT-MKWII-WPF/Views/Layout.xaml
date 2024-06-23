@@ -11,7 +11,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:local="clr-namespace:CT_MKWII_WPF.Views"
+        xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
         mc:Ignorable="d"
         Title="MKW Mod Manager" Height="876" Width="656"
         WindowStyle='None'
@@ -19,31 +19,40 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
         AllowsTransparency="True"
         Background="Transparent">
     
-    <Border Background="{StaticResource BackgroundColorV2}" 
-            CornerRadius="{StaticResource CornerRadius}"
-            MouseDown="TopBar_MouseDown">
+    <Border Background="{StaticResource ForegroundColorV2}" 
+            CornerRadius="{StaticResource CornerRadius}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="192"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <!-- RowDefinition Height="30"/ -->
+                <RowDefinition Height="25"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
-            <Border
-                    CornerRadius="{StaticResource CornerRadiusLeft}"
-                    Background="{StaticResource ForegroundColorV2}"></Border>
+
+            <!-- This border is only used as topBar in order so you can move the window around -->
+            <Border Grid.ColumnSpan="2"
+                    CornerRadius="{StaticResource CornerRadius}"
+                    Background="{StaticResource ForegroundColorV2}"
+                    MouseDown="TopBar_MouseDown"></Border>
             
             <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <Button Width="30" Height="20" Style="{StaticResource TopButton}" Click="MinimizeButton_Click">
-                    <icon:FontAwesome Kind="MinusSolid" Width="10" Height="10"  />
+                <Button Width="30" Height="25" Style="{StaticResource TopButton}" Click="MinimizeButton_Click">
+                    <icon:FontAwesome Kind="MinusSolid" Width="12" Height="12"/>
                 </Button>
-                <Button Width="30" Height="20" Style="{StaticResource TopButton}" Click="CloseButton_Click">
-                    <icon:FontAwesome Kind="XmarkSolid" Width="10" Height="10"   />
+                <Button Width="30" Height="25" Style="{StaticResource TopButton}" Click="CloseButton_Click">
+                    <icon:FontAwesome Kind="XmarkSolid" Width="12" Height="12"/>
                 </Button>
             </DockPanel>
+            
+             <!-- Page box -->
+            <Border Grid.Column="1" Grid.Row="1"
+                    CornerRadius="{StaticResource CornerRadiusLeftRightTwix}"
+                    Background="{StaticResource BackgroundColorV2}"></Border>
+            
+            <Frame Grid.Column="1"  Grid.Row="1"  
+                            x:Name="ContentArea" Margin="{StaticResource EdgeGap}" />
             
         </Grid>
     </Border>
