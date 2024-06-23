@@ -13,7 +13,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:CT_MKWII_WPF.Views"
         mc:Ignorable="d"
-        Title="MKW Mod Manager" Height="880" Width="550"
+        Title="MKW Mod Manager" Height="876" Width="656"
         WindowStyle='None'
         ResizeMode='CanMinimize'
         AllowsTransparency="True"
@@ -24,7 +24,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             MouseDown="TopBar_MouseDown">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="192"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
