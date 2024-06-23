@@ -1,0 +1,51 @@
+﻿<!--
+For any icons we use the IconPack which basicly includes any icon from any  free iconpack out there:
+https://github.com/MahApps/MahApps.Metro.IconPacks
+
+https://game-icons.net/1x1/delapouite/flat-tire.html
+https://game-icons.net/1x1/delapouite/car-wheel.html
+-->
+<Window x:Class="CT_MKWII_WPF.Views.Layout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:CT_MKWII_WPF.Views"
+        mc:Ignorable="d"
+        Title="MKW Mod Manager" Height="880" Width="550"
+        WindowStyle='None'
+        ResizeMode='CanMinimize'
+        AllowsTransparency="True"
+        Background="Transparent">
+    
+    <Border Background="{StaticResource BackgroundColorV2}" 
+            CornerRadius="{StaticResource CornerRadius}"
+            MouseDown="TopBar_MouseDown">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <!-- RowDefinition Height="30"/ -->
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Border
+                    CornerRadius="{StaticResource CornerRadiusLeft}"
+                    Background="{StaticResource ForegroundColorV2}"
+                    MouseDown="TopBar_MouseDown"></Border>
+            
+            <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button Width="30" Height="20" Style="{StaticResource TopButton}" Click="MinimizeButton_Click">
+                    <icon:FontAwesome Kind="MinusSolid" Width="10" Height="10"  />
+                </Button>
+                <Button Width="30" Height="20" Style="{StaticResource TopButton}" Click="CloseButton_Click">
+                    <icon:FontAwesome Kind="XmarkSolid" Width="10" Height="10"   />
+                </Button>
+            </DockPanel>
+            
+        </Grid>
+    </Border>
+</Window>
