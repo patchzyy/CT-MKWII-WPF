@@ -51,14 +51,19 @@
         <Color x:Key="Cyan950">#00342F</Color>
 
     <!-- Note that these colors will be used inside the application, all colors above is our pallet where we can choice from -->
+    <!-- That also means that some colors will be used for multiple things,and some not at all, that's perfectly fine -->
     <SolidColorBrush x:Key="BackgroundColorV2" Color="{StaticResource Gray950}" />
     <SolidColorBrush x:Key="ForegroundColorV2" Color="{StaticResource Gray900}" />
-    <SolidColorBrush x:Key="EmptyPageBody" Color="{StaticResource Gray700}"/>
-    <SolidColorBrush x:Key="ForegroundHover" Color="{StaticResource Gray600}"/>
-    <SolidColorBrush x:Key="SilentText" Color="{StaticResource Gray500}"/>
+    <SolidColorBrush x:Key="ForegroundContactColor" Color="{StaticResource Gray800}" />
+    <SolidColorBrush x:Key="ForegroundHover" Color="{StaticResource Gray600}" />
+    
+    <SolidColorBrush x:Key="BodyTextColor" Color="{StaticResource Gray600}" />
+    <SolidColorBrush x:Key="TitleTextColor" Color="{StaticResource Gray500}" />
     
     <CornerRadius x:Key="CornerRadius">5</CornerRadius>
     <CornerRadius x:Key="CornerRadiusLeft">5,0,0,5</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusBottomLeft">0,0,0,5</CornerRadius>
     <CornerRadius x:Key="CornerRadiusLeftRightTwix">5,0,5,0</CornerRadius>
     <Thickness x:Key="EdgeGap">10</Thickness> 
+    
 </ResourceDictionary>

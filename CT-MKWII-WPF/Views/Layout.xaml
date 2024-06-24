@@ -28,7 +28,9 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition/>
+                <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
 
             <!-- This border is only used as topBar in order so you can move the window around -->
@@ -46,13 +48,26 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                 </Button>
             </DockPanel>
             
-             <!-- Page box -->
-            <Border Grid.Column="1" Grid.Row="1"
+             <!-- Page container -->
+            <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"
                     CornerRadius="{StaticResource CornerRadiusLeftRightTwix}"
                     Background="{StaticResource BackgroundColorV2}"></Border>
             
-            <Frame Grid.Column="1"  Grid.Row="1"  
+            <Frame Grid.Column="1"  Grid.Row="1"  Grid.RowSpan="3"
                             x:Name="ContentArea" Margin="{StaticResource EdgeGap}" />
+            
+            <!-- Side bar -->
+            <Border Grid.Column="0" Grid.Row="3"
+                    CornerRadius="{StaticResource CornerRadiusBottomLeft}"
+                    Background="{StaticResource ForegroundContactColor}"
+                    >
+                <components:IconLabel IconKind="{x:Static icon:PackIconFontAwesomeKind.DiscordBrands}" 
+                                 IconPack="FontAwesome"
+                                 Text="patchzy" 
+                                 Color="Blue" 
+                                 FontSize="15"
+                                 IconSize="30"/>
+            </Border>
             
         </Grid>
     </Border>

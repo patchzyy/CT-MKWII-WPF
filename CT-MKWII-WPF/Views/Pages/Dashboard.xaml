@@ -8,24 +8,8 @@
       mc:Ignorable="d"
       Title="Dashboard" Height="831" Width="444" Background="Transparent">
     <Grid>
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
-                <ContentControl Width="150" Height="150" Foreground="{StaticResource ForegroundColorV2}">
-                    <icon:GameIcons Kind="FlatTire" Width="150" Height="150" />
-                </ContentControl>
-                <TextBlock Text="Awww, empty page!" 
-                           FontSize="20"
-                             Foreground="{StaticResource SilentText}"
-                           Margin="0,10,0,0"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Center"/>
-                <TextBlock Text="This page is still in development. You can expect this page to be filled with content in the future." 
-                           FontSize="15"
-                           Width="190"
-                           Foreground="{StaticResource EmptyPageBody}"
-                           Margin="0,10,0,0"
-                           TextWrapping="Wrap"
-                           TextAlignment="Center"
-                           HorizontalAlignment="Center"/>
-            </StackPanel>
+            <components:EmptyPageInfo 
+                Title="Awww, empty page!"
+                Body="This page is still in development. You can expect this page to be filled with content in the future." />
     </Grid>
 </Page>

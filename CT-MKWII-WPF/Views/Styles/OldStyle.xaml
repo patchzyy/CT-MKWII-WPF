@@ -34,11 +34,11 @@
         </Style>
         
         <Style TargetType="ComboBox">
-        <Setter Property="Background" Value="#2D2D2D"/>
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
-        <Setter Property="BorderBrush" Value="#4D4D4D"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="5"/>
-        <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background" Value="#2D2D2D"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+            <Setter Property="BorderBrush" Value="#4D4D4D"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
 </ResourceDictionary>
