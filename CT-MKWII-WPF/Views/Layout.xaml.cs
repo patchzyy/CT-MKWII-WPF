@@ -31,4 +31,23 @@ public partial class Layout : Window
     {
         Close();
     }
+    
+    private void Discord_Click(object sender, RoutedEventArgs e)
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = "https://www.youtube.com/watch?v=xvFZjo5PgG0",
+            UseShellExecute = true
+        });
+    }
+
+    private void Github_Click(object sender, RoutedEventArgs e)
+    {  
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = "https://github.com/patchzyy/CT-MKWII-WPF",
+            UseShellExecute = true
+        });
+    }
+
 }

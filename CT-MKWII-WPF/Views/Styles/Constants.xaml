@@ -60,6 +60,10 @@
     <SolidColorBrush x:Key="BodyTextColor" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="TitleTextColor" Color="{StaticResource Gray500}" />
     
+    <SolidColorBrush x:Key="SuccessTitleTextColor" Color="{StaticResource Cyan400}" />
+    <SolidColorBrush x:Key="ErrorTitleTextColor" Color="{StaticResource Red400}" />
+    <SolidColorBrush x:Key="WarningTitleTextColor" Color="{StaticResource Yellow400}" />
+    
     <CornerRadius x:Key="CornerRadius">5</CornerRadius>
     <CornerRadius x:Key="CornerRadiusLeft">5,0,0,5</CornerRadius>
     <CornerRadius x:Key="CornerRadiusBottomLeft">0,0,0,5</CornerRadius>
