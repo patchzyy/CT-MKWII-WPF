@@ -13,7 +13,7 @@ public partial class RetroRewindDolphin : UserControl
         UpdateActionButton();
         UpdateResolutionDropDown();
         Loaded += (sender, e) => ResolutionDropDown.SelectionChanged += Change_Resolution;
-        Loaded += (sender, e) => GetCurrentVSyncStatus();
+        Loaded += (sender, e) => UpdateVSyncStatusButton();
         Loaded += (sender, e) => UpdateCurrentUberShaderStatus();
         
         VSyncCheckbox.Checked += Enable_VSync;
@@ -24,171 +24,135 @@ public partial class RetroRewindDolphin : UserControl
     
     private void EnableReccommendedSettings(object sender, RoutedEventArgs e)
     {
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "ShaderCompilationMode", "2");
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings","WaitForShadersBeforeStarting", "True" );
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "MSAA", "0x00000002");
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "SSAA", "False");
+        DolphinSettingsUtils.EnableReccomendedSettings();
     }
     
     private void DisableReccommendedSettings(object sender, RoutedEventArgs e)
     {
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "ShaderCompilationMode", "0");
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings","WaitForShadersBeforeStarting", "False" );
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "MSAA", "0x00000001");
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "SSAA", "False");
+        DolphinSettingsUtils.DisableReccommendedSettings();
     }
     
     private void UpdateCurrentUberShaderStatus()
     {
-        var GFXFile = SettingsUtils.FindGFXFile();
-        if (GFXFile == "")
-        {
-            ReccommendedSettingsCheckBox.IsChecked = false;
-        }
-        var UberShaders = DolphinSettingHelper.ReadINISetting(GFXFile, "Settings", "ShaderCompilationMode");
-        if (UberShaders == "2")
-        {
-            ReccommendedSettingsCheckBox.IsChecked = true;
-        }
-        else
-        {
-            ReccommendedSettingsCheckBox.IsChecked = false;
-        }
+        ReccommendedSettingsCheckBox.IsChecked = DolphinSettingsUtils.IsReccommendedSettingsEnabled();
     }
     
-    
-    private void GetCurrentVSyncStatus()
+    private void UpdateVSyncStatusButton()
     {
-        var GFXFile = SettingsUtils.FindGFXFile();
-        if (GFXFile == "")
-        {
-            MessageBox.Show("GFX file not found");
-            VSyncCheckbox.IsChecked = false;
-        }
-        var VSync = DolphinSettingHelper.ReadINISetting(GFXFile,  "VSync");
-        if (VSync.Trim() == "True")
-        {
-            VSyncCheckbox.IsChecked = true;
-        }
-        else
-        {
-            VSyncCheckbox.IsChecked = false;
-        }
+        VSyncCheckbox.IsChecked = DolphinSettingsUtils.GetCurrentVSyncStatus();
     }
 
     private void UpdateResolutionDropDown()
     {
-        //read the setting from the GFX file
-        var GFXFile = SettingsUtils.FindGFXFile();
-        if (GFXFile == "")
-        {
-            return;
-        }
-        var resolution = DolphinSettingHelper.ReadINISetting(GFXFile, "Settings", "InternalResolution");
-        //TODO: very dirty fix, please properly fix when there is no resolution or other settings set
-        try
-        {
-            ResolutionDropDown.SelectedIndex = int.Parse(resolution) - 1;
-        }
-        catch
-        {
-            ResolutionDropDown.SelectedIndex = 0;
-        }
+        ResolutionDropDown.SelectedIndex = DolphinSettingsUtils.GetCurrentResolution() - 1;
     }
 
     private async void UpdateActionButton()
     {
-        //first check if the server is even enabled, if not then just give 1 pop up letting the user know
-        var serverEnabled = await RetroRewindInstaller.IsServerEnabled();
-        if (!serverEnabled)
+        RRStatusManager.ActionButtonStatus status = await RRStatusManager.GetCurrentStatus();
+        switch (status)
         {
-            MessageBox.Show("We can't connect to the RR servers. Check your internet connection\nThe servers might be down. Please check back later.\nLaunching in offline mode", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            case RRStatusManager.ActionButtonStatus.NoServer:
+            {
+                ActionButton.Content = "No Server";
+                ActionButton.IsEnabled = false;
+                break;
+            }
+            case RRStatusManager.ActionButtonStatus.NoDolphin:
+            {
+                ActionButton.Content = "No Dolphin";
+                ActionButton.IsEnabled = false;
+                break;
+            }
+            case RRStatusManager.ActionButtonStatus.ConfigNotFinished:
+            {
+                ActionButton.Content = "Config Not Finished";
+                ActionButton.IsEnabled = false;
+                break;
+            }
+            case RRStatusManager.ActionButtonStatus.noRR:
+            {
+                ActionButton.Content = "Install Retro Rewind";
+                ActionButton.IsEnabled = true;
+                break;
+            }
+            case RRStatusManager.ActionButtonStatus.noRRActive:
+            {
+                //this is here for future use,
+                //right now there is no de-activation, but if we want multiple mods this might be handy
+                ActionButton.Content = "Activate Retro Rewind";
+                ActionButton.IsEnabled = true;
+                break;
+            }
+            case RRStatusManager.ActionButtonStatus.RRnotReady:
+            {
+                ActionButton.Content = "Activate Retro Rewind";
+                ActionButton.IsEnabled = true;
+                break;
+            }
+            case RRStatusManager.ActionButtonStatus.OutOfDate:
+            {
+                ActionButton.Content = "Update Retro Rewind";
+                ActionButton.IsEnabled = true;
+                break;
+            }
+            case RRStatusManager.ActionButtonStatus.UpToDate:
+            {
+                ActionButton.Content = "Play Retro Rewind";
+                ActionButton.IsEnabled = true;
+                break;
+            }
         }
-        
-        var dolphinInstalled = DolphinInstaller.IsDolphinInstalled();
-        var retroRewindActive = DirectoryHandler.isRRActive();
-        var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
-        bool installedButNotActive = retroRewindInstalled && !retroRewindActive;
-
-
-        if (!SettingsUtils.IsConfigFileFinishedSettingUp())
-        {
-            return;
-        }
-        bool retroRewindUpToDate;
-        string latestRRVersion;
-        if (serverEnabled)
-        {
-            retroRewindUpToDate = await RetroRewindInstaller.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
-            latestRRVersion = await RetroRewindInstaller.GetLatestVersionString();
-        }
-        else
-        {
-            retroRewindUpToDate = true;
-            latestRRVersion = "N/A";
-        }
-        string currentStatus = CurrentStatus.Text;
-
-        if (!dolphinInstalled)
-        {
-            ActionButton.Content = "Install Dolphin";
-        }
-        else if (!retroRewindInstalled && !installedButNotActive)
-        {
-            ActionButton.Content = "Install Retro Rewind";
-        }
-        else if (!retroRewindUpToDate)
-        {
-            ActionButton.Content = "Update Retro Rewind";
-        }
-        else
-        {
-            ActionButton.Content = "Play Retro Rewind";
-        }
-
-        StatusText.Text = $"Dolphin: {(dolphinInstalled ? "Installed" : "Not Installed")}\n" +
-                          $"Retro Rewind: {(retroRewindInstalled ? "Installed" : "Not Installed")}\n" +
-                          $"Retro Rewind Version: {RetroRewindInstaller.CurrentRRVersion()}\n" +
-                          $"Retro Rewind Up to Date: {(retroRewindUpToDate ? "Yes\n" : "No\n")}" +
-                          $"Latest RR Version: {latestRRVersion}";
     }
 
     private async void ActionButton_Click(object sender, RoutedEventArgs e)
     {
-        var dolphinInstalled = DolphinInstaller.IsDolphinInstalled();
-        var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
-        var retroRewindUpToDate = await RetroRewindInstaller.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
-        var retroRewindActive = DirectoryHandler.isRRActive();
-        bool installedButNotActive = retroRewindInstalled && !retroRewindActive;
-        bool isUpdating = false;
-
-        if (!dolphinInstalled)
+        RRStatusManager.ActionButtonStatus status = await RRStatusManager.GetCurrentStatus();
+        switch (status)
         {
-            DolphinInstaller.InstallDolphin();
-        }
-        
-        else if (!retroRewindInstalled && !installedButNotActive)
-        {
-            RetroRewindInstaller.InstallRetroRewind();
-        }
-        else if (!retroRewindUpToDate)
-        {
-            if (isUpdating)
+            //fail save, but the button should be disabled
+            case RRStatusManager.ActionButtonStatus.NoServer:
             {
-                MessageBox.Show("Already updating Retro Rewind", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                break;
             }
-            isUpdating = true;
-            if (await RetroRewindInstaller.UpdateRR())
+            case RRStatusManager.ActionButtonStatus.NoDolphin:
             {
+                break;
+            }
+            case RRStatusManager.ActionButtonStatus.ConfigNotFinished:
+            {
+                break;
+            }
+            case RRStatusManager.ActionButtonStatus.noRR:
+            {
+                await RetroRewindInstaller.InstallRetroRewind();
                 UpdateActionButton();
+                break;
             }
-            isUpdating = false;
+            case RRStatusManager.ActionButtonStatus.noRRActive:
+            {
+                //this is here for future use,
+                //right now there is no de-activation, but if we want multiple mods this might be handy
+                MessageBox.Show("Activate Retro Rewind");
+                break;
+            }
+            case RRStatusManager.ActionButtonStatus.RRnotReady:
+            {
+                // RetroRewindInstaller.ActivateRetroRewind();
+                break;
+            }
+            case RRStatusManager.ActionButtonStatus.OutOfDate:
+            {
+                await RetroRewindInstaller.UpdateRR();
+                break;
+            }
+            case RRStatusManager.ActionButtonStatus.UpToDate:
+            {
+                RetroRewindLauncher.PlayRetroRewind();
+                break;
+            }
         }
-        else
-        {
-            RetroRewindLauncher.PlayRetroRewind();
-        }
+        UpdateActionButton();
     }
 
     private void Change_Resolution(object sender, SelectionChangedEventArgs e)
@@ -209,15 +173,9 @@ public partial class RetroRewindDolphin : UserControl
         DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Hardware", "VSync", "False");
         return;
     }
-
-    private void SetOptimalDolphinSettings(object sender, RoutedEventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
-
+    
     private void TriggerNANDSetup(object sender, RoutedEventArgs e)
     {
         NANDTutorialUtils.RunNANDTutorial();
-        
     }
 }

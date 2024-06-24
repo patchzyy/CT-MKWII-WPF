@@ -30,19 +30,19 @@
             </TextBlock.Effect>
         </TextBlock>
         <!-- dynamic text saying weather its up to date or not -->
-        <TextBlock x:Name="StatusText" FontSize="5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,0,10" Foreground="White" RenderTransformOrigin="0.402,0.576">
-            <TextBlock.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBlock.RenderTransform>
-            <TextBlock.Effect>
-                <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/>
-            </TextBlock.Effect>
-        </TextBlock>
+        <!-- <TextBlock x:Name="StatusText" FontSize="5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,5,0,10" Foreground="White" RenderTransformOrigin="0.402,0.576"> -->
+        <!--     <TextBlock.RenderTransform> -->
+        <!--         <TransformGroup> -->
+        <!--             <ScaleTransform ScaleX="1"/> -->
+        <!--             <SkewTransform/> -->
+        <!--             <RotateTransform/> -->
+        <!--             <TranslateTransform/> -->
+        <!--         </TransformGroup> -->
+        <!--     </TextBlock.RenderTransform> -->
+        <!--     <TextBlock.Effect> -->
+        <!--         <DropShadowEffect Color="Black" Direction="0" ShadowDepth="2" Opacity="1"/> -->
+        <!--     </TextBlock.Effect> -->
+        <!-- </TextBlock> -->
         <!-- text with current status if game is updating or downloading or something all the way at the bottom under the button -->
         <TextBlock x:Name="CurrentStatus" FontSize="12" HorizontalAlignment="Center" Margin="0,196,0,86" Foreground="White" RenderTransformOrigin="0.402,0.576" Width="122">
             <TextBlock.RenderTransform>
@@ -69,7 +69,15 @@
             <ComboBoxItem Content="5x (3200x2640) NOT RECOMMENDED"/>
         </ComboBox>
         <CheckBox x:Name="VSyncCheckbox" Foreground="White" FontWeight="Bold" Content="VSync" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0"></CheckBox>
-        <CheckBox x:Name="ReccommendedSettingsCheckBox" Foreground="White" FontWeight="Bold" Content="Recommended Settings" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,70,0,0"></CheckBox>
+        <CheckBox x:Name="ReccommendedSettingsCheckBox" 
+                  Foreground="White" 
+                  FontWeight="Bold" 
+                  Content="Recommended Settings" 
+                  HorizontalAlignment="Left" 
+                  VerticalAlignment="Top" 
+                  Margin="10,70,0,0"
+                  ToolTip="This will enable settings to reduce stuttering and improve image quality"
+                  ></CheckBox>
         <Button x:Name="OptimalSettings" Click="TriggerNANDSetup" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="NAND setup"/>
     </Grid>
 </UserControl>

@@ -158,17 +158,14 @@ namespace CT_MKWII_WPF.Pages
 
         private async Task CombineFilesIntoSingleMod(string[] filePaths)
         {
-            string modName = Path.GetFileNameWithoutExtension(filePaths[0]);
+            string modName = Microsoft.VisualBasic.Interaction.InputBox("Enter mod name:", "Mod Name", "New Mod");
             var modDirectory = GetModDirectoryPath(modName);
-
             CreateDirectory(modDirectory);
-
             for (int i = 0; i < filePaths.Length; i++)
             {
                 UpdateProgress(i + 1, filePaths.Length);
                 await Task.Run(() => ProcessFile(filePaths[i], modDirectory));
             }
-
             AddMod(modName);
         }
 

@@ -5,6 +5,7 @@ using System.IO.Compression;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
+using CT_MKWII_WPF;
 using CT_MKWII_WPF.Pages;
 using CT_MKWII_WPF.Utils;
 
@@ -281,7 +282,8 @@ public static async Task InstallRetroRewind()
         });
         
         MessageBox.Show("Retro Rewind has been installed successfully.\nIf the button still says install please navigate to a different page and then go back.");
-        //update the button
+        
+        
         
     }
     catch (Exception ex)
