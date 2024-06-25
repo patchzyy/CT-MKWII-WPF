@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using CT_MKWII_WPF.Views.Pages;
 
@@ -11,7 +13,7 @@ public partial class Layout : Window
         InitializeComponent();
       
         Dashboard myPage = new Dashboard();
-        ContentArea.Navigate(myPage);
+        NavigateToPage(myPage);
     }
     
     private void TopBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -48,5 +50,15 @@ public partial class Layout : Window
             FileName = "https://github.com/patchzyy/CT-MKWII-WPF",
             UseShellExecute = true
         });
+    }
+
+    private void DashboardPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new Dashboard());
+    private void SettingsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new SettingsPage());
+    private void ModsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new ModsPage());
+    
+    private void NavigateToPage(Page page)
+    {
+        ContentArea.Navigate(page);
+        ContentArea.NavigationService.RemoveBackEntry();
     }
 }

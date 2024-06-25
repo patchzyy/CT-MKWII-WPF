@@ -1,15 +1,16 @@
-﻿<Page x:Class="CT_MKWII_WPF.Views.Pages.Dashboard"
+﻿<Page x:Class="CT_MKWII_WPF.Views.Pages.SettingsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:old="clr-namespace:CT_MKWII_WPF.Views.Pages"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
-      Title="Dashboard" Background="Transparent">
+      Title="Settings" Background="Transparent">
     <Grid>
-      <components:EmptyPageInfo 
-          Title="Awww, empty page!"
-          Body="This page is still in development. You can expect this page to be filled with content in the future." />
+        <components:EmptyPageInfo 
+            Title="Whoops"
+            Body="No settings for you I am afraid." />  
     </Grid>
 </Page>

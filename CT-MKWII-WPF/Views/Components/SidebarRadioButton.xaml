@@ -62,7 +62,7 @@ FontSize="20"
     </UserControl.Resources>
     
     <RadioButton Style="{StaticResource SidebarMenuButton}"
-                 GroupName="SidebarGroup"
+                 GroupName="SidebarGroup" Click="OnClick"
                  IsChecked="{Binding IsChecked, ElementName=Root, Mode=TwoWay}"/>
     
 </UserControl>

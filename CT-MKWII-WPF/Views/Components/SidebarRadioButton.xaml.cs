@@ -54,4 +54,19 @@ public partial class SidebarRadioButton : UserControl
         get => (bool)GetValue(IsCheckedProperty);
         set => SetValue(IsCheckedProperty, value);
     }
+    
+    
+    public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent(
+        nameof(Click), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SidebarRadioButton));
+
+    public event RoutedEventHandler Click
+    {
+        add { AddHandler(ClickEvent, value); }
+        remove { RemoveHandler(ClickEvent, value); }
+    }
+
+    private void OnClick(object sender, RoutedEventArgs e)
+    {
+        RaiseEvent(new RoutedEventArgs(ClickEvent));
+    }
 }

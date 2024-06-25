@@ -54,7 +54,8 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                     Background="{StaticResource BackgroundColorV2}"></Border>
             
             <Frame Grid.Column="1"  Grid.Row="1"  Grid.RowSpan="3"
-                            x:Name="ContentArea" Margin="{StaticResource EdgeGap}" />
+                            x:Name="ContentArea" Margin="{StaticResource EdgeGap}"
+                            JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden" />
             
             <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top">
                 <components:IconLabel IconKind="{x:Static icon:PackIconGameIconsKind.CarWheel}" 
@@ -98,12 +99,15 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             <Border Grid.Column="0" Grid.Row="2" VerticalAlignment="Top">
                 <StackPanel>
                     <TextBlock Text="General" Style="{StaticResource SidebarSectionText}"/>
-                    <components:SidebarRadioButton  IconKind="{x:Static icon:PackIconMaterialKind.Home}"
-                                                    IconPack="Material" Text="Option 1" IsChecked="True"/>
-                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconMaterialKind.Account}" 
-                                                   IconPack="Material" Text="Option 2"/>
-                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconMaterialKind.Account}" 
-                                                   IconPack="Material" Text="Option 3"/>
+                    <components:SidebarRadioButton  IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseChimneySolid}"
+                                                    IconPack="FontAwesome" Text="Dashboard" IsChecked="True"
+                                                    Click="DashboardPage_Navigate"/>
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}" 
+                                                   IconPack="FontAwesome" Text="Settings" 
+                                                   Click="SettingsPage_Navigate"/>
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}" 
+                                                   IconPack="FontAwesome" Text="Mods"
+                                                   Click="ModsPage_Navigate"/>
                     
                     <!-- add an other section by doing this:
                     <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}"/>

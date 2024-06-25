@@ -1,4 +1,4 @@
-﻿<Page x:Class="CT_MKWII_WPF.Views.Pages.Dashboard"
+﻿<Page x:Class="CT_MKWII_WPF.Views.Pages.ModsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,10 +6,10 @@
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
-      Title="Dashboard" Background="Transparent">
+      Title="Mods" Background="Transparent">
     <Grid>
-      <components:EmptyPageInfo 
-          Title="Awww, empty page!"
-          Body="This page is still in development. You can expect this page to be filled with content in the future." />
+        <components:EmptyPageInfo 
+            Title="No mods yet!"
+            Body="You dont have any mods installed yet. Start by installing them, and importing them in to the Wheel Wizard!" />
     </Grid>
 </Page>
