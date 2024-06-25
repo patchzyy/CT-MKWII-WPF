@@ -38,7 +38,7 @@ public partial class Layout : Window
     {
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
         {
-            FileName = "https://www.youtube.com/watch?v=xvFZjo5PgG0",
+            FileName = "https://discord.gg/rUTcFudrVa",
             UseShellExecute = true
         });
     }
