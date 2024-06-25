@@ -1,6 +1,6 @@
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/patchzyy/CT-MKWII-WPF)
-![GitHub all releases](https://img.shields.io/github/downloads/patchzyy/CT-MKWII-WPF/total)
-[![Discord](https://img.shields.io/discord/1253384439937896560)](https://discord.gg/vZ7T2wJnsq)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/patchzyy/CT-MKWII-WPF?style=flat-square)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/patchzyy/CT-MKWII-WPF/total?style=flat-square)
+[![Discord](https://img.shields.io/discord/1253384439937896560)](https://discord.gg/vZ7T2wJnsq?style=flat-square)
 
 # Open Source Mario Kart Wii Mod Manager
 
