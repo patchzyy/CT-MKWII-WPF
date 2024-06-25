@@ -28,7 +28,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/> <!-- TopBar -->
-                <RowDefinition Height="55"/> <!-- Reserved spacing for title -->   <!-- Also the page container -->
+                <RowDefinition Height="45"/> <!-- Reserved spacing for title -->   <!-- Also the page container -->
                 <RowDefinition/>             <!--Side bar -->                      <!-- Also the page container -->
                 <RowDefinition Height="60"/> <!--Bottom info corner -->            <!-- Also the page container -->
             </Grid.RowDefinitions>

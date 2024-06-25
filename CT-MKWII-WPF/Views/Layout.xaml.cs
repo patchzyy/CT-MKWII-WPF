@@ -8,6 +8,17 @@ namespace CT_MKWII_WPF.Views;
 
 public partial class Layout : Window
 {
+    // ADD HERE THE PAGED YOU WANT TO NAVIGATE TO
+    private void DashboardPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new Dashboard());
+    private void SettingsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new SettingsPage());
+    private void ModsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new ModsPage());
+    
+    private void NavigateToPage(Page page)
+    {
+        ContentArea.Navigate(page);
+        ContentArea.NavigationService.RemoveBackEntry();
+    }
+    
     public Layout()
     {
         InitializeComponent();
@@ -50,15 +61,5 @@ public partial class Layout : Window
             FileName = "https://github.com/patchzyy/CT-MKWII-WPF",
             UseShellExecute = true
         });
-    }
-
-    private void DashboardPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new Dashboard());
-    private void SettingsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new SettingsPage());
-    private void ModsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new ModsPage());
-    
-    private void NavigateToPage(Page page)
-    {
-        ContentArea.Navigate(page);
-        ContentArea.NavigationService.RemoveBackEntry();
     }
 }
