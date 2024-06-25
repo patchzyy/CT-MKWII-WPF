@@ -20,7 +20,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
         Background="Transparent">
     
     <Border Background="{StaticResource ForegroundColorV2}" 
-            CornerRadius="{StaticResource CornerRadius}">
+            CornerRadius="{StaticResource WindowCornerRadius}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="192"/>
@@ -35,7 +35,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
 
             <!-- This border is only used as topBar in order so you can move the window around -->
             <Border Grid.ColumnSpan="2"
-                    CornerRadius="{StaticResource CornerRadius}"
+                    CornerRadius="{StaticResource WindowCornerRadius}"
                     Background="{StaticResource ForegroundColorV2}"
                     MouseDown="TopBar_MouseDown"></Border>
             
@@ -50,7 +50,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             
              <!-- Page container -->
             <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"
-                    CornerRadius="{StaticResource CornerRadiusLeftRightTwix}"
+                    CornerRadius="{StaticResource WindowCornerRadiusLeftRightTwix}"
                     Background="{StaticResource BackgroundColorV2}"></Border>
             
             <Frame Grid.Column="1"  Grid.Row="1"  Grid.RowSpan="3"
@@ -69,7 +69,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             
             <!--Bottom info corner -->
             <Border Grid.Column="0" Grid.Row="3"
-                    CornerRadius="{StaticResource CornerRadiusBottomLeft}"
+                    CornerRadius="{StaticResource WindowCornerRadiusBottomLeft}"
                     Background="{StaticResource ForegroundContactColor}"
                     >
                 <StackPanel VerticalAlignment="Center">

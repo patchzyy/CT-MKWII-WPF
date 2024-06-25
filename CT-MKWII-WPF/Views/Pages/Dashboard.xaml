@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="Dashboard" Background="Transparent">
@@ -11,5 +12,20 @@
       <components:EmptyPageInfo 
           Title="Awww, empty page!"
           Body="This page is still in development. You can expect this page to be filled with content in the future." />
+      
+      
+   
+          <components:Button Variant="Primary"
+                             IsEnabled="True"
+                             IconPack="Material"
+                             IconKind="{x:Static icon:PackIconMaterialKind.Home}"
+                             IconSize="20"
+                             Text="Home"
+                             FontSize="16"
+                             
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Click="Button_OnClick"/>
+   
     </Grid>
 </Page>
