@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CT_MKWII_WPF.Views.Components"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="200">
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
         <ContentControl Width="150" Height="150" Foreground="{StaticResource ForegroundColorV2}">
             <icon:GameIcons Kind="FlatTire" Width="150" Height="150" />

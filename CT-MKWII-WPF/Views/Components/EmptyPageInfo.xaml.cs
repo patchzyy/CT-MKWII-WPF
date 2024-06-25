@@ -2,6 +2,8 @@
 using System.Windows.Controls;
 
 /*
+ This component can be used in any page that is not yet developed. or in a page that should list content, but there is none.
+ 
  EXAMPLES:
        <components:EmptyPageInfo 
                 Title="Awww, empty page!"

@@ -25,18 +25,29 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
     
-    <Style TargetType="TextBlock" x:Key="TitleText">
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Foreground" Value="{StaticResource TitleTextColor}"/>
-        <Setter Property="FontWeight" Value="Bold" />
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
+           TargetType="{x:Type RadioButton}"
+           x:Key="SidebarMenuButton">
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch"
+                          Background="{TemplateBinding Background}">
+                        <TextBlock Text="{TemplateBinding Content}"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{StaticResource BackgroundColorV2}"/>
+            </Trigger>
+        </Style.Triggers>
+        
     </Style>
-    
-    <Style TargetType="TextBlock" x:Key="BodyText">
-        <Setter Property="FontSize" Value="15"/>
-        <Setter Property="Foreground" Value="{StaticResource BodyTextColor}"/>
-        <Setter Property="TextWrapping" Value="Wrap"/>
-    </Style>
-
 </ResourceDictionary>

@@ -59,15 +59,25 @@
     
     <SolidColorBrush x:Key="BodyTextColor" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="TitleTextColor" Color="{StaticResource Gray500}" />
+    <SolidColorBrush x:Key="TitleTextHover" Color="{StaticResource Gray300}" />
     
     <SolidColorBrush x:Key="SuccessTitleTextColor" Color="{StaticResource Cyan400}" />
     <SolidColorBrush x:Key="ErrorTitleTextColor" Color="{StaticResource Red400}" />
     <SolidColorBrush x:Key="WarningTitleTextColor" Color="{StaticResource Yellow400}" />
+    
+    <!-- Font size constants are:
+    Title: 20
+    body: 16
+    But i have no idea how to do it, so you will just have to remember it
+     -->
     
     <CornerRadius x:Key="CornerRadius">5</CornerRadius>
     <CornerRadius x:Key="CornerRadiusLeft">5,0,0,5</CornerRadius>
     <CornerRadius x:Key="CornerRadiusBottomLeft">0,0,0,5</CornerRadius>
     <CornerRadius x:Key="CornerRadiusLeftRightTwix">5,0,5,0</CornerRadius>
     <Thickness x:Key="EdgeGap">10</Thickness> 
+    <Thickness x:Key="LeftEdgeGap">10,0,0,0</Thickness>
+    <Thickness x:Key="LeftTopEdgeGap">10,10,0,0</Thickness>
+    <Thickness x:Key="SidebarSectionGap">10,20,10,0</Thickness>
     
 </ResourceDictionary>

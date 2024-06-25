@@ -27,10 +27,10 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition/>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="25"/> <!-- TopBar -->
+                <RowDefinition Height="55"/> <!-- Reserved spacing for title -->   <!-- Also the page container -->
+                <RowDefinition/>             <!--Side bar -->                      <!-- Also the page container -->
+                <RowDefinition Height="60"/> <!--Bottom info corner -->            <!-- Also the page container -->
             </Grid.RowDefinitions>
 
             <!-- This border is only used as topBar in order so you can move the window around -->
@@ -59,41 +59,57 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top">
                 <components:IconLabel IconKind="{x:Static icon:PackIconGameIconsKind.CarWheel}" 
                                       IconPack="GameIcons"
-                                      Text="Mod Tire" 
+                                      Text="Wheel Wizard" 
                                       Color="{StaticResource TitleTextColor}"
-                                      FontSize="21"
-                                      Margin="10,10,0,0"
+                                      FontSize="20"
+                                      Margin="{StaticResource LeftTopEdgeGap}"
                                       IconSize="31"/>
             </Border>
             
-            <!-- Side bar -->
+            <!--Bottom info corner -->
             <Border Grid.Column="0" Grid.Row="3"
                     CornerRadius="{StaticResource CornerRadiusBottomLeft}"
                     Background="{StaticResource ForegroundContactColor}"
                     >
                 <StackPanel VerticalAlignment="Center">
-                    <components:IconLabel IconKind="{x:Static icon:PackIconFontAwesomeKind.DiscordBrands}" 
-                                          IconPack="FontAwesome"
-                                          Text="Discord | patchzy" 
-                                          Color="{StaticResource TitleTextColor}"
-                                          FontSize="13"
-                                          HoverColor="{StaticResource SuccessTitleTextColor}"
-                                          Margin="10,0,0,0"
-                                          Click="Discord_Click"
-                                          IconSize="20"/>
-                    <components:IconLabel IconKind="{x:Static icon:PackIconFontAwesomeKind.GithubBrands}" 
-                                          IconPack="FontAwesome"
-                                          Text="Source code" 
-                                          Color="{StaticResource TitleTextColor}"
-                                          FontSize="13"
-                                          HoverColor="{StaticResource SuccessTitleTextColor}"
-                                          Margin="10,5,0,0"
-                                          Click="Github_Click"
-                                          IconSize="20"/>
+                    <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.DiscordBrands}" 
+                                                IconPack="FontAwesome"
+                                                Text="Talk to us!" 
+                                                Color="{StaticResource TitleTextColor}"
+                                                FontSize="13"
+                                                HoverColor="{StaticResource SuccessTitleTextColor}"
+                                                Margin="{StaticResource LeftEdgeGap}"
+                                                Click="Discord_Click"
+                                                IconSize="20"/>
+                    <Rectangle Height="5" Fill="Transparent"/>
+                    <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.GithubBrands}" 
+                                                IconPack="FontAwesome"
+                                                Text="Source code" 
+                                                Color="{StaticResource TitleTextColor}"
+                                                FontSize="13"
+                                                HoverColor="{StaticResource SuccessTitleTextColor}"
+                                                Margin="{StaticResource LeftEdgeGap}"
+                                                Click="Github_Click"
+                                                IconSize="20"/>
                 </StackPanel>
-                
             </Border>
             
+            <!--Side bar -->
+            <Border Grid.Column="0" Grid.Row="2" VerticalAlignment="Top">
+                <StackPanel>
+                    <TextBlock Text="General" Style="{StaticResource SidebarSectionText}"/>
+                    <components:SidebarRadioButton  IconKind="{x:Static icon:PackIconMaterialKind.Home}"
+                                                    IconPack="Material" Text="Option 1" IsChecked="True"/>
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconMaterialKind.Account}" 
+                                                   IconPack="Material" Text="Option 2"/>
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconMaterialKind.Account}" 
+                                                   IconPack="Material" Text="Option 3"/>
+                    
+                    <!-- add an other section by doing this:
+                    <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}"/>
+                     -->
+                </StackPanel>
+            </Border>
         </Grid>
     </Border>
 </Window>

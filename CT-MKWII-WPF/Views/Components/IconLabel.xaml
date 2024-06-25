@@ -8,84 +8,19 @@
              mc:Ignorable="d"
              d:DesignHeight="150" d:DesignWidth="300"
              x:Name="Root">
-    <UserControl.Resources>
-        <Style x:Key="HoverStyle" TargetType="Button">
-            <Setter  Property="BorderThickness " Value="0"/>
-            <Setter  Property="Background " Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter  Property="HorizontalContentAlignment " Value="Left"/>
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter  Property="Foreground" Value="{Binding Color, ElementName=Root}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="{Binding HoverColor, ElementName=Root}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>
     
-    <Button Click="OnClick" Style="{StaticResource HoverStyle}" >
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" >
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
         
-        <ContentControl Content="{Binding IconKind, ElementName=Root}"
-                        Width="{Binding IconSize, ElementName=Root}"
-                        Height="{Binding IconSize, ElementName=Root}"
-                        VerticalAlignment="Center">
-            <ContentControl.Style>
-                <Style TargetType="ContentControl">
-                    <Setter Property="ContentTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <icon:PackIconMaterial Kind="{Binding}" 
-                                                       Width="{Binding IconSize, ElementName=Root}"
-                                                       Height="{Binding IconSize, ElementName=Root}"/>
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IconPack, ElementName=Root}" Value="GameIcons">
-                            <Setter Property="ContentTemplate">
-                                <Setter.Value>
-                                    <DataTemplate>
-                                        <icon:PackIconGameIcons Kind="{Binding}"
-                                                                Width="{Binding IconSize, ElementName=Root}"
-                                                                Height="{Binding IconSize, ElementName=Root}"/>
-                                    </DataTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IconPack, ElementName=Root}" Value="FontAwesome">
-                            <Setter Property="ContentTemplate">
-                                <Setter.Value>
-                                    <DataTemplate>
-                                        <icon:PackIconFontAwesome Kind="{Binding}"
-                                                                  Width="{Binding IconSize, ElementName=Root}"
-                                                                  Height="{Binding IconSize, ElementName=Root}"/>
-                                    </DataTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ContentControl.Style>
-        </ContentControl>
+        <local:DynamicIcon IconPack="{Binding IconPack, ElementName=Root}"
+                           IconKind="{Binding IconKind, ElementName=Root}"
+                           IconSize="{Binding IconSize, ElementName=Root}"
+                           ForegroundColor="{Binding Color, ElementName=Root}"/>
         
         <TextBlock Text="{Binding Text, ElementName=Root}"
                    FontSize="{Binding FontSize, ElementName=Root}"
+                   Foreground="{Binding Color, ElementName=Root}"
                    Margin="10,0,0,0"
                    VerticalAlignment="Center"/>
+        
     </StackPanel>
-    </Button>
 </UserControl>
