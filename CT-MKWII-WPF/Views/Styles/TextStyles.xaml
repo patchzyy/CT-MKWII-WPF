@@ -19,4 +19,9 @@
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Margin" Value="{StaticResource SidebarSectionGap}" />
     </Style>
+    
+    <Style TargetType="TextBlock" x:Key="TinyText">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="{StaticResource BodyTextColor}"/>
+    </Style>
 </ResourceDictionary>

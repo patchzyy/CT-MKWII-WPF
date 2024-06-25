@@ -12,5 +12,16 @@
         <components:EmptyPageInfo 
             Title="Whoops"
             Body="No settings for you I am afraid." />  
+        
+        <TextBlock Text="Version 1.0.1"
+                   Style="{StaticResource TinyText}"
+                   HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <components:InputField
+            Width="300"
+            Height="40"
+            Text="{Binding Input, Mode=TwoWay}"
+            Placeholder="Add text plz"
+            HorizontalAlignment="Left"
+            Margin="0,0,0,20"></components:InputField>
     </Grid>
 </Page>

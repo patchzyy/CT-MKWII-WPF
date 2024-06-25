@@ -56,6 +56,16 @@
     <SolidColorBrush x:Key="ForegroundContactColor" Color="{StaticResource Gray800}" />
     <SolidColorBrush x:Key="ForegroundHover" Color="{StaticResource Gray600}" />
     
+    <!-- Input Field -->
+    <SolidColorBrush x:Key="InputFieldDefault" Color="{StaticResource Gray900}" />
+    <SolidColorBrush x:Key="InputFieldSelected" Color="{StaticResource Gray700}" />
+    <SolidColorBrush x:Key="InputFieldSelectedBorder" Color="{StaticResource Gray500}" />
+    <SolidColorBrush x:Key="InputFieldPlaceholderText" Color="{StaticResource Gray500}" />
+    <SolidColorBrush x:Key="InputFieldDefaultText" Color="{StaticResource Gray200}" />
+    <SolidColorBrush x:Key="InputFieldSelectedText" Color="{StaticResource Gray50}" />
+    
+    
+    
     <SolidColorBrush x:Key="BodyTextColor" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="TitleTextColor" Color="{StaticResource Gray500}" />
     <SolidColorBrush x:Key="TitleTextHover" Color="{StaticResource Gray300}" />
@@ -75,6 +85,7 @@
     <CornerRadius x:Key="CornerRadiusLeft">0,0,0,0</CornerRadius> <!-- 5,0,0,5 -->
     <CornerRadius x:Key="CornerRadiusBottomLeft">0,0,0,0</CornerRadius>   <!-- 0,0,0,5 -->
     <CornerRadius x:Key="CornerRadiusLeftRightTwix">5,0,0,0</CornerRadius> <!-- 5,0,5,0 -->
+    
     
     <Thickness x:Key="EdgeGap">10</Thickness> 
     <Thickness x:Key="LeftEdgeGap">10,0,0,0</Thickness>

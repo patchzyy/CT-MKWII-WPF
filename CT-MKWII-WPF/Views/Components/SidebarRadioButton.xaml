@@ -1,16 +1,4 @@
-﻿<!--
-
-FontSize="20"
-                                          
-                                                   ForegroundColor="{StaticResource TitleTextColor}"
-                                                   HoverForeground="{StaticResource TitleTextHover}"
-                                                   HoverBackground="{StaticResource ForegroundContactColor}"
-                                                   SelectedForeground="{StaticResource TitleTextColor}"
-                                                   SelectedBackground="{StaticResource BackgroundColorV2}"
-                                                   GroupName="SidebarGroup
--->
-
-<UserControl x:Class="CT_MKWII_WPF.Views.Components.SidebarRadioButton"
+﻿<UserControl x:Class="CT_MKWII_WPF.Views.Components.SidebarRadioButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
