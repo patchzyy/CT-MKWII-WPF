@@ -1,3 +1,4 @@
+
 # Open Source Mario Kart Wii Mod Manager
 
 **Currently only supports RR**
@@ -19,5 +20,9 @@ Please report any bugs :)
 - move config.json and rr.json (if its created) to %appdata/MWiiManager
 - UI rework (add tabs top bar for settings, my-stuff, game, x)
 - A bug can appear where GFX.ini is trying to be found in the LOAD instead of user folder
+
+- ![GitHub release (latest by date)](https://img.shields.io/github/v/release/patchzyy/CT-MKWII-WPF)
+- ![GitHub all releases](https://img.shields.io/github/downloads/patchzyy/CT-MKWII-WPF/total)
+- [![Discord](https://img.shields.io/discord/YOUR_DISCORD_SERVER_ID)](https://discord.gg/vZ7T2wJnsq)
 
     
