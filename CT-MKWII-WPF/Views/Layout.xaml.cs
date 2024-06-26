@@ -12,6 +12,7 @@ public partial class Layout : Window
     private void DashboardPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new Dashboard());
     private void SettingsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new SettingsPage());
     private void ModsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new ModsPage());
+    private void KitchenSink_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new KitchenSink());
     
     private void NavigateToPage(Page page)
     {

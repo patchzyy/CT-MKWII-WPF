@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -26,7 +25,7 @@ namespace CT_MKWII_WPF.Views.Components
 
         public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(
             nameof(Color), typeof(Brush), typeof(IconLabelButton), 
-            new PropertyMetadata(Brushes.Black, OnColorChanged));
+            new PropertyMetadata(Brushes.Black));
 
         public Brush Color
         {
@@ -42,17 +41,6 @@ namespace CT_MKWII_WPF.Views.Components
         {
             get => (Brush)GetValue(HoverColorProperty);
             set => SetValue(HoverColorProperty, value);
-        }
-
-        private static void OnColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is IconLabelButton iconLabelButton)
-            {
-                if (iconLabelButton.HoverColor == null)
-                {
-                    iconLabelButton.HoverColor = (Brush)e.NewValue;
-                }
-            }
         }
         
         public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(

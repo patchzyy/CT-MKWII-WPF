@@ -1,0 +1,71 @@
+﻿<Page x:Class="CT_MKWII_WPF.Views.Pages.KitchenSink"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d"
+      d:DesignHeight="831" d:DesignWidth="444"
+      Title="KitchenSink" Background="Transparent">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="250">
+            <!-- Default Button -->
+            <components:Button Variant="Default"
+                               IsEnabled="True"
+                               IconPack="Material"
+                               IconKind="{x:Static icon:PackIconMaterialKind.Home}"
+                               Text="Home"
+                               Click="Button_OnClick"
+                               Margin="0,0,0,10"/>
+            <!-- Primary Button -->
+            <components:Button Variant="Primary"
+                               IsEnabled="True"
+                               IconPack="Material"
+                               IconKind="{x:Static icon:PackIconMaterialKind.Check}"
+                               Text="Primary"
+                               Click="Button_OnClick"
+                               Margin="0,0,0,10"/>
+            <!-- Secondary Button -->
+            <components:Button Variant="Secondary"
+                               IsEnabled="True"
+                               IconPack="Material"
+                               IconKind="{x:Static icon:PackIconMaterialKind.Database}"
+                               Text="Secondary"
+                               Click="Button_OnClick"
+                               Margin="0,0,0,10"/>
+            <!-- Danger Button -->
+            <components:Button Variant="Danger"
+                               IsEnabled="True"
+                               IconPack="Material"
+                               IconKind="{x:Static icon:PackIconMaterialKind.Allergy}"
+                               Text="Danger"
+                               Click="Button_OnClick"
+                               Margin="0,0,0,10"/>
+            <!-- Disabled Button -->
+            <components:Button Variant="Default"
+                               IsEnabled="False"
+                               IconPack="Material"
+                               IconKind="{x:Static icon:PackIconMaterialKind.Stamper}"
+                               Text="Disabled"
+                               Click="Button_OnClick"
+                               Margin="0,0,0,10"/>
+            <!-- Horizontal StackPanel for the two buttons next to each other -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,0,0,10">
+                <!-- Only Icon button -->
+                <components:Button Variant="Default"
+                                   IconPack="Material"
+                                   IconKind="{x:Static icon:PackIconMaterialKind.Timer}"
+                                   Text=""
+                                   Click="Button_OnClick"
+                                   Margin="0,0,10,0"/>
+                
+                <!-- Only Text button -->
+                <components:Button Variant="Default"
+                                   IconSize="0"
+                                   Text="Text only"
+                                   Click="Button_OnClick"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

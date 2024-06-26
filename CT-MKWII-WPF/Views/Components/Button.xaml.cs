@@ -1,15 +1,36 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
+
+/*
+EXAMPLES:
+
+# all parameters
+ <components:Button Variant="Primary"
+                    IsEnabled="True"
+                    IconPack="Material"
+                    IconKind="{x:Static icon:PackIconMaterialKind.Home}"
+                    IconSize="20"
+                    Text="Home"
+                    FontSize="16"
+                    Click="Button_OnClick"/>
+
+# but you dont need all
+ <components:Button IconSize="0"
+                    Text="Home"
+                    Click="Button_OnClick"/>
+                    
+# Note1:  you either need to find the icon, or set IconSize to 0 to hide it
+# Note2:  variant can be: Primary, Secondary, Default, Danger   (if none, it will go to Default)
+ */
 
 namespace CT_MKWII_WPF.Views.Components
 {
     public partial class Button : UserControl
     {
-
+        // Primary, Secondary, Default, Danger
         public static readonly DependencyProperty VariantProperty =
             DependencyProperty.Register(nameof(Variant), typeof(string), typeof(Button), 
-                new PropertyMetadata("Gray"));
+                new PropertyMetadata("Default"));
         
         public string Variant
         {
@@ -28,7 +49,8 @@ namespace CT_MKWII_WPF.Views.Components
         }
         
         public static readonly DependencyProperty IconPackProperty =
-            DependencyProperty.Register(nameof(IconPack), typeof(string), typeof(Button), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(IconPack), typeof(string), typeof(Button),
+                new PropertyMetadata(null));
 
         public string IconPack
         {
@@ -38,7 +60,8 @@ namespace CT_MKWII_WPF.Views.Components
 
         
         public static readonly DependencyProperty IconKindProperty =
-            DependencyProperty.Register(nameof(IconKind), typeof(object), typeof(Button), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(IconKind), typeof(object), typeof(Button),
+                new PropertyMetadata(null));
             
         public object IconKind
         {
@@ -47,7 +70,8 @@ namespace CT_MKWII_WPF.Views.Components
         }
         
         public static readonly DependencyProperty IconSizeProperty =
-            DependencyProperty.Register(nameof(IconSize), typeof(double), typeof(Button), new PropertyMetadata(16.0));
+            DependencyProperty.Register(nameof(IconSize), typeof(double), typeof(Button), 
+                new PropertyMetadata(24.0));
         
         public double IconSize
         {
@@ -56,7 +80,8 @@ namespace CT_MKWII_WPF.Views.Components
         }
         
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register(nameof(Text), typeof(string), typeof(Button), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register(nameof(Text), typeof(string), typeof(Button), 
+                new PropertyMetadata(string.Empty));
 
         public string Text
         {
@@ -65,7 +90,8 @@ namespace CT_MKWII_WPF.Views.Components
         }
         
         public static readonly new DependencyProperty FontSizeProperty =
-            DependencyProperty.Register(nameof(FontSize), typeof(double), typeof(Button), new PropertyMetadata(14.0));
+            DependencyProperty.Register(nameof(FontSize), typeof(double), typeof(Button), 
+                new PropertyMetadata(20.0));
    
         public new double FontSize
         {
@@ -76,8 +102,6 @@ namespace CT_MKWII_WPF.Views.Components
         public Button()
         {
             InitializeComponent();
-            Foreground = new SolidColorBrush(Colors.White);
-            Background = new SolidColorBrush(Colors.Yellow);
         }
         
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -19,8 +19,21 @@
         <TextBlock Text="{Binding Text, ElementName=Root}"
                    FontSize="{Binding FontSize, ElementName=Root}"
                    Foreground="{Binding Color, ElementName=Root}"
-                   Margin="10,0,0,0"
-                   VerticalAlignment="Center"/>
+                   VerticalAlignment="Center">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="10,0,0,0"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IconSize, ElementName=Root}" Value="0">
+                            <Setter Property="Margin" Value="0"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Text, ElementName=Root}" Value="">
+                            <Setter Property="Margin" Value="0"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
         
     </StackPanel>
 </UserControl>
