@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Views/Styles/OldStyle.xaml"/>
                 <ResourceDictionary Source="Views/Styles/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="Views/Styles/TextStyles.xaml"/>
+                <ResourceDictionary Source="Views/Styles/CheckboxStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         

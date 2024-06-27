@@ -21,7 +21,7 @@
                         <DataTemplate>
                             <icon:PackIconMaterial Kind="{Binding}" 
                                                    Width="{Binding IconSize, ElementName=Root}"
-                                                   Height="{Binding IconSize, ElementName=Root}"/>
+                                                   Height="{Binding IconSize, ElementName=Root}" />
                         </DataTemplate>
                     </Setter.Value>
                 </Setter>

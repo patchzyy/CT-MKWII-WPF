@@ -85,6 +85,7 @@
     <SolidColorBrush x:Key="BodyTextColor" Color="{StaticResource Gray600}" />
     <SolidColorBrush x:Key="TitleTextColor" Color="{StaticResource Gray500}" />
     <SolidColorBrush x:Key="TitleTextHover" Color="{StaticResource Gray300}" />
+    <SolidColorBrush x:Key="FormFieldLabelColor" Color="{StaticResource Gray300}" />
     
     <!-- Error colors -->
     <SolidColorBrush x:Key="SuccessTitleTextColor" Color="{StaticResource Cyan400}" />
@@ -94,6 +95,7 @@
     <!-- Font size constants are:
     Title: 20
     body: 16
+    FormFieldLabels: 14
     Tiny: 12
     But i have no idea how to do it, so you will just have to remember it
      -->

@@ -125,5 +125,12 @@
                                Click="InputButton_OnClick" Margin="10,0,0,0"/>
         </StackPanel>
         
+        <StackPanel Grid.Row="4">
+            <CheckBox IsChecked="True" >Extra Cheese</CheckBox>
+            <CheckBox IsChecked="False" >Extra Sauce</CheckBox>
+            <CheckBox IsChecked="False" IsEnabled="False">Extra Costs</CheckBox>
+            <CheckBox IsChecked="True" IsEnabled="False">Extra Flavor</CheckBox>
+        </StackPanel>
+        
     </Grid>
 </Page>
