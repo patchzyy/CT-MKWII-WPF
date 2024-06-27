@@ -4,7 +4,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
-      xmlns:old="clr-namespace:CT_MKWII_WPF.Views.Pages"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="Settings" Background="Transparent">
@@ -16,12 +15,5 @@
         <TextBlock Text="Version 1.0.1"
                    Style="{StaticResource TinyText}"
                    HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-        <components:InputField
-            Width="300"
-            Height="40"
-            Text="{Binding Input, Mode=TwoWay}"
-            Placeholder="Add text plz"
-            HorizontalAlignment="Left"
-            Margin="0,0,0,20"></components:InputField>
     </Grid>
 </Page>

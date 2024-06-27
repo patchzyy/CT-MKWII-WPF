@@ -12,5 +12,20 @@
       <components:EmptyPageInfo 
           Title="Awww, empty page!"
           Body="This page is still in development. You can expect this page to be filled with content in the future." />
+      
+      
+      <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+          <components:InputField
+              Width="300"
+              Height="40"
+              Placeholder="This is a test"
+              HorizontalAlignment="Left"
+              x:Name="MyInputField"
+              Margin="0,0,0,20"/>
+      
+          <components:Button VerticalAlignment="Top" Text="check" FontSize="15" IconSize="0"
+                             Click="Button_OnClick"/>
+      </StackPanel>
+   
     </Grid>
 </Page>

@@ -9,7 +9,24 @@
       d:DesignHeight="831" d:DesignWidth="444"
       Title="KitchenSink" Background="Transparent">
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="250">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <components:IconLabel Grid.Row="0"
+            IconPack="FontAwesome"
+            IconKind="{x:Static icon:PackIconFontAwesomeKind.FaucetDripSolid}"
+            Text="This is a kitchen sink page"
+            FontSize="20"
+            VerticalAlignment="Center"
+            IconSize="24"
+            Margin="20,0,0,0"
+            Color="{StaticResource TitleTextColor}"
+            ></components:IconLabel>
+        
+        <UniformGrid Grid.Row="1" Columns="3" Rows="2" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <!-- Default Button -->
             <components:Button Variant="Default"
                                IsEnabled="True"
@@ -17,7 +34,7 @@
                                IconKind="{x:Static icon:PackIconMaterialKind.Home}"
                                Text="Home"
                                Click="Button_OnClick"
-                               Margin="0,0,0,10"/>
+                               Margin="3"/>
             <!-- Primary Button -->
             <components:Button Variant="Primary"
                                IsEnabled="True"
@@ -25,23 +42,7 @@
                                IconKind="{x:Static icon:PackIconMaterialKind.Check}"
                                Text="Primary"
                                Click="Button_OnClick"
-                               Margin="0,0,0,10"/>
-            <!-- Secondary Button -->
-            <components:Button Variant="Secondary"
-                               IsEnabled="True"
-                               IconPack="Material"
-                               IconKind="{x:Static icon:PackIconMaterialKind.Database}"
-                               Text="Secondary"
-                               Click="Button_OnClick"
-                               Margin="0,0,0,10"/>
-            <!-- Danger Button -->
-            <components:Button Variant="Danger"
-                               IsEnabled="True"
-                               IconPack="Material"
-                               IconKind="{x:Static icon:PackIconMaterialKind.Allergy}"
-                               Text="Danger"
-                               Click="Button_OnClick"
-                               Margin="0,0,0,10"/>
+                               Margin="3"/>
             <!-- Disabled Button -->
             <components:Button Variant="Default"
                                IsEnabled="False"
@@ -49,9 +50,25 @@
                                IconKind="{x:Static icon:PackIconMaterialKind.Stamper}"
                                Text="Disabled"
                                Click="Button_OnClick"
-                               Margin="0,0,0,10"/>
+                               Margin="3"/>
+            <!-- Secondary Button -->
+            <components:Button Variant="Secondary"
+                               IsEnabled="True"
+                               IconPack="Material"
+                               IconKind="{x:Static icon:PackIconMaterialKind.Database}"
+                               Text="Secondary"
+                               Click="Button_OnClick"
+                               Margin="3"/>
+            <!-- Danger Button -->
+            <components:Button Variant="Danger"
+                               IsEnabled="True"
+                               IconPack="Material"
+                               IconKind="{x:Static icon:PackIconMaterialKind.Allergy}"
+                               Text="Danger"
+                               Click="Button_OnClick"
+                               Margin="3"/>
             <!-- Horizontal StackPanel for the two buttons next to each other -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="3">
                 <!-- Only Icon button -->
                 <components:Button Variant="Default"
                                    IconPack="Material"
@@ -59,13 +76,39 @@
                                    Text=""
                                    Click="Button_OnClick"
                                    Margin="0,0,10,0"/>
-                
                 <!-- Only Text button -->
                 <components:Button Variant="Default"
                                    IconSize="0"
-                                   Text="Text only"
+                                   Text="Text"
                                    Click="Button_OnClick"/>
             </StackPanel>
-        </StackPanel>
+        </UniformGrid>
+        
+        <UniformGrid Grid.Row="2" Columns="3" Rows="1" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            
+            <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.IceCreamSolid}" 
+                                        IconPack="FontAwesome"
+                                        Text="Label and Icon" 
+                                        Color="{StaticResource TitleTextColor}"
+                                        HoverColor="{StaticResource WarningTitleTextColor}"
+                                        Click="Button_OnClick"
+                                        IconSize="20" Margin="5"/>
+            
+            <components:IconLabelButton IconSize="0"
+                                        Text="Only a label" 
+                                        Color="{StaticResource TitleTextColor}"
+                                        FontSize="13"
+                                        HoverColor="{StaticResource ErrorTitleTextColor}"
+                                        Click="Button_OnClick" Margin="5"/>
+            
+            <components:IconLabelButton IconKind="{x:Static icon:PackIconFontAwesomeKind.SocksSolid}" 
+                                        IconPack="FontAwesome"
+                                        Text="" 
+                                        Color="{StaticResource TitleTextColor}"
+                                        HoverColor="{StaticResource SuccessTitleTextColor}"
+                                        Click="Button_OnClick"
+                                        IconSize="20" Margin="5"/>
+        </UniformGrid>
+ 
     </Grid>
 </Page>

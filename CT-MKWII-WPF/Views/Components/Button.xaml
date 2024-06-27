@@ -25,6 +25,7 @@
                 <Setter Property="Background" Value="{StaticResource ButtonBackgroundDefault-Default}"/>
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="Hand"/>
                         <Setter Property="Foreground" Value="{StaticResource ButtonForegroundDefault-Hover}"/>
                         <Setter Property="Background" Value="{StaticResource ButtonBackgroundDefault-Hover}"/>
                     </Trigger>
