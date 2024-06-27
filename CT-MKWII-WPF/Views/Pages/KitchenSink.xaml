@@ -13,6 +13,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
         <components:IconLabel Grid.Row="0"
@@ -109,6 +110,20 @@
                                         Click="Button_OnClick"
                                         IconSize="20" Margin="5"/>
         </UniformGrid>
- 
+        
+        
+        <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,10" >
+            <components:InputField
+                Width="300"
+                Placeholder="Enter desired path here..."
+                HorizontalAlignment="Left"
+                x:Name="MyInputField"/>
+      
+            <components:Button Text="" FontSize="16" 
+                               IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
+                               IconPack="FontAwesome"
+                               Click="InputButton_OnClick" Margin="10,0,0,0"/>
+        </StackPanel>
+        
     </Grid>
 </Page>

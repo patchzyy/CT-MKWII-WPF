@@ -8,6 +8,7 @@ namespace CT_MKWII_WPF.Views.Components
         public InputField()
         {
             InitializeComponent();
+            FontSize = 16;
         }
 
         public static readonly DependencyProperty TextProperty =
@@ -28,6 +29,16 @@ namespace CT_MKWII_WPF.Views.Components
         {
             get { return (string)GetValue(PlaceholderProperty); }
             set { SetValue(PlaceholderProperty, value); }
+        }
+        
+        public static readonly DependencyProperty LabelProperty =
+            DependencyProperty.Register(nameof(Label), typeof(string), typeof(InputField), 
+                new PropertyMetadata(string.Empty));
+
+        public string Label
+        {
+            get { return (string)GetValue(LabelProperty); }
+            set { SetValue(LabelProperty, value); }
         }
     }
 }

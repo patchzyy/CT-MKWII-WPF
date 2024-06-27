@@ -60,12 +60,26 @@
     <SolidColorBrush x:Key="ForegroundHover" Color="{StaticResource Gray600}" />
     
     <!-- Input field -->
-    <SolidColorBrush x:Key="InputFieldDefault" Color="{StaticResource Gray900}" />
-    <SolidColorBrush x:Key="InputFieldSelected" Color="{StaticResource Gray700}" />
-    <SolidColorBrush x:Key="InputFieldSelectedBorder" Color="{StaticResource Gray500}" />
-    <SolidColorBrush x:Key="InputFieldPlaceholderText" Color="{StaticResource Gray500}" />
-    <SolidColorBrush x:Key="InputFieldDefaultText" Color="{StaticResource Gray200}" />
-    <SolidColorBrush x:Key="InputFieldSelectedText" Color="{StaticResource Gray50}" />
+    <SolidColorBrush x:Key="InputFieldBorder-Default" Color="{StaticResource Gray800}" />
+    <SolidColorBrush x:Key="InputFieldBackground-Default" Color="{StaticResource Gray800}" />
+    <SolidColorBrush x:Key="InputFieldForeground-Default" Color="{StaticResource Gray200}" />
+    <SolidColorBrush x:Key="InputFieldPlaceholder-Default" Color="{StaticResource Gray500}" />
+    
+    <SolidColorBrush x:Key="InputFieldBorder-Hover" Color="{StaticResource Gray700}" />
+    <SolidColorBrush x:Key="InputFieldBackground-Hover" Color="{StaticResource Gray700}" />
+    <SolidColorBrush x:Key="InputFieldForeground-Hover" Color="{StaticResource Gray200}" />
+    <SolidColorBrush x:Key="InputFieldPlaceholder-Hover" Color="{StaticResource Gray500}" />
+
+    <SolidColorBrush x:Key="InputFieldBorder-Selected" Color="{StaticResource Gray500}" />
+    <SolidColorBrush x:Key="InputFieldBackground-Selected" Color="{StaticResource Gray700}" />
+    <SolidColorBrush x:Key="InputFieldForeground-Selected" Color="{StaticResource Gray50}" />
+    <SolidColorBrush x:Key="InputFieldPlaceholder-Selected" Color="{StaticResource Gray500}" />
+    
+    <SolidColorBrush x:Key="InputFieldBorder-Disabled" Color="{StaticResource Gray900}" />
+    <SolidColorBrush x:Key="InputFieldBackground-Disabled" Color="{StaticResource Gray900}" />
+    <SolidColorBrush x:Key="InputFieldForeground-Disabled" Color="{StaticResource Gray950}" />
+    <SolidColorBrush x:Key="InputFieldPlaceholder-Disabled" Color="{StaticResource Gray950}" />
+    
     
     <!-- Generic text stuff -->
     <SolidColorBrush x:Key="BodyTextColor" Color="{StaticResource Gray600}" />
@@ -80,6 +94,7 @@
     <!-- Font size constants are:
     Title: 20
     body: 16
+    Tiny: 12
     But i have no idea how to do it, so you will just have to remember it
      -->
     

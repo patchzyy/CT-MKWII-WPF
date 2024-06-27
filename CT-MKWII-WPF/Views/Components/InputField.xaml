@@ -8,18 +8,26 @@
              x:Name="Root">
     
     <UserControl.Resources>
-        <Style x:Key="InputField" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="{StaticResource InputFieldDefault}"></Setter>
-            <Setter Property="Foreground" Value="{StaticResource InputFieldDefaultText}"></Setter>
-            <Setter Property="BorderBrush" Value="{StaticResource InputFieldDefault}"></Setter>
-            <Setter Property="BorderThickness" Value="1"></Setter>
-            <Setter Property="Padding" Value="5"></Setter>
-            <Setter Property="Margin" Value="5"></Setter>
-            <Setter Property="FontSize" Value="16"></Setter>
+        <Style x:Key="InputField" TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource InputFieldBackground-Default}"/>
+            <Setter Property="Foreground" Value="{StaticResource InputFieldForeground-Default}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource InputFieldBorder-Default}"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="{Binding FontSize, ElementName=Root}"/>
             
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
+                    <ControlTemplate TargetType="TextBox">
+                        <StackPanel>
+                            <!-- Label TextBlock -->
+                            <TextBlock x:Name="Label"
+                                       Text="{Binding Label, ElementName=Root}" 
+                                       FontSize="12"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource TitleTextColor}" 
+                                       VerticalAlignment="Bottom"
+                                       Margin="0,0,0,2"/>
                         <Border x:Name="border"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -28,30 +36,44 @@
                             <Grid>
                                 <TextBlock x:Name="Placeholder"
                                            Text="{Binding Placeholder, ElementName=Root}"
-                                           Foreground="{StaticResource InputFieldPlaceholderText}"
+                                           Foreground="{StaticResource InputFieldPlaceholder-Default}"
                                            Visibility="Collapsed"
+                                           VerticalAlignment="Center"
                                            Margin="{TemplateBinding Padding}"/>
                                 <ScrollViewer x:Name="PART_ContentHost"
                                               Focusable="False"
+                                              VerticalAlignment="Center"
                                               HorizontalScrollBarVisibility="Hidden"
                                               VerticalScrollBarVisibility="Hidden"/>
                                 </Grid>
                         </Border>
+                            </StackPanel>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource InputFieldBackground-Disabled}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource InputFieldBorder-Disabled}"/>
+                                <Setter Property="Foreground" Value="{StaticResource InputFieldForeground-Disabled}"/>
+                                <Setter Property="Foreground" TargetName="Placeholder" Value="{StaticResource InputFieldPlaceholder-Disabled}"/>
                             </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource InputFieldSelectedBorder}"/>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="IBeam"/>
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource InputFieldBackground-Hover}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource InputFieldBorder-Hover}"/>
+                                <Setter Property="Foreground" Value="{StaticResource InputFieldForeground-Hover}"/>
+                                <Setter Property="Foreground" TargetName="Placeholder" Value="{StaticResource InputFieldPlaceholder-Hover}"/>
                             </Trigger>
-                            <Trigger Property="IsFocused" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource InputFieldSelected}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource InputFieldSelectedBorder}"/>
-                                <Setter Property="Foreground" Value="{StaticResource InputFieldSelectedText}"/>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource InputFieldBackground-Selected}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource InputFieldBorder-Selected}"/>
+                                <Setter Property="Foreground" Value="{StaticResource InputFieldForeground-Selected}"/>
+                                <Setter Property="Foreground" TargetName="Placeholder" Value="{StaticResource InputFieldPlaceholder-Selected}"/>
                             </Trigger>
                             <Trigger Property="Text" Value="">
                                 <Setter Property="Visibility" TargetName="Placeholder" Value="Visible"/>
                             </Trigger>
+                            <DataTrigger Binding="{Binding Label, ElementName=Root}" Value="">
+                                <Setter Property="Visibility" TargetName="Label" Value="Collapsed"/>
+                            </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -60,8 +82,6 @@
     </UserControl.Resources>
 
     <TextBox Style="{StaticResource InputField}"
-             Text="{Binding Text, ElementName=Root, UpdateSourceTrigger=PropertyChanged}"
-             Width="{Binding Width, ElementName=Root}"
-             Height="{Binding Height, ElementName=Root}"/>
+             Text="{Binding Text, ElementName=Root}"/>
 
 </UserControl>
