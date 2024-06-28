@@ -24,4 +24,11 @@
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="{StaticResource BodyTextColor}"/>
     </Style>
+    
+    <Style TargetType="TextBlock" x:Key="FormFieldLabelText">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Bold"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource FormFieldLabelColor}"/>
+        <Setter Property="Margin" Value="0,0,0,2"></Setter>
+    </Style>
 </ResourceDictionary>

@@ -27,7 +27,7 @@ public partial class SettingsPage : UserControl
             return;
         }
         //if not, we try to find it
-        string folderPath = GetDolphinFolderPath();
+        string folderPath = DolphinSettingHelper.GetDolphinFolderPath();
         if (!string.IsNullOrEmpty(folderPath))
         {
             DolphinUserFolderTextBox.Text = folderPath;

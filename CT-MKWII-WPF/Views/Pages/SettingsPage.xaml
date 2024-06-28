@@ -15,19 +15,25 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,50" >
-            <components:InputField
-                Width="300"
-                Placeholder="Enter desired path here..."
-                HorizontalAlignment="Left"
-                Label="Dolphin Emulator .exe Path"
-                x:Name="DolphinInputField"/>
+        <StackPanel Grid.Row="1" Margin="0,50">
+            <TextBlock
+                Style="{StaticResource FormFieldLabelText}"
+                Text="Gallo"></TextBlock>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top"  >
+                <components:InputField
+                    Width="300"
+                    Placeholder="Enter desired path here..."
+                    HorizontalAlignment="Left"
+                    x:Name="DolphinInputField"/>
       
-            <components:Button Text="" FontSize="16" 
-                               IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
-                               IconPack="FontAwesome"
-                               Click="DolphinBrowseClick" Margin="10,0,0,0"/>
+                <components:Button Text="" FontSize="16" 
+                                   IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
+                                   IconPack="FontAwesome"
+                                   Click="DolphinBrowseClick" Margin="10,0,0,0"/>
+            </StackPanel>
         </StackPanel>
+        
+        
         
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,50" >
             <components:InputField

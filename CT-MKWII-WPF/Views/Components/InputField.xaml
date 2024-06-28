@@ -23,11 +23,8 @@
                             <!-- Label TextBlock -->
                             <TextBlock x:Name="Label"
                                        Text="{Binding Label, ElementName=Root}" 
-                                       FontSize="14"
-                                       FontWeight="Bold"
-                                       Foreground="{StaticResource FormFieldLabelColor}" 
-                                       VerticalAlignment="Bottom"
-                                       Margin="0,0,0,2"/>
+                                       Style="{StaticResource FormFieldLabelText}"
+                                       VerticalAlignment="Bottom"/>
                         <Border x:Name="border"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
