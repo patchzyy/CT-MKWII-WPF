@@ -14,7 +14,7 @@ public RiivolutionDolphin()
 
     private async void UpdateActionButton()
     {
-        var dolphinInstalled = DolphinInstaller.IsDolphinInstalled();
+        var dolphinInstalled = DolphinInstaller.IsUserFolderValid();
         var RiivolutionInstalled = RiivolutionInstaller.IsRiivolutionInstalled();
 
         if (!dolphinInstalled)
@@ -36,7 +36,7 @@ public RiivolutionDolphin()
 
     private async void ActionButton_Click(object sender, RoutedEventArgs e)
     {
-        var dolphinInstalled = DolphinInstaller.IsDolphinInstalled();
+        var dolphinInstalled = DolphinInstaller.IsUserFolderValid();
         var riivolutionInstalled = RiivolutionInstaller.IsRiivolutionInstalled();
         
         if (!dolphinInstalled)

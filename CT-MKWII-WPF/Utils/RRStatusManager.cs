@@ -23,7 +23,7 @@ public class RRStatusManager
         {
             return ActionButtonStatus.NoServer;
         }
-        var dolphinInstalled = DolphinInstaller.IsDolphinInstalled();
+        var dolphinInstalled = DolphinInstaller.IsUserFolderValid();
         var retroRewindActive = DirectoryHandler.isRRActive();
         var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
         if (!retroRewindInstalled) return ActionButtonStatus.noRR;

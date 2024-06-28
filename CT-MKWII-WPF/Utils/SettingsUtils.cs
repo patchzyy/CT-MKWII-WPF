@@ -112,11 +112,8 @@ namespace CT_MKWII_WPF.Utils
         {
             if (_config == null || !Directory.Exists(_config.UserFolderPath) || !File.Exists(_config.DolphinLocation) || !File.Exists(_config.GameLocation))
             {
-                var mainWindow = (MainWindow)Application.Current.MainWindow;
-                mainWindow.ChangeContent(new SettingsPage());
                 return false;
             }
-
             return true;
         }
 

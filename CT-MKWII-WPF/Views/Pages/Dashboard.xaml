@@ -26,10 +26,12 @@
                 FontSize="30"
                 ></TextBlock>
             <components:Button Variant="Primary" 
+                               x:Name="PlayButton"
                                IsEnabled="False"
                                IconPack="FontAwesome"
                                IconKind="{x:Static icon:PackIconFontAwesomeKind.PlaySolid}"
                                Text="Loading..."
+                               FontSize="16"
                                Click="PlayButtonClick"
                                Width="200" 
                                Height="50" 
