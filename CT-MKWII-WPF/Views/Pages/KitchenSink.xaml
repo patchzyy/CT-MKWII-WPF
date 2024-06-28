@@ -14,6 +14,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
         <components:IconLabel Grid.Row="0"
@@ -125,12 +126,21 @@
                                Click="InputButton_OnClick" Margin="10,0,0,0"/>
         </StackPanel>
         
-        <StackPanel Grid.Row="4">
-            <CheckBox IsChecked="True" >Extra Cheese</CheckBox>
-            <CheckBox IsChecked="False" >Extra Sauce</CheckBox>
-            <CheckBox IsChecked="False" IsEnabled="False">Extra Costs</CheckBox>
-            <CheckBox IsChecked="True" IsEnabled="False">Extra Flavor</CheckBox>
-        </StackPanel>
+        <UniformGrid Grid.Row="4" Columns="2" Rows="1" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <StackPanel>
+                <CheckBox IsChecked="True" >Extra Cheese</CheckBox>
+                <CheckBox IsChecked="False" >Extra Sauce</CheckBox>
+                <CheckBox IsChecked="False" IsEnabled="False">Extra Costs</CheckBox>
+                <CheckBox IsChecked="True" IsEnabled="False">Extra Flavor</CheckBox>
+            </StackPanel>
+        
+            <StackPanel >
+                <RadioButton GroupName="KitchenSinkGroup1" IsChecked="True" >Extra Cheese</RadioButton>
+                <RadioButton GroupName="KitchenSinkGroup1" IsChecked="False" >Extra Sauce</RadioButton>
+                <RadioButton GroupName="KitchenSinkGroup2" IsChecked="False" IsEnabled="False">Extra Costs</RadioButton>
+                <RadioButton GroupName="KitchenSinkGroup2" IsChecked="True" IsEnabled="False">Extra Flavor</RadioButton>
+            </StackPanel>
+        </UniformGrid>
         
     </Grid>
 </Page>
