@@ -126,19 +126,26 @@
                                Click="InputButton_OnClick" Margin="10,0,0,0"/>
         </StackPanel>
         
-        <UniformGrid Grid.Row="4" Columns="2" Rows="1" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+        <UniformGrid Grid.Row="4" Columns="3" Rows="1" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <StackPanel>
                 <CheckBox IsChecked="True" >Extra Cheese</CheckBox>
                 <CheckBox IsChecked="False" >Extra Sauce</CheckBox>
                 <CheckBox IsChecked="False" IsEnabled="False">Extra Costs</CheckBox>
                 <CheckBox IsChecked="True" IsEnabled="False">Extra Flavor</CheckBox>
             </StackPanel>
-        
-            <StackPanel >
-                <RadioButton GroupName="KitchenSinkGroup1" IsChecked="True" >Extra Cheese</RadioButton>
-                <RadioButton GroupName="KitchenSinkGroup1" IsChecked="False" >Extra Sauce</RadioButton>
-                <RadioButton GroupName="KitchenSinkGroup2" IsChecked="False" IsEnabled="False">Extra Costs</RadioButton>
-                <RadioButton GroupName="KitchenSinkGroup2" IsChecked="True" IsEnabled="False">Extra Flavor</RadioButton>
+            
+            <StackPanel>
+                <CheckBox Style="{StaticResource Switch}" IsChecked="True" >Option 1</CheckBox>
+                <CheckBox Style="{StaticResource Switch}" IsChecked="False" >Option 3</CheckBox>
+                <CheckBox Style="{StaticResource Switch}" IsChecked="False" IsEnabled="False">Option 4</CheckBox>
+                <CheckBox Style="{StaticResource Switch}" IsChecked="True" IsEnabled="False">Option 2</CheckBox>
+            </StackPanel>
+            
+            <StackPanel>
+                <RadioButton GroupName="KitchenSinkGroup1" IsChecked="True" >Option 1</RadioButton>
+                <RadioButton GroupName="KitchenSinkGroup1" IsChecked="False" >Or option 2</RadioButton>
+                <RadioButton GroupName="KitchenSinkGroup2" IsChecked="False" IsEnabled="False">:(</RadioButton>
+                <RadioButton GroupName="KitchenSinkGroup2" IsChecked="True" IsEnabled="False">:)</RadioButton>
             </StackPanel>
         </UniformGrid>
         

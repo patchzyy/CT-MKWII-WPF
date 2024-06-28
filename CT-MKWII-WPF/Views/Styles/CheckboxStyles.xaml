@@ -83,6 +83,70 @@
      </Style>
     
     <!-- ============ -->
+    <!--    SWITCH    -->
+    <!-- ============ -->
+    <Style TargetType="CheckBox"  x:Key="Switch">
+         <!-- setting the contents attributes, but will be overwritten inside the checkbox itself -->
+         <Setter Property="FontSize" Value="14"/>
+         <Setter Property="FontWeight" Value="Bold"/>
+         <Setter Property="Foreground" Value="{StaticResource FormFieldLabelColor}" />
+         
+         <Setter Property="Background" Value="{StaticResource Switch-Background}"/>
+         
+         <Setter Property="Template">
+             <Setter.Value>
+                 <ControlTemplate TargetType="CheckBox">
+                     <StackPanel Orientation="Horizontal">
+                         <Border Width="48" Height="26"
+                                 Background="{TemplateBinding Background}"
+                                 BorderThickness="0"
+                                 CornerRadius="13">
+                             <Ellipse Width="21" Height="21" x:Name="SwitchNob"
+                                      Margin="3,0" HorizontalAlignment="Left"
+                                      Fill="{StaticResource Checkbox-InnerWhite}" VerticalAlignment="Center"/>
+                         </Border>
+                         <ContentPresenter 
+                             VerticalAlignment="Center"
+                             Margin="5,0,0,0"
+                             RecognizesAccessKey="True"/>
+                     </StackPanel>
+                     <ControlTemplate.Triggers>
+                         <Trigger Property="IsMouseOver" Value="True">
+                             <Setter Property="Background" Value="{StaticResource Switch-Hover}"/>
+                             <Setter Property="Cursor" Value="Hand"/>
+                         </Trigger>
+                         
+                         <Trigger Property="IsChecked" Value="True">
+                             <Setter TargetName="SwitchNob" Property="HorizontalAlignment" Value="Right"/>
+                             <Setter Property="Background" Value="{StaticResource Checkbox-CheckedColor}"/>
+                         </Trigger>
+                       
+                         <!-- Disabled -->
+                         <MultiTrigger>
+                             <MultiTrigger.Conditions>
+                                 <Condition Property="IsEnabled" Value="False"/>
+                                 <Condition Property="IsChecked" Value="False"/>
+                             </MultiTrigger.Conditions>
+                             <Setter Property="Background" Value="{StaticResource CheckboxDisabled-Background}"/>
+                             <Setter TargetName="SwitchNob" Property="Fill" Value="{StaticResource CheckboxDisabled-InnerWhite}"/>
+                         </MultiTrigger>
+                    
+                         <MultiTrigger>
+                             <MultiTrigger.Conditions>
+                                 <Condition Property="IsEnabled" Value="False"/>
+                                 <Condition Property="IsChecked" Value="True"/>
+                             </MultiTrigger.Conditions>
+                             <Setter Property="Background" Value="{StaticResource CheckboxDisabled-CheckedColor}"/>
+                             <Setter TargetName="SwitchNob" Property="Fill" Value="{StaticResource CheckboxDisabled-InnerWhite}"/>
+                         </MultiTrigger>
+                     </ControlTemplate.Triggers>
+                 </ControlTemplate>
+             </Setter.Value>
+         </Setter>
+     </Style>
+    
+    
+    <!-- ============ -->
     <!-- RADIO BUTTON -->
     <!-- ============ -->
      <Style TargetType="RadioButton">
@@ -102,7 +166,7 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="3"
-                                CornerRadius="12">
+                                CornerRadius="1000">
                             <Ellipse Width="9" Height="9"
                                      Fill="{StaticResource Checkbox-InnerWhite}"
                                      HorizontalAlignment="Center" VerticalAlignment="Center"
