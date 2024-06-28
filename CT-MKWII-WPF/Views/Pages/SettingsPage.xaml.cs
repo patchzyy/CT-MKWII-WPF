@@ -34,9 +34,9 @@ public partial class SettingsPage : Page
         CheckBoxStackPanel.IsEnabled = SettingsUtils.doesConfigExist() && SettingsUtils.SetupCorrectly();
         if (CheckBoxStackPanel.IsEnabled)
         {
-            VSyncButton.IsChecked = DolphinSettingHelper.ReadINISetting(SettingsUtils.FindGFXFile(), "Hardware", "VSync") == "True";
-            //todo, yes yes move this to the backend, but also check for all 4 settings
-            RecommendedButton.IsChecked = DolphinSettingHelper.ReadINISetting(SettingsUtils.FindGFXFile(), "Settings", "ShaderCompilationMode") == "2";
+            VSyncButton.IsChecked = DolphinSettingsUtils.GetCurrentVSyncStatus();
+            //todo, also check for all 4 settings
+            RecommendedButton.IsChecked = DolphinSettingsUtils.IsReccommendedSettingsEnabled();
         }
         if (ResolutionStackPanel.IsEnabled)
         {
@@ -184,22 +184,9 @@ public partial class SettingsPage : Page
         }
     }
     
-    //todo: everything under here should be moved to the backend
-    private void EnableReccommendedSettings()
-    {
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "ShaderCompilationMode", "2");
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings","WaitForShadersBeforeStarting", "True" );
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "MSAA", "0x00000002");
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "SSAA", "False");
-    }
+    private void EnableReccommendedSettings() => DolphinSettingsUtils.EnableReccomendedSettings();
     
-    private void DisableReccommendedSettings()
-    {
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "ShaderCompilationMode", "0");
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings","WaitForShadersBeforeStarting", "False" );
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "MSAA", "0x00000001");
-        DolphinSettingHelper.ChangeINISettings(SettingsUtils.FindGFXFile(), "Settings", "SSAA", "False");
-    }
+    private void DisableReccommendedSettings() => DolphinSettingsUtils.DisableReccommendedSettings(); 
 
     private void UpdateResolution(object sender, RoutedEventArgs e)
     {

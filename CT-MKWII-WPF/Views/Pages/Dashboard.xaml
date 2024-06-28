@@ -26,7 +26,7 @@
                 FontSize="30"
                 ></TextBlock>
             <components:Button Variant="Primary" 
-                               x:Name="PlayButton"
+                               x:Name="ActionButton"
                                IsEnabled="False"
                                IconPack="FontAwesome"
                                IconKind="{x:Static icon:PackIconFontAwesomeKind.PlaySolid}"

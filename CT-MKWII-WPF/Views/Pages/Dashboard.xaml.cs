@@ -13,57 +13,96 @@ public partial class Dashboard : Page
         UpdateActionButton();
     }
 
-    private void PlayButtonClick(object sender, RoutedEventArgs e)
+    private void GotoSettingsPage()
     {
-        throw new NotImplementedException();
+        var layout = (Layout) Application.Current.MainWindow;
+        layout.NavigateToPage(new SettingsPage());
+    }
+
+
+    private async void PlayButtonClick(object sender, RoutedEventArgs e)
+    {
+        RRStatusManager.ActionButtonStatus status = await RRStatusManager.GetCurrentStatus();
+        switch (status)
+        {
+            case RRStatusManager.ActionButtonStatus.NoServer: 
+                GotoSettingsPage();
+                break;
+            case RRStatusManager.ActionButtonStatus.NoDolphin:
+                GotoSettingsPage();
+                break;
+            case RRStatusManager.ActionButtonStatus.ConfigNotFinished:
+                GotoSettingsPage();
+                break;
+            case RRStatusManager.ActionButtonStatus.noRR:
+                await RetroRewindInstaller.InstallRetroRewind();
+                UpdateActionButton();
+                break;
+            case RRStatusManager.ActionButtonStatus.noRRActive:
+                //this is here for future use,
+                //right now there is no de-activation, but if we want multiple mods this might be handy
+                MessageBox.Show("Activate Retro Rewind");
+                break;
+            case RRStatusManager.ActionButtonStatus.RRnotReady:
+                // RetroRewindInstaller.ActivateRetroRewind();
+                break;
+            case RRStatusManager.ActionButtonStatus.OutOfDate:
+                await RetroRewindInstaller.UpdateRR();
+                break;
+            case RRStatusManager.ActionButtonStatus.UpToDate:
+                RetroRewindLauncher.PlayRetroRewind();
+                break;
+        }
+        UpdateActionButton();
     }
     
     private async void UpdateActionButton()
     {
-        //first check if the server is even enabled, if not then just give 1 pop up letting the user know
-        var serverEnabled = await RetroRewindInstaller.IsServerEnabled();
-        if (!serverEnabled)
+        RRStatusManager.ActionButtonStatus status = await RRStatusManager.GetCurrentStatus();
+        switch (status)
         {
-            MessageBox.Show("We can't connect to the RR servers. Check your internet connection\nThe servers might be down. Please check back later.\nLaunching in offline mode", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-        var isConfigFileSetup = SettingsUtils.configCorrectAndExists();
-        if (!isConfigFileSetup)
-        {
-            PlayButton.Text = "Settings";
-            return;
-        }
-        var isUserFolderValid = DolphinInstaller.IsUserFolderValid();
-        var retroRewindActive = DirectoryHandler.isRRActive();
-        var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
-        bool installedButNotActive = retroRewindInstalled && !retroRewindActive;
-        if (!SettingsUtils.IsConfigFileFinishedSettingUp())
-        {
-            PlayButton.Text = "Settings";
-        }
-        bool retroRewindUpToDate;
-        if (serverEnabled)
-        {
-            retroRewindUpToDate = await RetroRewindInstaller.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
-        }
-        else
-        {
-            retroRewindUpToDate = true;
-        }
-        if (!isUserFolderValid)
-        {
-            PlayButton.Text = "Settings";
-        }
-        else if (!retroRewindInstalled && !installedButNotActive)
-        {
-            PlayButton.Text = "Install Retro Rewind";
-        }
-        else if (!retroRewindUpToDate)
-        {
-            PlayButton.Text = "Update Retro Rewind";
-        }
-        else
-        {
-            PlayButton.Text = "Play Retro Rewind";
+            case RRStatusManager.ActionButtonStatus.NoServer:
+                ActionButton.Text = "No Server";
+                ActionButton.IsEnabled = true;
+                ActionButton.Variant = "Secondary";
+                break;
+            case RRStatusManager.ActionButtonStatus.NoDolphin:
+                ActionButton.Text = "Settings";
+                ActionButton.IsEnabled = true;
+                ActionButton.Variant = "Secondary";
+                break;
+            case RRStatusManager.ActionButtonStatus.ConfigNotFinished:
+                ActionButton.Text = "Config Not Finished";
+                ActionButton.IsEnabled = true;
+                ActionButton.Variant = "Secondary";
+                break;
+            case RRStatusManager.ActionButtonStatus.noRR:
+                ActionButton.Text = "Install Retro Rewind";
+                ActionButton.IsEnabled = true;
+                ActionButton.Variant = "Secondary";
+                break;
+            case RRStatusManager.ActionButtonStatus.noRRActive:
+                //this is here for future use,
+                //right now there is no de-activation, but if we want multiple mods this might be handy
+                ActionButton.Text = "Activate Retro Rewind";
+                ActionButton.Variant = "Secondary";
+                ActionButton.IsEnabled = true;
+                break;
+            case RRStatusManager.ActionButtonStatus.RRnotReady:
+                ActionButton.Text = "Activate Retro Rewind";
+                ActionButton.Variant = "Secondary";
+                ActionButton.IsEnabled = true;
+                break;
+            case RRStatusManager.ActionButtonStatus.OutOfDate:
+                ActionButton.Text = "Update Retro Rewind";
+                ActionButton.Variant = "Secondary";
+                ActionButton.IsEnabled = true;
+                break;
+            case RRStatusManager.ActionButtonStatus.UpToDate:
+                ActionButton.Text = "Play Retro Rewind";
+                ActionButton.Variant = "Primary";
+                ActionButton.IsEnabled = true;
+                break;
         }
 
     }
