@@ -4,16 +4,58 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="Settings" Background="Transparent">
     <Grid>
-        <components:EmptyPageInfo 
-            Title="Whoops"
-            Body="No settings for you I am afraid." />  
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,50" >
+            <components:InputField
+                Width="300"
+                Placeholder="Enter desired path here..."
+                HorizontalAlignment="Left"
+                Label="Dolphin Emulator .exe Path"
+                x:Name="DolphinInputField"/>
+      
+            <components:Button Text="" FontSize="16" 
+                               IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
+                               IconPack="FontAwesome"
+                               Click="DolphinBrowseClick" Margin="10,0,0,0"/>
+        </StackPanel>
         
-        <TextBlock Text="Version 1.0.1"
-                   Style="{StaticResource TinyText}"
-                   HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,50" >
+            <components:InputField
+                Width="300"
+                Placeholder="Enter desired path here..."
+                HorizontalAlignment="Left"
+                Label="Mario Kart Wii Game File (.wbfs/.iso/.rvz)"
+                x:Name="MarioInputField"/>
+      
+            <components:Button Text="" FontSize="16" 
+                               IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
+                               IconPack="FontAwesome"
+                               Click="MarioKartBrowseClick" Margin="10,0,0,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,50" >
+            <components:InputField
+                Width="300"
+                Placeholder="Enter desired path here..."
+                HorizontalAlignment="Left"
+                Label="Dolphin User Folder"
+                x:Name="UserPathInputField"/>
+      
+            <components:Button Text="" FontSize="16" 
+                               IconKind="{x:Static icon:PackIconFontAwesomeKind.FolderOpenSolid}" 
+                               IconPack="FontAwesome"
+                               Click="DolphinUserPathClick" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        
     </Grid>
 </Page>

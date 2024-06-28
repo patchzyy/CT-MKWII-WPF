@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows;
 
 namespace CT_MKWII_WPF.Utils.DolphinHelpers;
@@ -39,6 +40,21 @@ public class DolphinSettingHelper
         }
         // MessageBox.Show("Could not find setting in INI file, Message Patchzy with the following error: " + SettingToRead, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         return "";
+    }
+    
+    public static string GetDolphinFolderPath()
+    {
+        // Try to automatically find the Dolphin Emulator folder path
+        string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator");
+        if (Directory.Exists(appDataPath))
+            return appDataPath;
+
+        string documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Dolphin Emulator");
+        if (Directory.Exists(documentsPath))
+            return documentsPath;
+
+        // Folder not found automatically
+        return string.Empty;
     }
     
     public static string ReadINISetting(string FileLocation, string SettingToRead)
