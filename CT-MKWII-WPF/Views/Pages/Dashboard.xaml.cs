@@ -10,4 +10,9 @@ public partial class Dashboard : Page
     {
         InitializeComponent();
     }
+
+    private void PlayButtonClick(object sender, RoutedEventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 }

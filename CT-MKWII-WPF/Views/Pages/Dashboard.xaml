@@ -9,9 +9,31 @@
       d:DesignHeight="831" d:DesignWidth="444"
       Title="Dashboard" Background="Transparent">
     <Grid>
-      <components:EmptyPageInfo 
-          Title="Awww, empty page!"
-          Body="This page is still in development. You can expect this page to be filled with content in the future." />
-   
+        <components:IconLabel  HorizontalAlignment="Left"
+                              IconPack="FontAwesome"
+                              IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseSolid}"
+                              Text="Home"
+                              FontSize="20"
+                              VerticalAlignment="Top"
+                              IconSize="24"
+                              Margin="20,0,0,0"
+                              Color="{StaticResource TitleTextColor}"
+        ></components:IconLabel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  >
+            <TextBlock HorizontalAlignment="Center"
+                Style="{StaticResource TitleText}"
+                Text="Retro Rewind"
+                FontSize="30"
+                ></TextBlock>
+            <components:Button Variant="Primary" 
+                               IsEnabled="False"
+                               IconPack="FontAwesome"
+                               IconKind="{x:Static icon:PackIconFontAwesomeKind.PlaySolid}"
+                               Text="Loading..."
+                               Click="PlayButtonClick"
+                               Width="200" 
+                               Height="50" 
+                               Margin="0,20,0,00"/>
+        </StackPanel>
     </Grid>
 </Page>

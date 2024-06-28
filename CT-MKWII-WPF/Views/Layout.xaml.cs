@@ -14,10 +14,11 @@ public partial class Layout : Window
     private void ModsPage_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new ModsPage());
     private void KitchenSink_Navigate(object _, RoutedEventArgs e) => NavigateToPage(new KitchenSink());
     
-    private void NavigateToPage(Page page)
+    public void NavigateToPage(Page page)
     {
         ContentArea.Navigate(page);
         ContentArea.NavigationService.RemoveBackEntry();
+        Console.WriteLine(page.Title);
     }
     
     public Layout()
@@ -50,7 +51,7 @@ public partial class Layout : Window
     {
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
         {
-            FileName = "https://discord.gg/rUTcFudrVa",
+            FileName = "https://discord.gg/vZ7T2wJnsq",
             UseShellExecute = true
         });
     }
