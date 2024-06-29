@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="Views/Styles/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="Views/Styles/TextStyles.xaml"/>
                 <ResourceDictionary Source="Views/Styles/CheckboxStyles.xaml"/>
+                <ResourceDictionary Source="Views/Styles/Converters.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         

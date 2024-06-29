@@ -32,14 +32,22 @@
              <Setter.Value>
                  <ControlTemplate TargetType="CheckBox">
                      <StackPanel Orientation="Horizontal">
-                         <Border Width="24" Height="24"
+                         
+                         <!-- The border is wrapped inside an outerBorder without the border
+                            This is to ensure that even if there is a funky pixel gap in between the inner part and outer stroke of the border, 
+                            that it will just be filled in with the same background color as the inside -->
+                         <Border Width="24" Height="24" 
                                  Background="{TemplateBinding Background}"
-                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                 BorderThickness="3"
                                  CornerRadius="{StaticResource GlobalCornerRadius}">
-                            <icon:PackIconMaterial HorizontalAlignment="Center" VerticalAlignment="Center"
-                                x:Name="CheckMark" Kind="CheckBold" Visibility="Collapsed"
-                                                   Foreground="{StaticResource Checkbox-InnerWhite}"/>
+                            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="3"
+                                    CornerRadius="{StaticResource GlobalCornerRadius}">
+                               <icon:PackIconMaterial HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   x:Name="CheckMark" Kind="CheckBold" Visibility="Collapsed"
+                                                      Foreground="{StaticResource Checkbox-InnerWhite}"/>
+                            </Border>
                          </Border>
                          <ContentPresenter 
                              VerticalAlignment="Center"
@@ -97,11 +105,11 @@
              <Setter.Value>
                  <ControlTemplate TargetType="CheckBox">
                      <StackPanel Orientation="Horizontal">
-                         <Border Width="48" Height="26"
+                         <Border Width="42" Height="24"
                                  Background="{TemplateBinding Background}"
                                  BorderThickness="0"
                                  CornerRadius="13">
-                             <Ellipse Width="21" Height="21" x:Name="SwitchNob"
+                             <Ellipse Width="18" Height="18" x:Name="SwitchNob"
                                       Margin="3,0" HorizontalAlignment="Left"
                                       Fill="{StaticResource Checkbox-InnerWhite}" VerticalAlignment="Center"/>
                          </Border>
@@ -162,15 +170,22 @@
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <StackPanel Orientation="Horizontal">
-                        <Border Width="24" Height="24"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="3"
+                        
+                        <!-- The border is wrapped inside an outerBorder without the border
+                            This is to ensure that even if there is a funky pixel gap in between the inner part and outer stroke of the border, 
+                            that it will just be filled in with the same background color as the inside -->
+                        <Border Width="24" Height="24"  Background="{TemplateBinding Background}"
                                 CornerRadius="1000">
-                            <Ellipse Width="9" Height="9"
-                                     Fill="{StaticResource Checkbox-InnerWhite}"
-                                     HorizontalAlignment="Center" VerticalAlignment="Center"
-                                     x:Name="CheckDot" Visibility="Collapsed"/>
+                            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="3"
+                                    CornerRadius="1000">
+                                <Ellipse Width="11" Height="11"
+                                         Fill="{StaticResource Checkbox-InnerWhite}"
+                                         HorizontalAlignment="Center" VerticalAlignment="Center"
+                                         x:Name="CheckDot" Visibility="Collapsed"/>
+                            </Border>
                         </Border>
                         <ContentPresenter 
                             VerticalAlignment="Center"
