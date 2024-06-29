@@ -40,5 +40,15 @@ namespace CT_MKWII_WPF.Views.Components
             get { return (string)GetValue(LabelProperty); }
             set { SetValue(LabelProperty, value); }
         }
+        
+        public static readonly DependencyProperty LabelTipProperty =
+            DependencyProperty.Register(nameof(LabelTip), typeof(string), typeof(InputField), 
+                new PropertyMetadata(string.Empty));
+
+        public string LabelTip
+        {
+            get { return (string)GetValue(LabelTipProperty); }
+            set { SetValue(LabelTipProperty, value); }
+        }
     }
 }
