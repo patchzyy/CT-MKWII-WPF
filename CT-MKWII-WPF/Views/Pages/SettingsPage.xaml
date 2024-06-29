@@ -43,9 +43,8 @@
         </UniformGrid> 
         
         <StackPanel Grid.Row="2" Margin="0,25">
-            <TextBlock
-                Style="{StaticResource FormFieldLabelText}"
-                Text="Dolphin Emulator .exe Path"></TextBlock>
+            <components:FormFieldLabel Text="Dolphin Emulator executable" 
+                                       TipText="Path must end with .exe"/>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top"  >
                 <components:InputField
                     Width="300"
@@ -62,9 +61,8 @@
         
         
         <StackPanel Grid.Row="3" Margin="0,25">
-            <TextBlock
-                Style="{StaticResource FormFieldLabelText}"
-                Text="Mario Kart Wii Game File (.wbfs/.iso/.rvz)"></TextBlock>
+            <components:FormFieldLabel Text="Mario Kart Wii Game File" 
+                                       TipText="Path can end with: .wbfs/.iso/.rvz"/>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" >
             <components:InputField
                 Width="300"
@@ -79,9 +77,7 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="4" Margin="0,25">
-            <TextBlock
-                Style="{StaticResource FormFieldLabelText}"
-                Text="Dolphin User Folder"></TextBlock>
+            <components:FormFieldLabel Text="Dolphin User Folder"/>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" >
                 <components:InputField
                     Width="300"

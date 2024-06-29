@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
              mc:Ignorable="d"
              d:DesignHeight="90" d:DesignWidth="300"
              x:Name="Root">
@@ -21,10 +22,10 @@
                     <ControlTemplate TargetType="TextBox">
                         <StackPanel>
                             <!-- Label TextBlock -->
-                            <TextBlock x:Name="Label"
-                                       Text="{Binding Label, ElementName=Root}" 
-                                       Style="{StaticResource FormFieldLabelText}"
-                                       VerticalAlignment="Bottom"/>
+                            <components:FormFieldLabel x:Name="LabelElement"
+                                                       Text="{Binding Label, ElementName=Root}" 
+                                                       TipText="{Binding LabelTip, ElementName=Root}" 
+                                                       VerticalAlignment="Bottom" />
                             
                             <!-- The border is wrapped inside an outerBorder without the border
                             This is to ensure that even if there is a funky pixel gap in between the inner part and outer stroke of the border, 
@@ -39,7 +40,7 @@
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         CornerRadius="{StaticResource GlobalCornerRadius}">
                                     <Grid>
-                                        <TextBlock x:Name="Placeholder"
+                                        <TextBlock x:Name="PlaceholderBlock"
                                                    Text="{Binding Placeholder, ElementName=Root}"
                                                    Foreground="{StaticResource InputFieldPlaceholder-Default}"
                                                    Visibility="Collapsed"
@@ -60,26 +61,26 @@
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource InputFieldBackground-Disabled}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource InputFieldBorder-Disabled}"/>
                                 <Setter Property="Foreground" Value="{StaticResource InputFieldForeground-Disabled}"/>
-                                <Setter Property="Foreground" TargetName="Placeholder" Value="{StaticResource InputFieldPlaceholder-Disabled}"/>
+                                <Setter Property="Foreground" TargetName="PlaceholderBlock" Value="{StaticResource InputFieldPlaceholder-Disabled}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Cursor" Value="IBeam"/>
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource InputFieldBackground-Hover}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource InputFieldBorder-Hover}"/>
                                 <Setter Property="Foreground" Value="{StaticResource InputFieldForeground-Hover}"/>
-                                <Setter Property="Foreground" TargetName="Placeholder" Value="{StaticResource InputFieldPlaceholder-Hover}"/>
+                                <Setter Property="Foreground" TargetName="PlaceholderBlock" Value="{StaticResource InputFieldPlaceholder-Hover}"/>
                             </Trigger>
                             <Trigger Property="IsFocused" Value="True">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource InputFieldBackground-Selected}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource InputFieldBorder-Selected}"/>
                                 <Setter Property="Foreground" Value="{StaticResource InputFieldForeground-Selected}"/>
-                                <Setter Property="Foreground" TargetName="Placeholder" Value="{StaticResource InputFieldPlaceholder-Selected}"/>
+                                <Setter Property="Foreground" TargetName="PlaceholderBlock" Value="{StaticResource InputFieldPlaceholder-Selected}"/>
                             </Trigger>
                             <Trigger Property="Text" Value="">
-                                <Setter Property="Visibility" TargetName="Placeholder" Value="Visible"/>
+                                <Setter Property="Visibility" TargetName="PlaceholderBlock" Value="Visible"/>
                             </Trigger>
                             <DataTrigger Binding="{Binding Label, ElementName=Root}" Value="">
-                                <Setter Property="Visibility" TargetName="Label" Value="Collapsed"/>
+                                <Setter Property="Visibility" TargetName="LabelElement" Value="Collapsed"/>
                             </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

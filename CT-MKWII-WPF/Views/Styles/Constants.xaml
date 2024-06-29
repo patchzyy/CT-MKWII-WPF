@@ -87,6 +87,8 @@
     <SolidColorBrush x:Key="TitleTextHover" Color="{StaticResource Gray300}" />
     <SolidColorBrush x:Key="FormFieldLabelColor" Color="{StaticResource Gray300}" />
     
+    <SolidColorBrush x:Key="ToolTipBackground" Color="{StaticResource Gray500}" />
+    <SolidColorBrush x:Key="ToolTipForeground" Color="{StaticResource Gray200}" />
     <!-- Error colors -->
     <SolidColorBrush x:Key="SuccessTitleTextColor" Color="{StaticResource Cyan400}" />
     <SolidColorBrush x:Key="ErrorTitleTextColor" Color="{StaticResource Red400}" />
@@ -100,13 +102,13 @@
     But i have no idea how to do it, so you will just have to remember it
      -->
     
-    <CornerRadius x:Key="GlobalCornerRadius">5</CornerRadius>
+    <CornerRadius x:Key="GlobalCornerRadius">6</CornerRadius>
     
     <!-- Window Corner Radius is split off from the rest so that we can change it without changing any other corner -->
     <CornerRadius x:Key="WindowCornerRadius">0</CornerRadius> <!-- 5 -->
     <CornerRadius x:Key="WindowCornerRadiusLeft">0,0,0,0</CornerRadius> <!-- 5,0,0,5 -->
     <CornerRadius x:Key="WindowCornerRadiusBottomLeft">0,0,0,0</CornerRadius> <!-- 0,0,0,5 -->
-    <CornerRadius x:Key="WindowCornerRadiusLeftRightTwix">5,0,0,0</CornerRadius> <!-- 5,0,5,0 -->
+    <CornerRadius x:Key="WindowCornerRadiusLeftRightTwix">6,0,0,0</CornerRadius> <!-- 5,0,5,0 -->
     
     
     <Thickness x:Key="EdgeGap">10</Thickness> 
