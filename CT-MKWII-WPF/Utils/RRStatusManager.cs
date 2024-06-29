@@ -23,6 +23,8 @@ public class RRStatusManager
         {
             return ActionButtonStatus.NoServer;
         }
+        var configCorrectAndExists = SettingsUtils.configCorrectAndExists();
+        if (!configCorrectAndExists) return ActionButtonStatus.ConfigNotFinished;
         var isUserFolderValid = DolphinInstaller.IsUserFolderValid();
         if (!isUserFolderValid) return ActionButtonStatus.NoDolphin;
         var retroRewindActive = DirectoryHandler.isRRActive();
