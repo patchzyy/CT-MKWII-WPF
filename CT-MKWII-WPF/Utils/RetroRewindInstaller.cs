@@ -121,7 +121,6 @@ public static class RetroRewindInstaller
         
     }
     progressWindow.Close();
-    MessageBox.Show("Update completed successfully.");
     
     return true;
 }
@@ -280,11 +279,6 @@ public static async Task InstallRetroRewind()
         {
             progressWindow.Close();
         });
-        
-        MessageBox.Show("Retro Rewind has been installed successfully.\nIf the button still says install please navigate to a different page and then go back.");
-        
-        
-        
     }
     catch (Exception ex)
     {

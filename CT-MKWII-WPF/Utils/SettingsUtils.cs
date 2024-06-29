@@ -19,15 +19,12 @@ namespace CT_MKWII_WPF.Utils
 
         public static bool SetupCorrectly()
         {
-            bool hasAllFiles = _config != null && Directory.Exists(_config.UserFolderPath) && File.Exists(_config.DolphinLocation) && File.Exists(_config.GameLocation);
-            if (hasAllFiles)
-            {
-                var folderPath = _config.UserFolderPath;
-                var configFolder = Path.Combine(folderPath, "Config");
-                var gfxFile = Path.Combine(configFolder, "GFX.ini");
-                if (File.Exists(gfxFile)) return true;
-            }
-            return false;
+            if (_config == null) return false;
+
+            string gfxFile = Path.Combine(_config.UserFolderPath, "Config", "GFX.ini");
+            return File.Exists(_config.DolphinLocation) && 
+                   File.Exists(_config.GameLocation) && 
+                   File.Exists(gfxFile);
         }
 
         public static bool doesConfigExist()

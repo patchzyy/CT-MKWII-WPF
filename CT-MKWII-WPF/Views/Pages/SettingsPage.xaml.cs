@@ -21,8 +21,7 @@ public partial class SettingsPage : Page
     
     private void LoadSettings()
     {
-        if (!SettingsUtils.doesConfigExist()) return;
-        if (!SettingsUtils.SetupCorrectly()) return;
+        if (!SettingsUtils.configCorrectAndExists()) return;
         DolphinInputField.Text = SettingsUtils.GetDolphinLocation();
         MarioInputField.Text = SettingsUtils.GetGameLocation();
         UserPathInputField.Text = SettingsUtils.GetUserPathLocation();
@@ -30,32 +29,26 @@ public partial class SettingsPage : Page
 
     private void UpdateResolutionButtonsState()
     {
-        ResolutionStackPanel.IsEnabled = SettingsUtils.doesConfigExist() && SettingsUtils.SetupCorrectly();
-        CheckBoxStackPanel.IsEnabled = SettingsUtils.doesConfigExist() && SettingsUtils.SetupCorrectly();
-        if (CheckBoxStackPanel.IsEnabled)
+        bool enableControls = SettingsUtils.configCorrectAndExists();
+        ResolutionStackPanel.IsEnabled = enableControls;
+        CheckBoxStackPanel.IsEnabled = enableControls;
+        if (enableControls)
         {
             VSyncButton.IsChecked = DolphinSettingsUtils.GetCurrentVSyncStatus();
-            //todo, also check for all 4 settings
             RecommendedButton.IsChecked = DolphinSettingsUtils.IsReccommendedSettingsEnabled();
-        }
-        if (ResolutionStackPanel.IsEnabled)
-        {
-            int finalResolution;
-            var resolution = DolphinSettingHelper.ReadINISetting(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution");
-            try
+            int finalResolution = 0;
+            var resolution =
+                DolphinSettingHelper.ReadINISetting(SettingsUtils.FindGFXFile(), "Settings", "InternalResolution");
+            if (int.TryParse(resolution, out int parsedResolution))
             {
-                 finalResolution = int.Parse(resolution) - 1;
-            }
-            catch (Exception e)
-            {
-                 finalResolution = 0;
+                finalResolution = parsedResolution - 1;
             }
             if (finalResolution >= 0 && finalResolution < ResolutionStackPanel.Children.Count)
             {
-                ((RadioButton)ResolutionStackPanel.Children[finalResolution]).IsChecked = true;
+                RadioButton radioButton = (RadioButton) ResolutionStackPanel.Children[finalResolution];
+                radioButton.IsChecked = true;
             }
         }
-        
     }
     
     
