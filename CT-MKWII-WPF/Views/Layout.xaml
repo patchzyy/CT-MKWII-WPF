@@ -97,19 +97,16 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             
             <!--Side bar -->
             <Border Grid.Column="0" Grid.Row="2" VerticalAlignment="Top">
-                <StackPanel>
+                <StackPanel x:Name="SidePanelButtons">
                     <TextBlock Text="General" Style="{StaticResource SidebarSectionText}"/>
                     <components:SidebarRadioButton  IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseChimneySolid}"
                                                     IconPack="FontAwesome" Text="Dashboard" IsChecked="True"
-                                                    x:Name="SidebarHomeButton"
                                                     Click="DashboardPage_Navigate"/>
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}" 
                                                    IconPack="FontAwesome" Text="Settings" 
-                                                   x:Name="SidebarSettingsButton"
                                                    Click="SettingsPage_Navigate"/>
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}" 
                                                    IconPack="FontAwesome" Text="Mods"
-                                                    x:Name="SidebarModsButton"
                                                    Click="ModsPage_Navigate"/>
                     
                     <!-- add an other section by doing this:

@@ -111,17 +111,13 @@ public partial class Dashboard : Page
     {
         //reference to the current layout
         var layout = (Layout) Application.Current.MainWindow;
-        layout.SidebarSettingsButton.IsEnabled = false;
-        layout.SidebarModsButton.IsEnabled = false;
-        layout.SidebarHomeButton.IsEnabled = false;
+        layout.SidePanelButtons.IsEnabled = false;
     }
     
     private void EnableSidebarButtons()
     {
         //reference to the current layout
         var layout = (Layout) Application.Current.MainWindow;
-        layout.SidebarSettingsButton.IsEnabled = true;
-        layout.SidebarModsButton.IsEnabled = true;
-        layout.SidebarHomeButton.IsEnabled = true;
+        layout.SidePanelButtons.IsEnabled = true;
     }
 }
