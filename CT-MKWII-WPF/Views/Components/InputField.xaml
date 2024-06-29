@@ -25,25 +25,35 @@
                                        Text="{Binding Label, ElementName=Root}" 
                                        Style="{StaticResource FormFieldLabelText}"
                                        VerticalAlignment="Bottom"/>
-                        <Border x:Name="border"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{StaticResource GlobalCornerRadius}">
-                            <Grid>
-                                <TextBlock x:Name="Placeholder"
-                                           Text="{Binding Placeholder, ElementName=Root}"
-                                           Foreground="{StaticResource InputFieldPlaceholder-Default}"
-                                           Visibility="Collapsed"
-                                           VerticalAlignment="Center"
-                                           Margin="{TemplateBinding Padding}"/>
-                                <ScrollViewer x:Name="PART_ContentHost"
-                                              Focusable="False"
-                                              VerticalAlignment="Center"
-                                              HorizontalScrollBarVisibility="Hidden"
-                                              VerticalScrollBarVisibility="Hidden"/>
-                                </Grid>
-                        </Border>
+                            
+                            <!-- The border is wrapped inside an outerBorder without the border
+                            This is to ensure that even if there is a funky pixel gap in between the inner part and outer stroke of the border, 
+                            that it will just be filled in with the same background color as the inside -->
+                            <Border Background="{TemplateBinding Background}"
+                                    CornerRadius="{StaticResource GlobalCornerRadius}">
+                                <Border x:Name="border"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="{StaticResource GlobalCornerRadius}">
+                                    <Grid>
+                                        <TextBlock x:Name="Placeholder"
+                                                   Text="{Binding Placeholder, ElementName=Root}"
+                                                   Foreground="{StaticResource InputFieldPlaceholder-Default}"
+                                                   Visibility="Collapsed"
+                                                   VerticalAlignment="Center"
+                                                   Margin="{TemplateBinding Padding}"/>
+                                        <ScrollViewer x:Name="PART_ContentHost"
+                                                      Focusable="False"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalScrollBarVisibility="Hidden"
+                                                      VerticalScrollBarVisibility="Hidden"/>
+                                    </Grid>
+                                </Border>
+                            </Border>
+                        
                             </StackPanel>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="False">
