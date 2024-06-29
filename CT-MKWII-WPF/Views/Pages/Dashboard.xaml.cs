@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using CT_MKWII_WPF.Utils;
+using CT_MKWII_WPF.Views.Components;
+using MaterialDesignThemes.Wpf;
 
 namespace CT_MKWII_WPF.Views.Pages;
 
@@ -35,8 +37,10 @@ public partial class Dashboard : Page
                 GotoSettingsPage();
                 break;
             case RRStatusManager.ActionButtonStatus.noRR:
+                SetButtonState("Installing...", "Secondary", false, PackIconKind.Download);
+                DisableSidebarButtons();
                 await RetroRewindInstaller.InstallRetroRewind();
-                UpdateActionButton();
+                EnableSidebarButtons();
                 break;
             case RRStatusManager.ActionButtonStatus.noRRActive:
                 //this is here for future use,
@@ -47,7 +51,10 @@ public partial class Dashboard : Page
                 // RetroRewindInstaller.ActivateRetroRewind();
                 break;
             case RRStatusManager.ActionButtonStatus.OutOfDate:
+                SetButtonState("Updating...", "Secondary", false, PackIconKind.Update);
+                DisableSidebarButtons();
                 await RetroRewindInstaller.UpdateRR();
+                EnableSidebarButtons();
                 break;
             case RRStatusManager.ActionButtonStatus.UpToDate:
                 RetroRewindLauncher.PlayRetroRewind();
@@ -62,48 +69,59 @@ public partial class Dashboard : Page
         switch (status)
         {
             case RRStatusManager.ActionButtonStatus.NoServer:
-                ActionButton.Text = "No Server";
-                ActionButton.IsEnabled = true;
-                ActionButton.Variant = "Secondary";
+                SetButtonState("No Server", "Secondary", true, PackIconKind.ServerNetworkOff);
                 break;
             case RRStatusManager.ActionButtonStatus.NoDolphin:
-                ActionButton.Text = "Settings";
-                ActionButton.IsEnabled = true;
-                ActionButton.Variant = "Secondary";
+                SetButtonState("Settings", "Secondary", true, PackIconKind.Cog);
                 break;
             case RRStatusManager.ActionButtonStatus.ConfigNotFinished:
-                ActionButton.Text = "Config Not Finished";
-                ActionButton.IsEnabled = true;
-                ActionButton.Variant = "Secondary";
+                SetButtonState("Config Not Finished", "Secondary", true, PackIconKind.FileDocumentEdit);
                 break;
             case RRStatusManager.ActionButtonStatus.noRR:
-                ActionButton.Text = "Install Retro Rewind";
-                ActionButton.IsEnabled = true;
-                ActionButton.Variant = "Secondary";
+                SetButtonState("Install", "Secondary", true, PackIconKind.Download);
                 break;
             case RRStatusManager.ActionButtonStatus.noRRActive:
                 //this is here for future use,
                 //right now there is no de-activation, but if we want multiple mods this might be handy
-                ActionButton.Text = "Activate Retro Rewind";
-                ActionButton.Variant = "Secondary";
-                ActionButton.IsEnabled = true;
+                SetButtonState("Activated", "Secondary", true, PackIconKind.Power);
                 break;
             case RRStatusManager.ActionButtonStatus.RRnotReady:
-                ActionButton.Text = "Activate Retro Rewind";
-                ActionButton.Variant = "Secondary";
-                ActionButton.IsEnabled = true;
+                SetButtonState("Activate", "Secondary", true, PackIconKind.Power);
                 break;
             case RRStatusManager.ActionButtonStatus.OutOfDate:
-                ActionButton.Text = "Update Retro Rewind";
-                ActionButton.Variant = "Secondary";
-                ActionButton.IsEnabled = true;
+                SetButtonState("Update", "Secondary", true, PackIconKind.Download);
                 break;
             case RRStatusManager.ActionButtonStatus.UpToDate:
-                ActionButton.Text = "Play Retro Rewind";
-                ActionButton.Variant = "Primary";
-                ActionButton.IsEnabled = true;
+                SetButtonState("Play", "Primary", true, PackIconKind.Play);
                 break;
         }
+    }
+    
+    private void SetButtonState(string text, string variant, bool isEnabled, PackIconKind iconKind)
+    {
+        ActionButton.Text = text;
+        ActionButton.Variant = variant;
+        ActionButton.IsEnabled = isEnabled;
+        ActionButton.IconPack = "Material";
+        ActionButton.IconKind = iconKind;
+        ActionButton.IconKind = ActionButton.IconKind.ToString();
+    }
 
+    private void DisableSidebarButtons()
+    {
+        //reference to the current layout
+        var layout = (Layout) Application.Current.MainWindow;
+        layout.SidebarSettingsButton.IsEnabled = false;
+        layout.SidebarModsButton.IsEnabled = false;
+        layout.SidebarHomeButton.IsEnabled = false;
+    }
+    
+    private void EnableSidebarButtons()
+    {
+        //reference to the current layout
+        var layout = (Layout) Application.Current.MainWindow;
+        layout.SidebarSettingsButton.IsEnabled = true;
+        layout.SidebarModsButton.IsEnabled = true;
+        layout.SidebarHomeButton.IsEnabled = true;
     }
 }
