@@ -3,28 +3,50 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
+      xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      
       xmlns:local="clr-namespace:CT_MKWII_WPF"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
       Title="Mods" Background="Transparent">
-
     <Page.Resources>
-        <!-- Define a CollectionViewSource with inline data -->
-        <CollectionViewSource x:Key="ModsCollection">
-            <CollectionViewSource.Source>
-                <x:Array Type="{x:Type local:ModItem}">
-                    <local:ModItem ModName="Sample Mod 1" IsEnabled="True"/>
-                    <local:ModItem ModName="Sample Mod 2" IsEnabled="False"/>
-                    <local:ModItem ModName="Sample Mod 3" IsEnabled="True"/>
-                </x:Array>
-            </CollectionViewSource.Source>
-        </CollectionViewSource>
+        <ContextMenu x:Key="ModContextMenu">
+            <MenuItem Header="Rename" Click="RenameMod_Click"/>
+            <MenuItem Header="Delete" Click="DeleteMod_Click"/>
+            <MenuItem Header="Open Folder" Click="OpenFolder_Click"/>
+        </ContextMenu>
     </Page.Resources>
     
-    
     <Grid>
-        <ListView Name="ModsListView"  Style="{StaticResource DragAndDroppableList}"
-                  ItemsSource="{Binding Source={StaticResource ModsCollection}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <components:IconLabel Grid.Row="0"
+                              IconPack="FontAwesome"
+                              IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}"
+                              Text="My Mods"
+                              FontSize="20"
+                              VerticalAlignment="Center"
+                              IconSize="24"
+                              Margin="20,0,0,20"
+                              Color="{StaticResource TitleTextColor}"/>
+        <components:EmptyPageInfo Grid.Row="2" x:Name="EmptyListMessage"
+                                  HorizontalAlignment="Center"
+                                  VerticalContentAlignment="Center"
+                                  Title="No mods found"
+                                  Body="You can import mods by clicking the button below."
+            ></components:EmptyPageInfo>
+        
+        <ListView Grid.Row="1" x:Name="ModsListView"  
+                  Style="{StaticResource DragAndDroppableList}"
+                  ItemsSource="{Binding Mods}" AllowDrop="True" 
+                  PreviewMouseLeftButtonDown="ModsListView_PreviewMouseLeftButtonDown" 
+                  PreviewMouseMove="ModsListView_PreviewMouseMove"
+                  Drop="ModsListView_Drop"
+                  MouseRightButtonUp="ModsListView_MouseRightButtonUp">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Enabled" Width="75">
@@ -36,9 +58,43 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Mod Name" DisplayMemberBinding="{Binding ModName}"/>
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="200" />
                 </GridView>
             </ListView.View>
         </ListView>
+        <UniformGrid Grid.Row="2" Columns="2" Rows="2"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+            <components:Button Variant="Default"
+                               IsEnabled="True"
+                               IconPack="Material"
+                               IconKind="{x:Static icon:PackIconMaterialKind.Import}"
+                               Text="Import mod"
+                               Width="180"
+                               Click="ImportmodClick"
+                               Margin="20,20,0,0"/>
+            <components:Button Variant="Default"
+                               IsEnabled="True"
+                               IconPack="FontAwesome"
+                               IconKind="{x:Static icon:PackIconFontAwesomeKind.CheckSolid}"
+                               Text="Enable/Disable"
+                               FontSize="18"
+                               Width="180"
+                               Click="EnableClick"
+                               Margin="20,20,20,0"/>
+        </UniformGrid>
+        <ProgressBar x:Name="ProgressBar" 
+                     HorizontalAlignment="Center"
+                     Visibility="Collapsed" 
+                     Height="20" 
+                     VerticalAlignment="Bottom" 
+                     Margin="10" 
+                     Foreground="{StaticResource ForegroundColor}" />
+        <TextBlock 
+            x:Name="StatusTextBlock" 
+            Visibility="Collapsed" 
+            HorizontalAlignment="Center"
+            Height="20" 
+            VerticalAlignment="Bottom" 
+            Margin="10,0,0,30" 
+            Text="Processing..." Foreground="{StaticResource ForegroundColor}"/>
     </Grid>
 </Page>

@@ -69,7 +69,8 @@
                     <GridViewColumn Header="Enabled" Width="75">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}"
+                                          HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

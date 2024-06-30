@@ -16,7 +16,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <components:IconLabel Grid.Row="0"
                               IconPack="FontAwesome"
@@ -101,6 +101,13 @@
                                Margin="3"/>
             <TextBlock></TextBlock>
         </UniformGrid>
+        <TextBlock
+            Style="{StaticResource TinyText}"
+            Grid.Row="6"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Text="Pre-release v1.0.0"
+            ></TextBlock>
         
     </Grid>
 </Page>
