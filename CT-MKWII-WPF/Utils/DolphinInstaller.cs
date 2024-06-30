@@ -6,10 +6,8 @@ using CT_MKWII_WPF.Utils;
 
 public static class DolphinInstaller
 {
-    public static bool IsDolphinInstalled()
+    public static bool IsUserFolderValid()
     {
-        // var dolphinFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator");
-        //go back 1 folder
         var dolphinFolder = SettingsUtils.GetUserPathLocation();
         return Directory.Exists(dolphinFolder);
     }

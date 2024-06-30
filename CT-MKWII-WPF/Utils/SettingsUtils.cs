@@ -19,8 +19,12 @@ namespace CT_MKWII_WPF.Utils
 
         public static bool SetupCorrectly()
         {
-            //see if the file has all the required paths
-            return _config != null && Directory.Exists(_config.UserFolderPath) && File.Exists(_config.DolphinLocation) && File.Exists(_config.GameLocation);
+            if (_config == null) return false;
+
+            string gfxFile = Path.Combine(_config.UserFolderPath, "Config", "GFX.ini");
+            return File.Exists(_config.DolphinLocation) && 
+                   File.Exists(_config.GameLocation) && 
+                   File.Exists(gfxFile);
         }
 
         public static bool doesConfigExist()
@@ -105,11 +109,8 @@ namespace CT_MKWII_WPF.Utils
         {
             if (_config == null || !Directory.Exists(_config.UserFolderPath) || !File.Exists(_config.DolphinLocation) || !File.Exists(_config.GameLocation))
             {
-                var mainWindow = (MainWindow)Application.Current.MainWindow;
-                mainWindow.ChangeContent(new SettingsPage());
                 return false;
             }
-
             return true;
         }
 

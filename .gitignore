@@ -48,3 +48,6 @@ Thumbs.db
 /CT-MKWII-WPF/bin
 /.vs
 CT-MKWII-WPF/Utils/RRNetwork.cs
+
+
+.idea/

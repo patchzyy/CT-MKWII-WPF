@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
@@ -87,7 +88,6 @@ public static class RetroRewindInstaller
         await InstallRetroRewind();
         return true;
     }
-    
     var allVersions = await GetAllVersionData();
     var updatesToApply = GetUpdatesToApply(currentVersion, allVersions);
     
@@ -96,9 +96,6 @@ public static class RetroRewindInstaller
     
     int totalUpdates = updatesToApply.Count;
     int currentUpdateIndex = 1;
-    
-
-
     foreach (var update in updatesToApply)
     {
         // MessageBox.Show($"Updating to version {update.Version}: {update.Description}");
@@ -118,11 +115,8 @@ public static class RetroRewindInstaller
         }
         currentUpdateIndex++;
         UpdateVersionFile(update.Version);
-        
     }
     progressWindow.Close();
-    MessageBox.Show("Update completed successfully.");
-    
     return true;
 }
     
@@ -155,13 +149,36 @@ private static async Task<List<(string Version, string Url, string Path, string 
 private static List<(string Version, string Url, string Path, string Description)> GetUpdatesToApply(string currentVersion, List<(string Version, string Url, string Path, string Description)> allVersions)
 {
     var updatesToApply = new List<(string Version, string Url, string Path, string Description)>();
-    bool startAdding = false;
+    allVersions.Sort((a,b) => CompareVersions(b.Version, a.Version)); // Sort in descending order
     foreach (var version in allVersions)
     {
-        if (version.Version == currentVersion) startAdding = true;
-        else if (startAdding) updatesToApply.Add(version);
+        if (CompareVersions(version.Version, currentVersion) > 0)
+        {
+            updatesToApply.Add(version);
+        }
+        else
+        {
+            break; 
+        }
     }
+    updatesToApply.Reverse();
     return updatesToApply;
+}
+
+private static int CompareVersions(string v1, string v2)
+{
+    var parts1 = v1.Split('.').Select(int.Parse).ToArray();
+    var parts2 = v2.Split('.').Select(int.Parse).ToArray();
+    for (int i = 0; i < Math.Max(parts1.Length, parts2.Length); i++)
+    {
+        int p1 = i < parts1.Length ? parts1[i] : 0;
+        int p2 = i < parts2.Length ? parts2[i] : 0;
+        if (p1 != p2)
+        {
+            return p1.CompareTo(p2);
+        }
+    }
+    return 0;
 }
 
 private static async Task<bool> DownloadAndApplyUpdate((string Version, string Url, string Path, string Description) update)
@@ -280,11 +297,6 @@ public static async Task InstallRetroRewind()
         {
             progressWindow.Close();
         });
-        
-        MessageBox.Show("Retro Rewind has been installed successfully.\nIf the button still says install please navigate to a different page and then go back.");
-        
-        
-        
     }
     catch (Exception ex)
     {

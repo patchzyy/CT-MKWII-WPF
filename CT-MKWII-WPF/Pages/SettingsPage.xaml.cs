@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using Microsoft.Win32; // For OpenFileDialog
 using System.Diagnostics;
 using CT_MKWII_WPF.Utils;
+using CT_MKWII_WPF.Utils.DolphinHelpers;
 using Microsoft.WindowsAPICodePack.Dialogs; // For Process
 
 namespace CT_MKWII_WPF.Pages;
@@ -26,7 +27,7 @@ public partial class SettingsPage : UserControl
             return;
         }
         //if not, we try to find it
-        string folderPath = GetDolphinFolderPath();
+        string folderPath = DolphinSettingHelper.GetDolphinFolderPath();
         if (!string.IsNullOrEmpty(folderPath))
         {
             DolphinUserFolderTextBox.Text = folderPath;
@@ -89,24 +90,10 @@ public partial class SettingsPage : UserControl
         DolphinUserFolderTextBox.Text = SettingsUtils.GetUserPathLocation();
     }
 
-    private string GetDolphinFolderPath()
-    {
-        // Try to automatically find the Dolphin Emulator folder path
-        string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Dolphin Emulator");
-        if (Directory.Exists(appDataPath))
-            return appDataPath;
-
-        string documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Dolphin Emulator");
-        if (Directory.Exists(documentsPath))
-            return documentsPath;
-
-        // Folder not found automatically
-        return string.Empty;
-    }
 
     private void BrowseDolphinAppDataButton_Click(object sender, RoutedEventArgs e)
     {
-        string folderPath = GetDolphinFolderPath();
+        string folderPath = DolphinSettingHelper.GetDolphinFolderPath();
 
         if (!string.IsNullOrEmpty(folderPath))
         {
