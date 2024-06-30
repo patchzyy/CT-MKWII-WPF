@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 using CT_MKWII_WPF.Pages;
 
 namespace CT_MKWII_WPF.Utils.Auto_updator;
@@ -13,8 +12,6 @@ namespace CT_MKWII_WPF.Utils.Auto_updator;
 public static class VersionChecker
 {
     private const string VersionFileURL = "https://raw.githubusercontent.com/patchzyy/CT-MKWII-WPF/main/version.txt";
-    //this is the internal version of the program. On the github the version number is exposed.
-    //I will only update the version.txt & this when there is a next stable release
     private const string CurrentVersion = "1.0.0";
     
     public static string GetVersionNumber()
@@ -24,7 +21,6 @@ public static class VersionChecker
 
     public static void CheckForUpdates()
     {
-        //extract the version number from the version.txt file
         using (var client = new WebClient())
         {
             try
@@ -32,11 +28,9 @@ public static class VersionChecker
                 var version = client.DownloadString(VersionFileURL).Trim();
                 if (version != CurrentVersion)
                 {
-                    //ask the user if they want to update
                     var result = MessageBox.Show("A new version of CT-MKWII-WPF is available. Would you like to update?", "Update Available", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
-                        //update the program
                         Update();
                     }
                 }
@@ -47,47 +41,56 @@ public static class VersionChecker
             }
         }
     }
+    
+    private static string GetActualExecutablePath()
+    {
+        // Use the process module's filename, which should be the actual .exe path
+        using (var process = Process.GetCurrentProcess())
+        {
+            return process.MainModule.FileName;
+        }
+    }
 
     public static async Task Update()
     {
-        //find the file location of the current program
-        var currentLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
-        //download latest version file
-        var downloadurl = "https://github.com/patchzyy/CT-MKWII-WPF/releases/latest/download/CT-MKWII-WPF.exe";
-        //appdata mkwii folder, if not found, create it
-        var appdataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/CT-MKWII";
-        if (!System.IO.Directory.Exists(appdataFolder))
-        {
-            System.IO.Directory.CreateDirectory(appdataFolder);
-        }
-        var tempFolder = appdataFolder + "/temp";
-        if (!System.IO.Directory.Exists(tempFolder))
-        {
-            System.IO.Directory.CreateDirectory(tempFolder);
-        }
-        var updateFile = tempFolder + "/CT-MKWII-WPF.exe";
-        
-        //create a progress window
+        string currentLocation = GetActualExecutablePath();
+        var currentFolder = Path.GetDirectoryName(currentLocation);
+        var downloadUrl = "https://github.com/patchzyy/CT-MKWII-WPF/releases/latest/download/CT-MKWII-WPF.exe";
+        var newFilePath = Path.Combine(currentFolder, "CT-MKWII-WPF_new.exe");
+
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
-        
-        //download the update file
-        await DownloadUpdateFile(downloadurl, updateFile, progressWindow);
-        
-        //rename the current exe file
-        string backupExePath = Path.Combine(Path.GetDirectoryName(currentLocation), "CT-MKWII-WPF-old.exe");
-        File.Move(currentLocation, backupExePath);
-        
-        //move the new exe file to the current location
-        File.Copy(updateFile, currentLocation, overwrite:true);
-        
-        //clean up temp folder
-        Directory.Delete(tempFolder, true);
-        //restart the program
-        Process.Start(currentLocation);
+
+        // Download the new file
+        await DownloadUpdateFile(downloadUrl, newFilePath, progressWindow);
+
+        // Create and run the batch file
+        CreateAndRunBatchFile(currentLocation, newFilePath);
+
+        // Close the current program
         Environment.Exit(0);
     }
-    
+
+    private static void CreateAndRunBatchFile(string currentFilePath, string newFilePath)
+    {
+        var batchFilePath = Path.Combine(Path.GetDirectoryName(currentFilePath), "update.bat");
+        var originalFileName = Path.GetFileName(currentFilePath);
+        var newFileName = Path.GetFileName(newFilePath);
+
+        var batchContent = @"
+@echo off
+timeout /t 2 /nobreak
+del """ + originalFileName + @"""
+rename """ + newFileName + @""" """ + originalFileName + @"""
+start """" """ + originalFileName + @"""
+del ""%~f0""
+";
+
+        File.WriteAllText(batchFilePath, batchContent);
+
+        Process.Start(new ProcessStartInfo(batchFilePath) { CreateNoWindow = true });
+    }
+
     static async Task DownloadUpdateFile(string url, string filePath, ProgressWindow progressWindow)
     {
         using (HttpClient client = new HttpClient())

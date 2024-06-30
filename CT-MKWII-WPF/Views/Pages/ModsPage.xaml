@@ -27,7 +27,7 @@
         <components:IconLabel Grid.Row="0"
                               IconPack="FontAwesome"
                               IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}"
-                              Text="My Mods"
+                              Text="Mods"
                               FontSize="20"
                               VerticalAlignment="Center"
                               IconSize="24"
@@ -40,15 +40,16 @@
                                   Body="You can import mods by clicking the button below."
             ></components:EmptyPageInfo>
         
-        <ListView Grid.Row="1" x:Name="ModsListView"  
+        <ListView Grid.Row="1" x:Name="ModsListView" 
                   Style="{StaticResource DragAndDroppableList}"
                   ItemsSource="{Binding Mods}" AllowDrop="True" 
+                  
                   PreviewMouseLeftButtonDown="ModsListView_PreviewMouseLeftButtonDown" 
                   PreviewMouseMove="ModsListView_PreviewMouseMove"
                   Drop="ModsListView_Drop"
                   MouseRightButtonUp="ModsListView_MouseRightButtonUp">
             <ListView.View>
-                <GridView>
+                <GridView AllowsColumnReorder="False">
                     <GridViewColumn Header="Enabled" Width="75">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

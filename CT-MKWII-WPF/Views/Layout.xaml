@@ -120,7 +120,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                 <StackPanel x:Name="SidePanelButtons">
                     <TextBlock Text="General" Style="{StaticResource SidebarSectionText}"/>
                     <components:SidebarRadioButton  IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseChimneySolid}"
-                                                    IconPack="FontAwesome" Text="Dashboard" IsChecked="True"
+                                                    IconPack="FontAwesome" Text="Home" IsChecked="True"
                                                     Click="DashboardPage_Navigate"/>
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}" 
                                                    IconPack="FontAwesome" Text="Settings" 
