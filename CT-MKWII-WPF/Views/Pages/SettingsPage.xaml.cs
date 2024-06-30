@@ -30,6 +30,7 @@ public partial class SettingsPage : Page
     private void UpdateResolutionButtonsState()
     {
         bool enableControls = SettingsUtils.configCorrectAndExists();
+        if (ResolutionStackPanel == null || CheckBoxStackPanel == null) return;
         ResolutionStackPanel.IsEnabled = enableControls;
         CheckBoxStackPanel.IsEnabled = enableControls;
         if (enableControls)

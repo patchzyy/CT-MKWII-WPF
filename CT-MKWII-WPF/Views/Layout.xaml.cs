@@ -18,7 +18,6 @@ public partial class Layout : Window
     {
         ContentArea.Navigate(page);
         ContentArea.NavigationService.RemoveBackEntry();
-        Console.WriteLine(page.Title);
     }
     
     public Layout()

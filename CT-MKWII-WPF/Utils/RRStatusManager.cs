@@ -19,29 +19,23 @@ public class RRStatusManager
     public static async Task<ActionButtonStatus> GetCurrentStatus()
     {
         var serverEnabled = await RetroRewindInstaller.IsServerEnabled();
-        if (!serverEnabled)
-        {
-            return ActionButtonStatus.NoServer;
-        }
+        if (!serverEnabled) return ActionButtonStatus.NoServer;
         var configCorrectAndExists = SettingsUtils.configCorrectAndExists();
         if (!configCorrectAndExists) return ActionButtonStatus.ConfigNotFinished;
         var isUserFolderValid = DolphinInstaller.IsUserFolderValid();
         if (!isUserFolderValid) return ActionButtonStatus.NoDolphin;
         var retroRewindActive = DirectoryHandler.isRRActive();
+        if (!retroRewindActive) return ActionButtonStatus.RRnotReady;
         var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
         if (!retroRewindInstalled) return ActionButtonStatus.noRR;
         bool retroRewindUpToDate;
         string latestRRVersion;
         bool installedButNotActive = retroRewindInstalled && !retroRewindActive;
         if (installedButNotActive) return ActionButtonStatus.noRRActive;
-        if (!retroRewindActive) return ActionButtonStatus.RRnotReady;
-        if (!isUserFolderValid) return ActionButtonStatus.NoDolphin;
         if (!SettingsUtils.IsConfigFileFinishedSettingUp()) return ActionButtonStatus.ConfigNotFinished;
-
         retroRewindUpToDate = await RetroRewindInstaller.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
         if (!retroRewindUpToDate) return ActionButtonStatus.OutOfDate;
         latestRRVersion = await RetroRewindInstaller.GetLatestVersionString();
         return ActionButtonStatus.UpToDate;
-        
     }
 }

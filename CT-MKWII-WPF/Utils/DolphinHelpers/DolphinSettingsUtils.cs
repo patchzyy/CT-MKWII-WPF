@@ -44,7 +44,8 @@ public class DolphinSettingsUtils
         var GFXFile = SettingsUtils.FindGFXFile();
         if (GFXFile == "")
         {
-            MessageBox.Show("Something went wrong, please contact me. \nGFX file not found");
+            //this should NEVER happen, but just in case
+            MessageBox.Show("Something went wrong, please contact us via discord. \nGFX file not found");
             return false;
         }
         var VSync = DolphinSettingHelper.ReadINISetting(GFXFile,  "VSync");
