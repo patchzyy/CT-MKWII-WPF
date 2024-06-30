@@ -24,4 +24,6 @@
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="{StaticResource BodyTextColor}"/>
     </Style>
+    
+    
 </ResourceDictionary>
