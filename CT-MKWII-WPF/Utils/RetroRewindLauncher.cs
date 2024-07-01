@@ -14,13 +14,6 @@ public static class RetroRewindLauncher
             DirectoryHandler.BackupRiivolution();
             DirectoryHandler.RetrieveRR();
         }
-        //show a pop up if the user has not launched yet
-        if (!SettingsUtils.HasRunNANDTutorial())
-        {
-            MessageBox.Show("Keep in mind, you need your NAND setup to play online. \nIf you have not set up your NAND yet you can NOT play online! \nIf you have already set up your NAND you may ignore this message", "NAND setup", MessageBoxButton.OK,
-                MessageBoxImage.Warning);
-            SettingsUtils.setHasSeenNandPopUp(true);
-        }
         //first clear the my-stuff folder
         //now we check for all the mods we want in the modconfig
         var mods = SettingsUtils.GetMods();
