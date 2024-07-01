@@ -96,7 +96,7 @@ public class DolphinSettingHelper
                 sectionFound = true;
                 sectionIndex = i;
             }
-            else if (sectionFound && lines[i].StartsWith($"{settingToChange}="))
+            else if (sectionFound && (lines[i].StartsWith($"{settingToChange}=") || lines[i].StartsWith($"{settingToChange} =")))
             {
                 lines[i] = $"{settingToChange}={value}";
                 settingFound = true;
