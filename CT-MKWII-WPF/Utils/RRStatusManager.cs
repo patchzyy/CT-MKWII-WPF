@@ -24,14 +24,10 @@ public class RRStatusManager
         if (!configCorrectAndExists) return ActionButtonStatus.ConfigNotFinished;
         var isUserFolderValid = DolphinInstaller.IsUserFolderValid();
         if (!isUserFolderValid) return ActionButtonStatus.NoDolphin;
-        var retroRewindActive = DirectoryHandler.isRRActive();
-        if (!retroRewindActive) return ActionButtonStatus.RRnotReady;
         var retroRewindInstalled = RetroRewindInstaller.IsRetroRewindInstalled();
         if (!retroRewindInstalled) return ActionButtonStatus.noRR;
         bool retroRewindUpToDate;
         string latestRRVersion;
-        bool installedButNotActive = retroRewindInstalled && !retroRewindActive;
-        if (installedButNotActive) return ActionButtonStatus.noRRActive;
         if (!SettingsUtils.IsConfigFileFinishedSettingUp()) return ActionButtonStatus.ConfigNotFinished;
         retroRewindUpToDate = await RetroRewindInstaller.IsRRUpToDate(RetroRewindInstaller.CurrentRRVersion());
         if (!retroRewindUpToDate) return ActionButtonStatus.OutOfDate;
