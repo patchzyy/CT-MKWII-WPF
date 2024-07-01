@@ -12,7 +12,7 @@ namespace CT_MKWII_WPF.Utils.Auto_updator;
 public static class VersionChecker
 {
     private const string VersionFileURL = "https://raw.githubusercontent.com/patchzyy/CT-MKWII-WPF/main/version.txt";
-    private const string CurrentVersion = "1.0.1";
+    private const string CurrentVersion = "1.0.2";
     
     public static string GetVersionNumber()
     {

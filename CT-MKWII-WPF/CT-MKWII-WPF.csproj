@@ -38,5 +38,7 @@
         <SubType>Designer</SubType>
       </Page>
     </ItemGroup>
-
+    <PropertyGroup>
+        <ApplicationIcon>car-wheel.ico</ApplicationIcon>
+    </PropertyGroup>
 </Project>

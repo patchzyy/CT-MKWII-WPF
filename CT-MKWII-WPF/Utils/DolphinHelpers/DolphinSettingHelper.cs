@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 
 namespace CT_MKWII_WPF.Utils.DolphinHelpers;
@@ -75,52 +76,48 @@ public class DolphinSettingHelper
         }
         return "";
     }
-    public static void ChangeINISettings(string FileLocation, string Section, string SettingToChange, string Value)
+    public static void ChangeINISettings(string fileLocation, string section, string settingToChange, string value)
     {
-        if (!File.Exists(FileLocation))
+        if (!File.Exists(fileLocation))
         {
-            MessageBox.Show("Something went wrong, INI file could not be found, Message Patchzy with the following error: " + FileLocation, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"Something went wrong, INI file could not be found, Message Patchzy with the following error: {fileLocation}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
         }
-        //now we can assume file exists, so we good to go
-        var lines = File.ReadAllLines(FileLocation);
-        //first we need to see if the section already exists
-        var sectionExists = false;
-        for (int i = 0; i < lines.Length; i++)
+
+        var lines = File.ReadAllLines(fileLocation).ToList();
+        bool sectionFound = false;
+        bool settingFound = false;
+        int sectionIndex = -1;
+
+        for (int i = 0; i < lines.Count; i++)
         {
-            if (lines[i] == $"[{Section}]")
+            if (lines[i].Trim() == $"[{section}]")
             {
-                sectionExists = true;
+                sectionFound = true;
+                sectionIndex = i;
+            }
+            else if (sectionFound && lines[i].StartsWith($"{settingToChange}="))
+            {
+                lines[i] = $"{settingToChange}={value}";
+                settingFound = true;
+                break;
+            }
+            else if (lines[i].Trim().StartsWith("[") && lines[i].Trim().EndsWith("]") && sectionFound)
+            {
                 break;
             }
         }
-        if (!sectionExists)
+
+        if (!sectionFound)
         {
-            //add the section to the end of the file
-            string toAdd = $"[{Section}]";
-            File.AppendAllText(FileLocation, toAdd + "\n");
+            lines.Add($"[{section}]");
+            lines.Add($"{settingToChange}={value}");
         }
-        //now we know for sure the section exists, but before continuing, we also need to check if the section doesnt already contain the setting to change
-        for (int i = 0; i < lines.Length; i++)
+        else if (!settingFound)
         {
-            if (lines[i].Contains(SettingToChange))
-            {
-                //we found the setting, now we need to change it
-                lines[i] = $"{SettingToChange} = {Value}";
-                File.WriteAllLines(FileLocation, lines);
-                return;
-            }
+            lines.Insert(sectionIndex + 1, $"{settingToChange}={value}");
         }
-        //if we reach here, then the setting does not exist, so we need to add it to the correct section
-        for (int i = 0; i < lines.Length; i++)
-        {
-            if (lines[i] == $"[{Section}]")
-            {
-                //we found the section, now we need to add the setting
-                string toAdd = $"{SettingToChange} = {Value}";
-                File.AppendAllText(FileLocation, toAdd + "\n");
-                return;
-            }
-        }
-        return;
+
+        File.WriteAllLines(fileLocation, lines);
     }
 }
