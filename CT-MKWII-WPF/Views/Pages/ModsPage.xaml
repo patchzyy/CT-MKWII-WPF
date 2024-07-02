@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:components="clr-namespace:CT_MKWII_WPF.Views.Components"
       xmlns:local="clr-namespace:CT_MKWII_WPF"
       mc:Ignorable="d"
       d:DesignHeight="831" d:DesignWidth="444"
@@ -13,7 +14,7 @@
         <CollectionViewSource x:Key="ModsCollection">
             <CollectionViewSource.Source>
                 <x:Array Type="{x:Type local:ModItem}">
-                    <local:ModItem ModName="Sample Mod 1" IsEnabled="True"/>
+                    <local:ModItem ModName="Sample Mod 1, Just so you know this mod name is way to long but that is for the test" IsEnabled="True"/>
                     <local:ModItem ModName="Sample Mod 2" IsEnabled="False"/>
                     <local:ModItem ModName="Sample Mod 3" IsEnabled="True"/>
                 </x:Array>
@@ -23,22 +24,32 @@
     
     
     <Grid>
-        <ListView Name="ModsListView"  Style="{StaticResource DragAndDroppableList}"
-                  ItemsSource="{Binding Source={StaticResource ModsCollection}}">
+        <components:DraggableListView x:Name="ModsListView" 
+                                      ItemsSource="{Binding Source={StaticResource ModsCollection}}">
+            <components:DraggableListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Button 1" Click="MenuItem_OnClick"/>
+                    <MenuItem Header="Button 2"/>
+                    <Separator />
+                    <MenuItem Header="Button 100"/>
+                </ContextMenu>
+            </components:DraggableListView.ContextMenu>
+            
             <ListView.View>
-                <GridView>
+                <GridView AllowsColumnReorder="False">
                     <GridViewColumn Header="Enabled" Width="75">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}" 
+                                <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}"
+                                          Style="{StaticResource SwitchDark}"
                                           HorizontalAlignment="Center" VerticalAlignment="Center"
-                                          Margin="0,5"/>
+                                          Margin="0,5" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Mod Name" DisplayMemberBinding="{Binding ModName}"/>
+                    <GridViewColumn Header="Mod Name" DisplayMemberBinding="{Binding ModName}" />
                 </GridView>
             </ListView.View>
-        </ListView>
+        </components:DraggableListView>
     </Grid>
 </Page>

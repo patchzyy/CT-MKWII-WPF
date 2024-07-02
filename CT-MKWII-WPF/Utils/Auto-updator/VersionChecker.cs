@@ -15,7 +15,7 @@ public static class VersionChecker
     private const string VersionFileURL = "https://raw.githubusercontent.com/patchzyy/CT-MKWII-WPF/main/version.txt";
     //this is the internal version of the program. On the github the version number is exposed.
     //I will only update the version.txt & this when there is a next stable release
-    private const string CurrentVersion = "0.0.3";
+    private const string CurrentVersion = "1.0.3";
     
     public static string GetVersionNumber()
     {

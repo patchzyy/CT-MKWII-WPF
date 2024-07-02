@@ -1,6 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Media;
+using static CT_MKWII_WPF.Views.ViewUtils;
 
 namespace CT_MKWII_WPF.Views.Pages
 {
@@ -23,7 +26,16 @@ namespace CT_MKWII_WPF.Views.Pages
 
             ModsListView.DataContext = this;
         }
+
+
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
         
+            var modItem = ModsListView.GetCurrentContextItem<ModItem>();
+            Console.WriteLine( modItem.ModName );
+            
+        }
         
+    
     }
 }
