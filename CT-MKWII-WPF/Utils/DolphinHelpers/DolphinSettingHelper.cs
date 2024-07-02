@@ -98,7 +98,7 @@ public class DolphinSettingHelper
             }
             else if (sectionFound && (lines[i].StartsWith($"{settingToChange}=") || lines[i].StartsWith($"{settingToChange} =")))
             {
-                lines[i] = $"{settingToChange}={value}";
+                lines[i] = $"{settingToChange} = {value}";
                 settingFound = true;
                 break;
             }
