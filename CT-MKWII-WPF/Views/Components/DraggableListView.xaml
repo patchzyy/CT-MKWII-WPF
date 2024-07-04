@@ -10,6 +10,38 @@
           PreviewMouseMove="GripIcon_MouseMove"
           Drop="GripIcon_OnDrop">
     
+    <ListView.Resources>
+        <Style x:Key="DraggedItemStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <Border BorderThickness="3"  Margin="0,2"
+                                CornerRadius="{StaticResource GlobalCornerRadius}"
+                                Background="Transparent">
+                            <Border.BorderBrush>
+                                <DrawingBrush Viewport="0,0,20,20" ViewportUnits="Absolute" TileMode="Tile">
+                                    <DrawingBrush.Drawing>
+                                        <DrawingGroup>
+                                            <GeometryDrawing Brush="{StaticResource DragItemBackground-Focus}" >
+                                                <GeometryDrawing.Geometry>
+                                                    <GeometryGroup>
+                                                        <RectangleGeometry Rect="0,0,50,50" />
+                                                        <RectangleGeometry Rect="50,50,50,50" />
+                                                    </GeometryGroup>
+                                                </GeometryDrawing.Geometry>
+                                            </GeometryDrawing>
+                                        </DrawingGroup>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Border.BorderBrush>
+
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ListView.Resources>
+    
     <ListView.Style>
         <Style TargetType="{x:Type ListView}">
             <Setter Property="Background" Value="Transparent"/>

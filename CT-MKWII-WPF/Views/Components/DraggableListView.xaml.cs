@@ -69,7 +69,10 @@ public partial class DraggableListView : ListView
     {
         //_startPoint = e.GetPosition(this);
         ListViewItem listViewItem = FindAncestor<ListViewItem>(e.OriginalSource)!;
-        listViewItem.Opacity = 0.4;
+        var height = listViewItem.ActualHeight;
+        listViewItem.Style = (Style)FindResource("DraggedItemStyle");
+        listViewItem.Height = height + 3; 
+        // i am probably forgetting something, but the height is 3 pix to short every time, idk why
         var dragData = new DataObject("listViewItem", listViewItem);
         DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
     }
@@ -82,27 +85,23 @@ public partial class DraggableListView : ListView
     private void GripIcon_OnDrop(object sender, DragEventArgs e)
     {
         if(!(e.Data.GetData("listViewItem") is ListViewItem listViewItem)) return;
-        listViewItem.Opacity = 1;
         Point dropPosition = e.GetPosition(this);
         int targetIndex = GetDropTargetIndex(dropPosition);
         targetIndex = Math.Clamp(targetIndex, 0, Items.Count - 1);
+        
+        var itemObject = ItemContainerGenerator.ItemFromContainer(listViewItem)!;
+        var itemType = itemObject.GetType();
+        var genericCollectionType = typeof(ObservableCollection<>).MakeGenericType(itemType);
+        var removeMethod = genericCollectionType.GetMethod("Remove", new[] { itemType });
+        var insertMethod = genericCollectionType.GetMethod("Insert", new[] { typeof(int), itemType });
 
-        Console.WriteLine(ItemsSource.GetType().BaseType);
-        
-        // the least worst solution now seems to be to create a interface something like DragableItem, then just check for that instead
-        // then we can also add attribs to that Draggable item if that is needed
-        
-        if (!(ItemsSource is ObservableCollection<ModItem> itemList))
+        if (removeMethod != null && insertMethod != null)
         {
-            Console.WriteLine(ItemsSource.GetType().IsGenericType);
-            Console.WriteLine("ERROR: This type of list is not usabled for a draggable container");
-            return;
-        }
-   
-        ModItem itemThing = (ItemContainerGenerator.ItemFromContainer(listViewItem) as ModItem)!;
-        itemList.Remove(itemThing);
-        itemList.Insert(targetIndex, itemThing);
-        
+            removeMethod.Invoke(ItemsSource, new[] { itemObject });
+            insertMethod.Invoke(ItemsSource, new object[] { targetIndex, itemObject });
+        } 
+        else Console.WriteLine("It seems this collection type does not support in-place reordering");
+     
         Console.WriteLine(targetIndex);
     }
     
