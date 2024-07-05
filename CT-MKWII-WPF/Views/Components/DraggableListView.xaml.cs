@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,20 +11,23 @@ namespace CT_MKWII_WPF.Views.Components;
 
 public partial class DraggableListView : ListView
 {
-    private ListViewItem? _listViewItem;
-    //private Point _startPoint;
+    private ListViewItem? _contextListViewItem; // the item that was right-clicked
+    private ListViewItem? _draggingListViewItem; // the item that is being dragged
+    private ListViewItem? _dragHoverListViewItem; // the item that is being hovered over while dragging an other item
+    private bool? _previousBotSide;
     
-    // Public property with a private setter and a public getter
     public ListViewItem? ContextMenuListViewItem
     {
-        get { return _listViewItem; }
-        private set { _listViewItem = value; }
+        get { return _contextListViewItem; }
+        private set { _contextListViewItem = value; }
     }
     
     public DraggableListView()
     {
         InitializeComponent();
         Loaded += OnLoaded;
+        DragOver += DraggableListView_DragOver;
+        AddHandler(DragDrop.QueryContinueDragEvent, new QueryContinueDragEventHandler(OnQueryContinueDrag));
     }
     
     public static readonly DependencyProperty ItemContextMenuProperty = DependencyProperty.Register(
@@ -50,78 +54,143 @@ public partial class DraggableListView : ListView
         
         gridView.Columns.Insert(0, gripColumn);
     }
-    
-    
+
     public T? GetCurrentContextItem<T>() where T : class
     {
-        if (_listViewItem == null) return null;
-        return ItemContainerGenerator.ItemFromContainer(_listViewItem) as T;
+        if (_contextListViewItem == null) return null;
+        return ItemContainerGenerator.ItemFromContainer(_contextListViewItem) as T;
     }
     
     private void ContextMenu_Click(object sender, RoutedEventArgs e)
     {
-        _listViewItem = FindAncestor<ListViewItem>(e.OriginalSource)!;
+        _contextListViewItem = FindAncestor<ListViewItem>(e.OriginalSource)!;
         if (sender is FrameworkElement && ItemContextMenu != null)
             ItemContextMenu.IsOpen = true;
     }
 
     private void GripIcon_Hold(object sender, MouseButtonEventArgs e)
     {
-        //_startPoint = e.GetPosition(this);
-        ListViewItem listViewItem = FindAncestor<ListViewItem>(e.OriginalSource)!;
-        var height = listViewItem.ActualHeight;
-        listViewItem.Style = (Style)FindResource("DraggedItemStyle");
-        listViewItem.Height = height + 3; 
-        // i am probably forgetting something, but the height is 3 pix to short every time, idk why
-        var dragData = new DataObject("listViewItem", listViewItem);
-        DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
+        _draggingListViewItem = FindAncestor<ListViewItem>(e.OriginalSource)!;
+    
+        var height = _draggingListViewItem.ActualHeight;
+        _draggingListViewItem.Style = (Style)FindResource("DraggedItemStyle");
+        _draggingListViewItem.Height = height; 
+        
+        var dragData = new DataObject("listViewItem", _draggingListViewItem);
+        DragDrop.DoDragDrop(_draggingListViewItem, dragData, DragDropEffects.Move);
     }
 
+
+    private void CancelDropAction()
+    {
+        if (_draggingListViewItem != null)
+            _draggingListViewItem.Style = (Style)FindResource("DefaultItemStyle");
+        if (_dragHoverListViewItem != null)
+            _dragHoverListViewItem.Style = (Style)FindResource("DefaultItemStyle");
+        _draggingListViewItem = null;
+        _dragHoverListViewItem = null;
+        _previousBotSide = null;
+    }
+    
     private void GripIcon_MouseMove(object sender, MouseEventArgs e)
     {
+        if (e.LeftButton != MouseButtonState.Pressed) CancelDropAction();
     }
-
+    
+    private void DraggableListView_DragOver(object sender, DragEventArgs e) => UpdateDragHoverItem(e);
+    private void UpdateDragHoverItem(DragEventArgs e)
+    {
+        var targetData = GetDropTargetIndex(e.GetPosition(this));
+        int targetIndex = targetData.Item1;
+        if (targetData.Item2) targetIndex--;
+        var viewItem = ItemContainerGenerator.ContainerFromIndex(targetIndex) as ListViewItem;
+       
+        if (viewItem != null && (viewItem != _dragHoverListViewItem || (targetIndex == Items.Count - 1 && _previousBotSide != targetData.Item2)))
+        {
+            if (_dragHoverListViewItem != null)
+                _dragHoverListViewItem.Style = (Style)FindResource("DefaultItemStyle");
+            if (viewItem != _draggingListViewItem)
+            {
+                _dragHoverListViewItem = viewItem;
+                string side = targetData.Item2 ? "Down" : "Up";
+                _previousBotSide = targetData.Item2;
+                _dragHoverListViewItem.Style = (Style)FindResource($"DefaultItemStyle-Target{side}");
+            }
+            else
+            {
+                _dragHoverListViewItem = null;
+                _previousBotSide = null;
+            }
+        }
+    }
+    
+    private void OnQueryContinueDrag(object sender, QueryContinueDragEventArgs e)
+    {
+        if (e.EscapePressed || e.Action == DragAction.Cancel || e.Action == DragAction.Drop)
+            CancelDropAction();
+    }
     
     private void GripIcon_OnDrop(object sender, DragEventArgs e)
     {
         if(!(e.Data.GetData("listViewItem") is ListViewItem listViewItem)) return;
-        Point dropPosition = e.GetPosition(this);
-        int targetIndex = GetDropTargetIndex(dropPosition);
-        targetIndex = Math.Clamp(targetIndex, 0, Items.Count - 1);
-        
+        var targetData = GetDropTargetIndex(e.GetPosition(this));
+        int targetIndex = targetData.Item1;
+
+        // Getting a bunch of types to call the Remove and Insert methods
         var itemObject = ItemContainerGenerator.ItemFromContainer(listViewItem)!;
+        var itemIndex = ItemContainerGenerator.IndexFromContainer(listViewItem);
+        if (itemIndex < targetIndex) targetIndex--;
         var itemType = itemObject.GetType();
         var genericCollectionType = typeof(ObservableCollection<>).MakeGenericType(itemType);
         var removeMethod = genericCollectionType.GetMethod("Remove", new[] { itemType });
         var insertMethod = genericCollectionType.GetMethod("Insert", new[] { typeof(int), itemType });
-
         if (removeMethod != null && insertMethod != null)
         {
+            _draggingListViewItem = null;
             removeMethod.Invoke(ItemsSource, new[] { itemObject });
-            insertMethod.Invoke(ItemsSource, new object[] { targetIndex, itemObject });
+            insertMethod.Invoke(ItemsSource, new object[] { targetIndex , itemObject });
         } 
         else Console.WriteLine("It seems this collection type does not support in-place reordering");
      
-        Console.WriteLine(targetIndex);
+        if (_dragHoverListViewItem != null)
+            _dragHoverListViewItem.Style = (Style)FindResource("DefaultItemStyle");
     }
     
-    private int GetDropTargetIndex(Point dropPosition)
+    private IEnumerable<ListViewItem> GetAllListViewItems()
     {
         for (int i = 0; i < Items.Count; i++)
         {
-            ListViewItem listViewItem = (ListViewItem)ItemContainerGenerator.ContainerFromIndex(i);
-            if (listViewItem != null)
-            {
-                Rect itemBounds = VisualTreeHelper.GetDescendantBounds(listViewItem);
-                Point itemPosition = listViewItem.TransformToAncestor(this).Transform(new Point(0, 0));
-
-                if (dropPosition.Y < itemPosition.Y + itemBounds.Height)
-                {
-                    return i;
-                }
-            }
+            var container = ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+        
+            if (container != null) yield return container;
+            // else
+            // {
+            //     // If the container is null, it might not be realized yet
+            //     ScrollIntoView(Items[i]);
+            //     container = ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+            //     if (container != null) yield return container;
+            // }
         }
-
-        return -1;
+    }
+    
+    // This method returns 2 indexes.
+    // Item1 = the target index where it should place
+    // Item2 = wether or not it should be displayed as bottom. (if so, Item1 also has to be decreased by 1)
+    private Tuple<int,bool> GetDropTargetIndex(Point dropPosition)
+    {
+        int index = 0;
+        foreach (var listViewItem in GetAllListViewItems())
+        {
+            Rect itemBounds = VisualTreeHelper.GetDescendantBounds(listViewItem);
+            Point itemPosition = listViewItem.TransformToAncestor(this).Transform(new Point(0, 0));
+            double itemBottom = itemPosition.Y + itemBounds.Height;
+            //double itemTop = itemPosition.Y;
+            // double itemMiddle = (itemTop + itemBottom) / 2;
+            
+            if (dropPosition.Y < itemBottom) return new Tuple<int, bool>(index, false);
+            index++;
+        }
+        
+        return new Tuple<int,bool>(Items.Count, true);
     }
 }

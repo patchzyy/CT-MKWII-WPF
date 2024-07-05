@@ -17,7 +17,27 @@ namespace CT_MKWII_WPF.Views.Pages
             {
                 new ModItem { ModName = "Sample Mod 1",  IsEnabled=true },
                 new ModItem { ModName = "Sample Mod 2",  IsEnabled=true },
-                new ModItem { ModName = "Sample Mod 3",  IsEnabled=true }
+                new ModItem { ModName = "Sample Mod 3",  IsEnabled=false },
+                new ModItem { ModName = "Sample Mod 4",  IsEnabled=false },
+                new ModItem { ModName = "Sample Mod 5",  IsEnabled=true },
+                
+                new ModItem { ModName = "Sample Mod 1",  IsEnabled=true },
+                new ModItem { ModName = "Sample Mod 2",  IsEnabled=true },
+                new ModItem { ModName = "Sample Mod 3",  IsEnabled=false },
+                new ModItem { ModName = "Sample Mod 4",  IsEnabled=false },
+                new ModItem { ModName = "Sample Mod 5",  IsEnabled=true },
+                
+                new ModItem { ModName = "Sample Mod 1",  IsEnabled=true },
+                new ModItem { ModName = "Sample Mod 2",  IsEnabled=true },
+                new ModItem { ModName = "Sample Mod 3",  IsEnabled=false },
+                new ModItem { ModName = "Sample Mod 4",  IsEnabled=false },
+                new ModItem { ModName = "Sample Mod 5",  IsEnabled=true },
+                
+                new ModItem { ModName = "Sample Mod 1",  IsEnabled=true },
+                new ModItem { ModName = "Sample Mod 2",  IsEnabled=true },
+                new ModItem { ModName = "Sample Mod 3",  IsEnabled=false },
+                new ModItem { ModName = "Sample Mod 4",  IsEnabled=false },
+                new ModItem { ModName = "Sample Mod 5",  IsEnabled=true },
             };
 
             ModsListView.DataContext = this;

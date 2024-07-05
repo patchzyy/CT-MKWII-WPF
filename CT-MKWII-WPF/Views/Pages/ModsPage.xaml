@@ -9,32 +9,50 @@
       Title="Mods" Background="Transparent">
 
     <Grid>
-        <components:DraggableListView x:Name="ModsListView" 
-                                      ItemsSource="{Binding Mods}">
-            <components:DraggableListView.ItemContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Button 1" Click="MenuItem_OnClick"/>
-                    <MenuItem Header="Button 2"/>
-                    <Separator />
-                    <MenuItem Header="Button 100"/>
-                </ContextMenu>
-            </components:DraggableListView.ItemContextMenu>
+        <ScrollViewer Focusable="False">
+            <ScrollViewer.Resources>
+                <Style TargetType="{x:Type ScrollBar}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                <Grid>
+                                    <Border Background="Red" CornerRadius="6"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ScrollViewer.Resources>
+   
             
-            <ListView.View>
-                <GridView AllowsColumnReorder="False">
-                    <GridViewColumn Header="Enabled" Width="75">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}"
-                                          Style="{StaticResource SwitchDark}"
-                                          HorizontalAlignment="Center" VerticalAlignment="Center"
-                                          Margin="0,5" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate> 
-                    </GridViewColumn>
-                    <GridViewColumn Header="Mod Name" DisplayMemberBinding="{Binding ModName}" />
-                </GridView>
-            </ListView.View>
-        </components:DraggableListView>
+            <components:DraggableListView x:Name="ModsListView"
+                                          ItemsSource="{Binding Mods}">
+                <components:DraggableListView.ItemContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Button 1" Click="MenuItem_OnClick"/>
+                        <MenuItem Header="Button 2"/>
+                        <Separator />
+                        <MenuItem Header="Button 100"/>
+                    </ContextMenu>
+                </components:DraggableListView.ItemContextMenu>
+           
+                <ListView.View >
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Header="Enabled" Width="75">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}"
+                                              Style="{StaticResource SwitchDark}"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"
+                                              Margin="0,5" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate> 
+                        </GridViewColumn>
+                        <GridViewColumn Header="Mod Name" DisplayMemberBinding="{Binding ModName}" />
+                    </GridView>
+                </ListView.View>
+            </components:DraggableListView>
+        </ScrollViewer>
+        
     </Grid>
 </Page>

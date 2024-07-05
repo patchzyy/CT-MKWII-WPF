@@ -13,6 +13,7 @@
     <SolidColorBrush x:Key="DragItemIcon-GroupHover+" Color="{StaticResource Gray400}" />  <!-- This is also the color for when an item is selected/focussed -->
     <SolidColorBrush x:Key="DragItemIcon-IndividualHover+" Color="{StaticResource Gray300}" />
     
+    <SolidColorBrush x:Key="DragItem-Target" Color="{StaticResource Cyan400}" />
     <!-- Style of the header -->
     <Style TargetType="{x:Type GridViewColumnHeader}">
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
