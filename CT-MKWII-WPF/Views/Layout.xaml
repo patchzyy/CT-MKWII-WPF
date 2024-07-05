@@ -123,7 +123,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                                                     IconPack="FontAwesome" Text="Home" IsChecked="True"
                                                     Click="DashboardPage_Navigate"/>
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}" 
-                                                   IconPack="FontAwesome" Text="Settings" 
+                                                   IconPack="FontAwesome" Text="Settings" x:Name="SettingsButton"
                                                    Click="SettingsPage_Navigate"/>
                     <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}" 
                                                    IconPack="FontAwesome" Text="Mods"

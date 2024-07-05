@@ -18,6 +18,7 @@ public partial class Dashboard : Page
     private void GotoSettingsPage()
     {
         var layout = (Layout) Application.Current.MainWindow;
+        layout.SettingsButton.IsChecked = true;
         layout.NavigateToPage(new SettingsPage());
     }
 
