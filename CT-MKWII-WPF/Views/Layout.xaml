@@ -118,6 +118,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             <!--Side bar -->
             <Border Grid.Column="0" Grid.Row="2" VerticalAlignment="Top">
                 <StackPanel x:Name="SidePanelButtons">
+                    <TextBlock x:Name="PlayerCountText" Margin="10,0,0,0" Style="{StaticResource SidebarSectionText}"/>
                     <TextBlock Text="General" Style="{StaticResource SidebarSectionText}"/>
                     <components:SidebarRadioButton  IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseChimneySolid}"
                                                     IconPack="FontAwesome" Text="Home" IsChecked="True"

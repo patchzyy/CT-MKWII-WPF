@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CT_MKWII_WPF.Utils;
 using CT_MKWII_WPF.Views.Pages;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace CT_MKWII_WPF.Views;
 
@@ -26,6 +29,20 @@ public partial class Layout : Window
       
         Dashboard myPage = new Dashboard();
         NavigateToPage(myPage);
+        populatePlayerText();
+    }
+
+    public async void populatePlayerText()
+    {
+        var rrinfo = await RRLiveInfo.getCurrentGameData();
+        PlayerCountText.Text = "Players online: " + RRLiveInfo.GetCurrentOnlinePlayers(rrinfo).ToString();
+        var periodicTimer= new PeriodicTimer(TimeSpan.FromSeconds(20));
+        while (await periodicTimer.WaitForNextTickAsync())
+        {
+            rrinfo = await RRLiveInfo.getCurrentGameData();
+            PlayerCountText.Text = "Players online: " + RRLiveInfo.GetCurrentOnlinePlayers(rrinfo).ToString();
+        }
+        
     }
     
     private void TopBar_MouseDown(object sender, MouseButtonEventArgs e)
