@@ -130,6 +130,10 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
                                                    IconPack="FontAwesome" Text="Mods"
                                                    Click="ModsPage_Navigate"/>
                     
+                    <TextBlock Text="Retro Rewind" Style="{StaticResource SidebarSectionText}"/>
+                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.UsersRectangleSolid}" 
+                                                   IconPack="FontAwesome" Text="Rooms"
+                                                   Click="RoomsPage_Navigate"/>
                     <!-- add an other section by doing this:
                     <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}"/>
                      -->
