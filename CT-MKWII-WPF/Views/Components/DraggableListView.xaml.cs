@@ -39,7 +39,25 @@ public partial class DraggableListView : ListView
         get => (ContextMenu)GetValue(ItemContextMenuProperty);
         set => SetValue(ItemContextMenuProperty, value);
     }
-    
+   
+        // Define the custom event handlers
+     public delegate void ItemClickEventHandler(object sender, MouseButtonEventArgs e, ListViewItem clickedItem);
+     public delegate void ItemsReorderEventHandler(ListViewItem movedItem, int newIndex);
+
+     // Declare the events
+     public event ItemClickEventHandler? OnItemClick;
+     public event ItemsReorderEventHandler? OnItemsReorder;
+     
+
+     private void ListViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+     {
+         var clickedItem = FindAncestor<ListViewItem>(e.OriginalSource);
+         Console.WriteLine(clickedItem);
+         if (clickedItem != null) 
+             OnItemClick?.Invoke(this, e, clickedItem);
+     }
+        
+        
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         if (!(View is GridView gridView)) return; 
@@ -79,7 +97,6 @@ public partial class DraggableListView : ListView
         var dragData = new DataObject("listViewItem", _draggingListViewItem);
         DragDrop.DoDragDrop(_draggingListViewItem, dragData, DragDropEffects.Move);
     }
-
 
     private void CancelDropAction()
     {
@@ -133,6 +150,7 @@ public partial class DraggableListView : ListView
     private void GripIcon_OnDrop(object sender, DragEventArgs e)
     {
         if(!(e.Data.GetData("listViewItem") is ListViewItem listViewItem)) return;
+        if(_draggingListViewItem == null) return; // this should never happen, so to be safe we just return
         var targetData = GetDropTargetIndex(e.GetPosition(this));
         int targetIndex = targetData.Item1;
 
@@ -144,6 +162,8 @@ public partial class DraggableListView : ListView
         var genericCollectionType = typeof(ObservableCollection<>).MakeGenericType(itemType);
         var removeMethod = genericCollectionType.GetMethod("Remove", new[] { itemType });
         var insertMethod = genericCollectionType.GetMethod("Insert", new[] { typeof(int), itemType });
+        
+        OnItemsReorder?.Invoke(_draggingListViewItem, targetIndex);
         if (removeMethod != null && insertMethod != null)
         {
             _draggingListViewItem = null;
@@ -151,7 +171,7 @@ public partial class DraggableListView : ListView
             insertMethod.Invoke(ItemsSource, new object[] { targetIndex , itemObject });
         } 
         else Console.WriteLine("It seems this collection type does not support in-place reordering");
-     
+        
         if (_dragHoverListViewItem != null)
             _dragHoverListViewItem.Style = (Style)FindResource("DefaultItemStyle");
     }
@@ -184,9 +204,7 @@ public partial class DraggableListView : ListView
             Rect itemBounds = VisualTreeHelper.GetDescendantBounds(listViewItem);
             Point itemPosition = listViewItem.TransformToAncestor(this).Transform(new Point(0, 0));
             double itemBottom = itemPosition.Y + itemBounds.Height;
-            //double itemTop = itemPosition.Y;
-            // double itemMiddle = (itemTop + itemBottom) / 2;
-            
+ 
             if (dropPosition.Y < itemBottom) return new Tuple<int, bool>(index, false);
             index++;
         }

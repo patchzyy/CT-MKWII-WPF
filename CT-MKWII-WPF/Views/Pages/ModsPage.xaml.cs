@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace CT_MKWII_WPF.Views.Pages
 {
@@ -46,8 +47,20 @@ namespace CT_MKWII_WPF.Views.Pages
 
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            var modItem = ModsListView.GetCurrentContextItem<ModItem>();
-            Console.WriteLine( modItem.ModName );
+            var mySelectedMod = ModsListView.GetCurrentContextItem<ModItem>();
+            Console.WriteLine( mySelectedMod );
+        }
+
+        private void ModsListView_OnOnItemClick(object sender, MouseButtonEventArgs e, ListViewItem clickedItem)
+        {
+            var mySelectedMod = (ModItem)clickedItem.DataContext;
+            Console.WriteLine( mySelectedMod );
+        }
+
+        private void ModsListView_OnOnItemsReorder(ListViewItem movedItem, int newIndex)
+        {
+            var mySelectedMod = (ModItem)movedItem.DataContext;
+            Console.WriteLine( $"({mySelectedMod}) moved to {newIndex}" );
         }
     }
 }

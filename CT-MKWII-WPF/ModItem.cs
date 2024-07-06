@@ -7,4 +7,6 @@ public class ModItem
 {
     public string ModName { get; set; } = "";
     public bool IsEnabled { get; set; }
+
+    public override string ToString() => "ModItem: " + ModName + " - " + IsEnabled;
 }

@@ -9,7 +9,7 @@
       Title="Mods" Background="Transparent">
 
     <Grid>
-        <ScrollViewer Focusable="False">
+       <!-- <ScrollViewer Focusable="False">
             <ScrollViewer.Resources>
                 <Style TargetType="{x:Type ScrollBar}">
                     <Setter Property="Template">
@@ -22,10 +22,12 @@
                         </Setter.Value>
                     </Setter>
                 </Style>
-            </ScrollViewer.Resources>
+            </ScrollViewer.Resources> -->
    
             
             <components:DraggableListView x:Name="ModsListView"
+                                          OnItemClick="ModsListView_OnOnItemClick"
+                                          OnItemsReorder="ModsListView_OnOnItemsReorder"
                                           ItemsSource="{Binding Mods}">
                 <components:DraggableListView.ItemContextMenu>
                     <ContextMenu>
@@ -52,7 +54,7 @@
                     </GridView>
                 </ListView.View>
             </components:DraggableListView>
-        </ScrollViewer>
+       <!--  </ScrollViewer> --> 
         
     </Grid>
 </Page>

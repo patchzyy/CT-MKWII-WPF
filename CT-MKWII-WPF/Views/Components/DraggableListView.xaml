@@ -60,6 +60,7 @@
                                 Height="Auto" Style="{StaticResource BorderCommon}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                MouseLeftButtonDown="ListViewItem_PreviewMouseLeftButtonDown"
                                 MouseRightButtonUp="ContextMenu_Click" MinHeight="37">
                             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                                 <components:IconLabelButton Text="" IconPack="FontAwesome" IconSize="23"  x:Name="GripIcon" 
