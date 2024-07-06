@@ -28,7 +28,7 @@ public static class VersionChecker
                 var version = client.DownloadString(VersionFileURL).Trim();
                 if (version != CurrentVersion)
                 {
-                    var result = MessageBox.Show("A new version of CT-MKWII-WPF is available. Would you like to update?", "Update Available", MessageBoxButtons.YesNo);
+                    var result = MessageBox.Show("A new version of Wheel Wizard is available. Would you like to update?", "Update Available", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
                         Update();
@@ -57,7 +57,6 @@ public static class VersionChecker
         var currentFolder = Path.GetDirectoryName(currentLocation);
         var downloadUrl = "https://github.com/patchzyy/CT-MKWII-WPF/releases/latest/download/CT-MKWII-WPF.exe";
         var newFilePath = Path.Combine(currentFolder, "CT-MKWII-WPF_new.exe");
-
         var progressWindow = new ProgressWindow();
         progressWindow.Show();
 
