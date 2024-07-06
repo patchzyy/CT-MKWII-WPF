@@ -11,8 +11,8 @@ namespace CT_MKWII_WPF.Utils.Auto_updator;
 
 public static class VersionChecker
 {
-    private const string VersionFileURL = "https://raw.githubusercontent.com/patchzyy/CT-MKWII-WPF/main/version.txt";
-    private const string CurrentVersion = "1.0.3";
+    private const string VersionFileURL = "https://raw.githubusercontent.com/patchzyy/WheelWizard/main/version.txt";
+    private const string CurrentVersion = "1.0.4a";
     
     public static string GetVersionNumber()
     {
@@ -28,7 +28,7 @@ public static class VersionChecker
                 var version = client.DownloadString(VersionFileURL).Trim();
                 if (version != CurrentVersion)
                 {
-                    var result = MessageBox.Show("A new version of Wheel Wizard is available. Would you like to update?", "Update Available", MessageBoxButtons.YesNo);
+                    var result = MessageBox.Show("We have switched the way we update, you NEED to update to keep receiving updates!", "Update Available", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
                         Update();
@@ -55,7 +55,7 @@ public static class VersionChecker
     {
         string currentLocation = GetActualExecutablePath();
         var currentFolder = Path.GetDirectoryName(currentLocation);
-        var downloadUrl = "https://github.com/patchzyy/CT-MKWII-WPF/releases/latest/download/CT-MKWII-WPF.exe";
+        var downloadUrl = "https://github.com/patchzyy/WheelWizard/releases/latest/download/WheelWizard.exe";
         var newFilePath = Path.Combine(currentFolder, "CT-MKWII-WPF_new.exe");
         var progressWindow = new ProgressWindow();
         progressWindow.Show();

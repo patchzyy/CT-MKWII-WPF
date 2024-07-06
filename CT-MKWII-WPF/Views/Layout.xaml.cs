@@ -26,21 +26,19 @@ public partial class Layout : Window
     public Layout()
     {
         InitializeComponent();
-      
-        Dashboard myPage = new Dashboard();
-        NavigateToPage(myPage);
-        populatePlayerText();
+        //
+        // Dashboard myPage = new Dashboard();
+        // NavigateToPage(myPage);
+        // populatePlayerText();
     }
 
     public async void populatePlayerText()
     {
         var rrinfo = await RRLiveInfo.getCurrentGameData();
-        PlayerCountText.Text = "Players online: " + RRLiveInfo.GetCurrentOnlinePlayers(rrinfo).ToString();
         var periodicTimer= new PeriodicTimer(TimeSpan.FromSeconds(20));
         while (await periodicTimer.WaitForNextTickAsync())
         {
             rrinfo = await RRLiveInfo.getCurrentGameData();
-            PlayerCountText.Text = "Players online: " + RRLiveInfo.GetCurrentOnlinePlayers(rrinfo).ToString();
         }
         
     }

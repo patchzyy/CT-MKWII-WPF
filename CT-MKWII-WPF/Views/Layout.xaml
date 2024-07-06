@@ -60,7 +60,7 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top">
                 <components:IconLabel IconKind="{x:Static icon:PackIconGameIconsKind.CarWheel}" 
                                       IconPack="GameIcons"
-                                      Text="Wheel Wizard" 
+                                      Text="UPDATE!" 
                                       Color="{StaticResource TitleTextColor}"
                                       FontSize="20"
                                       Margin="{StaticResource LeftTopEdgeGap}"
@@ -117,18 +117,19 @@ https://game-icons.net/1x1/delapouite/car-wheel.html
             
             <!--Side bar -->
             <Border Grid.Column="0" Grid.Row="2" VerticalAlignment="Top">
-                <StackPanel x:Name="SidePanelButtons">
-                    <TextBlock x:Name="PlayerCountText" Margin="10,0,0,0" Style="{StaticResource SidebarSectionText}"/>
-                    <TextBlock Text="General" Style="{StaticResource SidebarSectionText}"/>
-                    <components:SidebarRadioButton  IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseChimneySolid}"
-                                                    IconPack="FontAwesome" Text="Home" IsChecked="True"
-                                                    Click="DashboardPage_Navigate"/>
-                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}" 
-                                                   IconPack="FontAwesome" Text="Settings" x:Name="SettingsButton"
-                                                   Click="SettingsPage_Navigate"/>
-                    <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}" 
-                                                   IconPack="FontAwesome" Text="Mods"
-                                                   Click="ModsPage_Navigate"/>
+                <StackPanel x:Name="SidePanelButtons" IsEnabled="False">
+                    <!-- <TextBlock x:Name="PlayerCountText" Margin="10,0,0,0" Style="{StaticResource SidebarSectionText}"/> -->
+                    <!-- <TextBlock Text="General" Style="{StaticResource SidebarSectionText}"/> -->
+                    <!-- <components:SidebarRadioButton  IconKind="{x:Static icon:PackIconFontAwesomeKind.HouseChimneySolid}" -->
+                    <!--                                 IconPack="FontAwesome" Text="Home" IsChecked="True" -->
+                    <!--                                 Click="DashboardPage_Navigate"/> -->
+                    <!-- <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.WrenchSolid}"  -->
+                    <!--                                IconPack="FontAwesome" Text="Settings" x:Name="SettingsButton" -->
+                    <!--                                Click="SettingsPage_Navigate"/> -->
+                    <!-- <components:SidebarRadioButton IconKind="{x:Static icon:PackIconFontAwesomeKind.CubesStackedSolid}"  -->
+                    <!--                                IconPack="FontAwesome" Text="Mods" -->
+                    <!--                                Click="ModsPage_Navigate"/> -->
+                    <TextBlock Style="{StaticResource TitleText}" TextWrapping="Wrap" Text="We have switched the way we update, you NEED to update to keep receiving updates (please restart and click yes on the popup) "></TextBlock>
                     
                     <!-- add an other section by doing this:
                     <TextBlock Text="Other" Style="{StaticResource SidebarSectionText}"/>
