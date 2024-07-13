@@ -1,1 +1,1 @@
-This is test
+info|This is test \u000A and some more text
